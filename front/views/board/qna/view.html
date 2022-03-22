@@ -1,6 +1,6 @@
 {% extends "../_layout.html" %}
 {% block content %}
-<h3><a href="/board/notice/list">NOTICE</a></h3>
+<h3><a href="/board/qna/list">Q&A</a></h3>
 <table>
     <tr>
         <td>{{qItem.idx}}</td>
@@ -28,9 +28,9 @@
     </li>
     {% endfor %}
 </ul>
-<a href="/board/notice/list">목록가기</a>
-<a href="/board/notice/update?idx={{item.idx}}">수정</a>
-<form action="http://localhost:4001/board/notice/delete" method="post">
+<a href="/board/qna/list">목록가기</a>
+<a href="/board/qna/update?idx={{item.idx}}">수정</a>
+<form action="http://localhost:4001/board/qna/delete" method="post">
     <input type="hidden" name="idx" value="{{item.idx}}">
     <input type="submit" value="삭제하기">
 </form>
