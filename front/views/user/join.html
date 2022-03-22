@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--아이디 패스워드 이름    별명    주소   성별   핸드폰   전화  이메일 자기소개 포인트
+         userid userpw  name nickname  adress gender mobile  phone  email   bio    point  -->
+    <form action="#" method="post">
+        <!-- post : 암호화 // get : 암호화x url에 묻어감-->
+        <fieldset>
+            <legend>필수 입력 사항</legend>
+            <!-- name 부분은 백앤드개발자랑 이름을 맞춰야함-->
+            <p>
+                <label for="user_id">아이디 : </label>
+                <input type="text" id="user_id" name="userid">
+            </p>
+
+            <p>
+                <label for="user_pw">비밀번호 : </label>
+                <input type="password" id="user_pw" name="userpw">
+            </p>
+
+            <p>
+                <label for="user_name">이름 : </label>
+                <input type="text" id="user_name" name="name">
+            </p>
+
+            <p>
+                <label for="user_nickname">별명 : </label>
+                <input type="text" id="user_nickname" name="nickname">
+            </p>
+
+            <p>
+                <label for="user_address">주소를 입력 해 주세요.</label>
+                <input type="search" id="user_address" name="address">
+            </p>
+
+            <p>
+                <span>성별 : </span>
+                <label for="user_male">남성</label>
+                <input id="user_male" type="radio" checked value="남성" name="gender">
+                <label for="user_female">여성</label>
+                <input id="user_female" type="radio" value="여성" name="gender">
+                <select name="gender">
+                    <option>남성</option>
+                    <option>여성</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="user_email">이메일 : </label>
+                <input type="email" id="user_email" name="email">
+            </p>
+
+            <p>
+                <label for="user_birth">생년월일 : </label>
+                <input type="text" id="user_birth" placeholder="6자리입력" name="birth">
+            </p>
+            <p>
+                <label for="user_mobile">핸드폰 : </label>
+                <input type="tel" id="user_mobile" placeholder="숫자만입력" name=" mobile">
+            </p>
+            <p>
+                <label for="user_phone">전화 : </label>
+                <input type="tel" id="user_phone" placeholder="숫자만입력" name="phone">
+            </p>
+            <p>
+                <label for="user_bio">자기소개 : </label>
+                <input type="text" id="user_bio" name="bio">
+            </p>
+            <p>
+                <!-- <label for="user_point">포인트 : </label> -->
+                <input type="hidden" id="user_point" name="point">
+            </p>
+        </fieldset>
+
+        <!-- <p>
+            <span>회원약관</span>
+            <textarea readonly="readonly" name="userpolicy">회원약관.</textarea>
+        </p> -->
+
+
+        <p>
+            <input type="submit" value="회원가입">
+            <input type="reset" value="재작성">
+        </p>
+    </form>
+</body>
+
+</html>
