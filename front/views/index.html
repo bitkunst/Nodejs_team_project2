@@ -5,8 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <h1>메인페이지</h1>
+    <!-- <form method="get" action="/" id="chat">
+        <button type="submit">채팅방</button>
+    </form> -->
+    <a href="/" id="chat">채팅방</a>
+
+    <script type="text/javascript" src="http://localhost:4001/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        const socket = io('http://localhost:4001', {
+            withCredentials: true
+        })
+
+        socket.on('connect', ()=>{
+            console.log('webSocket connected')
+        })
+
+        socket.on('new_msg', (msg)=>{
+            console.log(msg)
+        })
+
+    </script>
 </body>
 </html>
