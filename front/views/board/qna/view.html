@@ -1,0 +1,37 @@
+{% extends "../_layout.html" %}
+{% block content %}
+<h3><a href="/board/qna/list">Q&A</a></h3>
+<table>
+    <tr>
+        <td>{{qItem.idx}}</td>
+        <td>{{qItem.title}}</td>
+        <td>{{qIitem.nickname}}</td>
+        <td>{{qItem.date}}</td>
+        <td>{{qItem.view}}</td>
+        <td>{{qItem.answer}}</td>
+    </tr>
+</table>
+<!-- 질문 -->
+<div id="qContent">{{qItem.content}}</div>
+<!-- 답변 -->
+<ul id="aContent">
+    {% for aItem in aList %}
+    <li>
+        <div class="aUserInfo">
+            <div><img src="{{aItem.pic}}" alt=""></div>
+            <span>{{aItem.nickname}}</span>
+            <span>{{aItem.date}}</span>
+        </div>
+        <div class="answerContent">
+            {{aItem.content}}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<a href="/board/qna/list">목록가기</a>
+<a href="/board/qna/update?idx={{item.idx}}">수정</a>
+<form action="http://localhost:4001/board/qna/delete" method="post">
+    <input type="hidden" name="idx" value="{{item.idx}}">
+    <input type="submit" value="삭제하기">
+</form>
+{% endblock %}
