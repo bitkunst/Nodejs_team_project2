@@ -18,7 +18,7 @@ router.get('/write', (req, res) => {
 
 // ajax로 게시판/카테고리 구성하기 or  그냥 html 분리하기, nunjucks로 {item} 넣어주기, back서버와 통신 필요
 router.get('/update', (req, res) => {
-    res.render('board/notice/update')
+    res.render('board/update')
 })
 
 module.exports = router
