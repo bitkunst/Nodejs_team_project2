@@ -1,0 +1,53 @@
+{% extends "../_layout.html" %}
+{% block content %}
+
+<h3><a href="/board/notice/list">NOTICE</a></h3>
+<table>
+    <thead>
+        <tr>
+            <td>번호</td>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>작성일</td>
+            <td>조회수</td>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- 임시 -->
+        <tr>
+            <td>1</td>
+            <td>임시데이터</td>
+            <td>admin</td>
+            <td>2022-03-22</td>
+            <td>0</td>
+        </tr>
+        <!-- template : boardList -->
+    </tbody>
+</table>
+<a href="/board/notice/write">글쓰기</a>
+<div id="pagination">
+    <button id="prevBtn">👈</button>
+    <div id="pageBtnDiv">
+        <!-- 임시 -->
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <!-- template : pageList -->
+    </div>
+    <button id="nextBtn">👉</button>
+</div>
+
+<template id="boardList">
+    <tr>
+        <td>{idx}</td>
+        <td>{title}</td>
+        <td>{nickname}</td>
+        <td>{date}</td>
+        <td>{view}</td>
+    </tr>
+</template>
+
+<template id="pageList">
+    <button>{pNum}</button>
+</template>
+{% endblock %}

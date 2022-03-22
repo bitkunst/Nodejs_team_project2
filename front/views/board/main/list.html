@@ -1,0 +1,72 @@
+{% extends "../_layout.html" %}
+{% block content %}
+
+<h3><a href="/board/main/list">BOARD</a></h3>
+<ul>
+    <!-- 임시데이터 -->
+    <li>
+        <div>
+            <p><a href="/board/main/:{idx}">글제목</a><button>❤️</button></p>
+            <div>
+                <div><img src="" alt="">프사</div>
+                <span>닉네임자리</span>
+            </div>
+            <div>
+                <span>2022.03.22</span>
+                <span>조회수 0</span>
+                <span>좋아요 0</span>
+            </div>
+        </div>
+        <div>
+            <img src="" alt="">이미지
+            <div>
+                <span>#해시태그1</span>
+                <span>#해시태그2</span>
+                <span>#해시태그3</span>
+            </div>
+        </div>
+    </li>
+    <!-- template : boardList -->
+</ul>
+<a href="/board/main/write">글쓰기</a>
+<div id="pagination">
+    <button id="prevBtn">👈</button>
+    <div id="pageBtnDiv">
+        <!-- 임시 -->
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <!-- template : pageList -->
+    </div>
+    <button id="nextBtn">👉</button>
+</div>
+
+<template id="boardList">
+    <li>
+        <div>
+            <p><a href="/board/main/:{idx}">{title}</a><button>❤️</button></p>
+            <div>
+                <div><img src="{userPic}" alt=""></div>
+                <span>{nickname}</span>
+            </div>
+            <div>
+                <span>{date}</span>
+                <span>{view}</span>
+                <span>{likes}</span>
+            </div>
+        </div>
+        <div>
+            <img src="{img1}" alt="">
+            <div>
+                <span>{ht1}</span>
+                <span>{ht2}</span>
+                <span>{ht3}</span>
+            </div>
+        </div>
+    </li>
+</template>
+
+<template id="pageList">
+    <button>{pNum}</button>
+</template>
+{% endblock %}

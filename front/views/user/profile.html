@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Profile</h3>
+    <p><span> " " </span>님 반갑습니다.</p>
+    <p>이름 :</p>
+    <p>성별 : </p>
+    <p>mobile : </p>
+    </div>
+    <div>
+        <form method="post" action="/user/profile/update">
+            <button>수정</button>
+        </form>
+        <form method="post" action="/user/profile">
+
+            <input type="hidden" name="userid">
+            <button class="delete" type="submit">탈퇴하기</button>
+        </form>
+    </div>
+    <div id="profile">
+        <h5><a href="/user/board/1">작성한 글 보기</a></h5>
+        <h5><a href="/user/comment/1">작성 댓글 보기</a></h5>
+        <h5><a href="/user/scrap/1">스크랩 보기</a></h5>
+    </div>
+</body>
+
+</html>

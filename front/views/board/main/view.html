@@ -1,0 +1,34 @@
+{% extends "../_layout.html" %}
+{% block content %}
+<h3><a href="/board/main/list">BOARD</a></h3>
+<table>
+    <tr>
+        <td>{{item.idx}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.nickname}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.view}}</td>
+    </tr>
+</table>
+<div id="content">{{item.content}}</div>
+<div>
+    {% for item in htList %}
+    <span>#{{item.ht}}</span>
+    {% endfor %}
+</div>
+<div>
+    <a href="/board/main/list">목록가기</a>
+    <a href="/board/main/update?idx={{item.idx}}">수정</a>
+    <form action="http://localhost:4001/board/main/delete" method="post">
+        <input type="hidden" name="idx" value="{{item.idx}}">
+        <input type="submit" value="삭제하기">
+    </form>
+</div>
+<div id="comment">
+    <span>댓글 {{commentNum}}개</span>
+    <div><form action="http://localhost:4001/api/comment/write" method="post">
+        <!-- 여기부터 수정하기 -->
+    </form></div>
+    
+</div>
+{% endblock %}

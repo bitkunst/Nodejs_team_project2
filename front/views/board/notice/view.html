@@ -1,0 +1,20 @@
+{% extends "../_layout.html" %}
+{% block content %}
+<h3><a href="/board/notice/list">NOTICE</a></h3>
+<table>
+    <tr>
+        <td>{{item.idx}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.nickname}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.view}}</td>
+    </tr>
+</table>
+<div id="content">{{item.content}}</div>
+<a href="/board/notice/list">목록가기</a>
+<a href="/board/notice/update?idx={{item.idx}}">수정</a>
+<form action="http://localhost:4001/board/notice/delete" method="post">
+    <input type="hidden" name="idx" value="{{item.idx}}">
+    <input type="submit" value="삭제하기">
+</form>
+{% endblock %}
