@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>회원정보 수정</h3>
+    <form name="form" method="post" action="/user/update" onSubmit="formCheck()">
+        <table>
+            <tbody class="tbody">
+                <tr>
+                    <td> 아이디 : </td>
+                    <!-- <td> {{user.userid}} </td> -->
+                </tr>
+                <tr>
+                    <td> 비밀번호 : </td>
+                    <td> <input type="password" name="userpw" value=""> </td>
+                </tr>
+                <tr>
+                    <td> 별명 : </td>
+                    <td> <input type="text" name="nickname" value=""> </td>
+                </tr>
+                <tr>
+                    <td> 생년월일 : </td>
+                    <!-- <td> {{user.birth}} </td> -->
+                </tr>
+                <tr>
+                    <td> 성별 : </td>
+                    <!-- <td> {{user.gender}} </td> -->
+                </tr>
+                <tr>
+                    <td> Mobile </td>
+                    <td> <input type="text" name="phone" value=""> </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <input type="submit" value="수정완료">
+    </form>
+    <div class="button">
+        <button><a href="/user/profile">mypage</a></button>
+    </div>
+</body>
+
+</html>
