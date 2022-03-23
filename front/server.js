@@ -10,15 +10,17 @@ nunjucks.configure('./views', {
     watch: true
 })
 
+
 app.use(express.static('./public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cookieParser())
+app.use(express.static('public'))
 
 
 app.use(router)
 
 
-app.listen(3001, ()=>{
+app.listen(3001, () => {
     console.log('front server onload')
 })
