@@ -1,14 +1,18 @@
-const pool = require('../../../db').pool
+const { promisePool } = require('../../../db')
+
 
 // 브라우저에서 ajax로 요청하면 db에서 게시글 목록 전달
 const listApi = async (req, res) => {
-    const sql = ``
+    const sql = `select idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, nickname 
+                from board 
+                left join user on board.b_userid = user.userid 
+                where board_name = 'qna' AND parent IS NULL
+                order by idx desc`
     let response = {
         errno: 1
     }
-    const conn = await pool.getConnection()
     try {
-        const [result] = await conn.execute(sql)
+        const [result] = await promisePool.execute(sql)
         response = {
             ...response,
             errno: 0,
@@ -18,7 +22,7 @@ const listApi = async (req, res) => {
     } catch (e) {
         console.log(e)
         res.json(response)
-    } finally { conn.release() }
+    }
 }
 
 // 프론트서버에서 ajax 요청시 db에서 해당 idx의 글 정보, 현재 접속한 유저 정보 전달

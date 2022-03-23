@@ -39,8 +39,8 @@
 
 <template id="boardList">
     <tr>
-        <td>{idx}</td>
-        <td>{title}</td>
+        <td>{num}</td>
+        <td><a href="/board/notice/view/{idx}">{title}</a></td>
         <td>{nickname}</td>
         <td>{date}</td>
         <td>{view}</td>
@@ -48,8 +48,8 @@
 </template>
 
 <template id="pageList">
-    <button>{pNum}</button>
+    <button class="pNum">{pNum}</button>
 </template>
 
-<script type="text/javascript" src="../../../noticelist.js"></script>
+<script type="text/javascript" src="../../../js/board/noticelist.js"></script>
 {% endblock %}

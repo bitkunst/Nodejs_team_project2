@@ -1,7 +1,7 @@
 {% extends "./_layout.html" %}
 {% block content %}
 <span>글쓰기</span>
-<form action="/board/write" method="post">
+<form action="http://localhost:4001/api/board/notice/write" method="post">
     <select name="board_name">
         <option value selected>게시판 선택</option>
         <option value="notice">공지사항</option>
