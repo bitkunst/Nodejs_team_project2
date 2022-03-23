@@ -6,7 +6,7 @@ const mainRouter = require('./main')
 const router = express.Router();
 
 router.use('/notice', noticeRouter);
-router.use('/notice', qnaRouter);
-router.use('/notice', mainRouter);
+router.use('/qna', qnaRouter);
+router.use('/main', mainRouter);
 
 module.exports = router;

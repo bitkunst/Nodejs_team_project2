@@ -2,7 +2,7 @@ const pool = require('../../../db').pool
 
 // 브라우저에서 ajax로 요청하면 db에서 게시글 목록 전달
 const listApi = async (req, res) => {
-    const sql = ``
+    const sql = `select * from board where board_name = 'notice'`
     let response = {
         errno: 1
     }
