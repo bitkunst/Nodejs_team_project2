@@ -4,6 +4,7 @@ const SocketIO = require('socket.io')
 const socket = require('./public/js/socket.js')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const router = require('./routes/index.js')
 const app = express()
 
 const server = http.createServer(app)
@@ -23,12 +24,8 @@ app.use(cors({
     credentials: true
 }))
 
-app.get('/', (req, res)=>{
-    // res.json({msg: 'hi'})
-    res.json({msg: 'hi'})
-})
 
-// socket(io)
+app.use(router)
 
 server.listen(4001, ()=>{
     console.log('back server onload')

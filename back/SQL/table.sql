@@ -66,6 +66,17 @@ CREATE TABLE img (
     img TEXT NOT NULL
 );
 
+CREATE TABLE chatroom (
+    idx INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    room VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE chat (
+    idx INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    room VARCHAR(50) NOT NULL,
+    content TEXT NOT NULL,
+    userid VARCHAR(50) NOT NULL
+);
 
 -- sample data --
 INSERT INTO user VALUES ('admin', 'admin', '관리자', '관리자', '주소없음', 'm', '01012341234', '0212341234', 'email@google.com', '안녕하세요 관리자입니다.', 0);
