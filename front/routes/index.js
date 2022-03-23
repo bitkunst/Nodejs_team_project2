@@ -8,8 +8,9 @@ router.get('/', (req, res) => {
     res.render('index.html')
 })
 
+router.use('/user', userRouter)
 router.use('/board', boardRouter)
-
 router.use('/chat', chatRouter)
 
 module.exports = router
+

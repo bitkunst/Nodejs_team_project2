@@ -5,8 +5,7 @@ const boardRouter = require('./board')
 const commentRouter = require('./comment')
 const router = express.Router();
 
-// router.use('/user', userRouter);
-
+router.use('/api/user', userRouter);
 router.use('/api/chat', chatRouter)
 router.use('/api/board', boardRouter);
 router.use('/api/comment', commentRouter);

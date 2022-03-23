@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('./userController');
+const userController = require('./userController.js');
 
+router.post('/login', userController.login);
 
-// router.post('/login', userController.logincheck);
+router.post('/join', userController.join);
+
 
 // router.get('/logout', userController.logout);
 
 // router.get('/join', userController.join);
-
-// router.post('/join', userController.joincheck);
 
 // router.get('/profile', userController.profile);
 
