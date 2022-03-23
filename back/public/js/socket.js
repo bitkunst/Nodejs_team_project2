@@ -5,14 +5,12 @@ function countRoom(io, roomName) {
 }
 
 const user = '익명'
-let room
 
 module.exports = (io) => {
     io.on('connection', (ws)=>{
         console.log('server webSocket connected')
 
         ws.on('enterRoom', async (roomName, done)=>{
-            room = roomName
             const sql = 'SELECT * FROM chat WHERE room=?'
             const prepare = [roomName]
             const [rows,] = await promisePool.query(sql, prepare)
@@ -31,9 +29,8 @@ module.exports = (io) => {
             done()
         })
 
-        ws.on('disconnect', ()=>{
-            const count = countRoom(io, room)
-            ws.to(room).emit('bye', user, count)
+        ws.on('disconnecting', ()=>{
+            ws.rooms.forEach(room => ws.to(room).emit('bye', user, countRoom(io,room)-1))
         })
 
     })
