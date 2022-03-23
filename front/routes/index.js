@@ -1,7 +1,8 @@
 const express = require('express')
-const router = express.Router()
 const userRouter = require('./user/userRouter.js')
 const boardRouter = require('./board')
+const chatRouter = require('./chat')
+const router = express.Router()
 
 router.get('/', (req, res) => {
     res.render('index.html')
@@ -9,5 +10,7 @@ router.get('/', (req, res) => {
 
 router.use('/user', userRouter)
 router.use('/board', boardRouter)
+router.use('/chat', chatRouter)
 
-module.exports = router;
+module.exports = router
+
