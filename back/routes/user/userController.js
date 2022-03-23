@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
 //     } finally { conn.release() }
 // }
 // userid userpw  name nickname  adress gender mobile  phone  email   bio    point
-app.post('/api/user/join', async (req, res) => {
+exports.join = async (req, res) => {
     const { userid, userpw, name, nickname, adress, gender, mobile, phone } =
         req.body;
     const conn = await pool.getConnection();
@@ -92,4 +92,4 @@ app.post('/api/user/join', async (req, res) => {
         conn.release();
         res.redirect('/')
     }
-});
+};
