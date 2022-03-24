@@ -71,33 +71,56 @@ exports.join = async (req, res) => {
     );
 };
 
+
+// userid userpw  name nickname  adress gender mobile  phone  email   bio    point
 // exports.join = async (req, res) => {
-//     const { body } = req;
-//     const conn = await promisePool.getConnection();
+//     const { userid, userpw, name, nickname, adress, gender, mobile, phone } =
+//         req.body;
+//     const conn = await pool.getConnection();
+//     const sql = `INSERT INTO user 
+//                 (userid, userpw, name, nickname, adress, gender, mobile, phone, email, bio, point)
+//                 VALUES
+//                 (?,?,?,?,?,?,?,?,?,?,'0')`;
+//     const prepare = [
+//         userid,
+//         userpw,
+//         name,
+//         nickname,
+//         adress,
+//         gender,
+//         mobile,
+//         phone,
+//         email,
+//         bio,
+//         point
+//     ];
+//     let data = {
+//         result: 'fail',
+//         err: 'fail',
+//     };
 //     try {
-//         const sql = `INSERT INTO user
-//                   (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point)
-//                   values
-//                   ("${body.userid}", "${body.userpw}", "${body.name}", "${body.nickname}", "${body.address}","${body.gender}","${body.mobile1}-${body.mobile2}-${body.mobile3}",
-//                   "${body.phone1}-${body.phone2}-${body.phone3}","${body.email}","${body.bio}","${body.point}")`;
-//         const sql2 = `INSERT INTO user
-//                   (userid, userpw, name, nickname, address, gender, mobile, email, bio, point)
-//                   values
-//                   ("${body.userid}", "${body.userpw}", "${body.name}", "${body.nickname}", "${body.address}","${body.gender}","${body.mobile1}-${body.mobile2}-${body.mobile3}",
-//                   "${body.email}","${body.bio}","${body.point}")`;
-//         if (body.phone1 == '' || body.phone2 == '' || body.phone3 == '') {
-//             await conn.query(sql2);
-//         } else {
-//             await conn.query(sql);
-//         }
-//     } catch (error) {
-//         console.log(error);
+//         const [result] = await conn.query(sql, prepare);
+//         data = {
+//             ...data,
+//             result,
+//         };
+//         const cookieOpt = {
+//             path: '/',
+//             httpOnly: true,
+//             secure: true,
+//             domain: 'localhost',
+//         };
+//         res.cookie('name', 'kong', cookieOpt);
+//     } catch (err) {
+//         data = {
+//             ...data,
+//             err,
+//         };
+//         console.log(err);
 //     } finally {
+//         res.send(data);
 //         conn.release();
+//         res.redirect('/')
 //     }
-//     res.send(
-//         alertmove(
-//             '회원가입이 완료되었습니다.'
-//         )
-//     );
 // };
+

@@ -10,19 +10,10 @@
             <td>작성자</td>
             <td>작성일</td>
             <td>조회수</td>
-            <td>답변수</td>
+            <td>추천수</td>
         </tr>
     </thead>
     <tbody>
-        <!-- 임시 -->
-        <tr>
-            <td>1</td>
-            <td>임시데이터</td>
-            <td>admin</td>
-            <td>2022-03-22</td>
-            <td>0</td>
-            <td>0</td>
-        </tr>
         <!-- template : boardList -->
     </tbody>
 </table>
@@ -30,10 +21,6 @@
 <div id="pagination">
     <button id="prevBtn">👈</button>
     <div id="pageBtnDiv">
-        <!-- 임시 -->
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
         <!-- template : pageList -->
     </div>
     <button id="nextBtn">👉</button>
@@ -41,16 +28,18 @@
 
 <template id="boardList">
     <tr>
-        <td>{idx}</td>
-        <td>{title}</td>
+        <td>{num}</td>
+        <td><a href="/board/qna/view/{idx}">{title}</a></td>
         <td>{nickname}</td>
         <td>{date}</td>
         <td>{view}</td>
-        <td>{answer}</td>
+        <td>{likes}</td>
     </tr>
 </template>
 
 <template id="pageList">
-    <button>{pNum}</button>
+    <button class="pNum">{pNum}</button>
 </template>
+
+<script type="text/javascript" src="../../../js/board/qnalist.js"></script>
 {% endblock %}
