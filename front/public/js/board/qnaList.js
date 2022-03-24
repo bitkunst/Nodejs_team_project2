@@ -31,7 +31,7 @@ const createList = (data, currentPage, viewArticle) => {
             .replace('{nickname}', v.nickname)
             .replace('{date}', v.date)
             .replace('{view}', v.view)
-            .replace('{answer}', v.answer)
+            .replace('{likes}', v.likes)
     })
     const tbody = document.querySelector('tbody')
     tbody.innerHTML = str
