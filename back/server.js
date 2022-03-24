@@ -16,7 +16,7 @@ const io = SocketIO(server, {
 })
 socket(io)
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
@@ -27,6 +27,6 @@ app.use(cors({
 
 app.use(router)
 
-server.listen(4001, ()=>{
+server.listen(4001, () => {
     console.log('back server onload')
 })

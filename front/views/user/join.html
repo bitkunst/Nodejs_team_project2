@@ -11,11 +11,11 @@
 <body>
     <!--아이디 패스워드 이름    별명    주소   성별   핸드폰   전화  이메일 자기소개 포인트
          userid userpw  name nickname  adress gender mobile  phone  email   bio    point  -->
-    <form action="#" method="post">
-        <!-- post : 암호화 // get : 암호화x url에 묻어감-->
+    <!-- <form action="#" method="post">
+        post : 암호화 // get : 암호화x url에 묻어감
         <fieldset>
             <legend>❤️필수 입력 사항❤️</legend>
-            <!-- name 부분은 백앤드개발자랑 이름을 맞춰야함-->
+            name 부분은 백앤드개발자랑 이름을 맞춰야함
             <p>
                 <label for="user_id">아이디 : </label>
                 <input type="text" id="user_id" name="userid">
@@ -47,10 +47,7 @@
                 <input id="user_male" type="radio" checked value="M" name="gender">
                 <label for="user_female">여성</label>
                 <input id="user_female" type="radio" value="F" name="gender">
-                <!-- <select name="gender">
-                    <option>남성</option>
-                    <option>여성</option>
-                </select> -->
+           
             </p>
 
             <p>
@@ -75,16 +72,78 @@
                 <input type="text" id="user_bio" name="bio">
             </p>
             <p>
-                <!-- <label for="user_point">포인트 : </label> -->
+                <label for="user_point">포인트 : </label>
                 <input type="hidden" id="user_point" name="point">
             </p>
         </fieldset>
 
-        <!-- <p>
-            <span>회원약관</span>
-            <textarea readonly="readonly" name="userpolicy">회원약관.</textarea>
-        </p> -->
-
+        <p>
+            <input type="submit" value="회원가입">
+            <input type="reset" value="재작성">
+        </p>
+    </form> -->
+    <form action="http://localhost:4001/api/user/join" method="post">
+        <fieldset>
+            <legend>❤️필수 입력 사항❤️</legend>
+            <p>
+                <label for="user_id">아이디 :</label>
+                <input type="text" name="userid" id="user_id" maxlength="16" />
+                <button type="button" id="id_check_btn" class="join_btn">
+                    중복확인
+                </button>
+            </p>
+            <p>
+                <label for="user_pw">비밀번호 :</label>
+                <input type="password" name="userpw" id="user_pw" maxlength="16" />
+            </p>
+            <p>
+                <label for="user_name">이름 :</label>
+                <input type="text" name="name" id="user_name" maxlength="16" />
+            </p>
+            <p>
+                <label for="user_nickname">닉네임 :</label>
+                <input type="text" name="nickname" id="useralias" maxlength="16" />
+            </p>
+            <p>
+                <label for="user_email">주소 :</label>
+                <input type="text" name="email" id="user_email" maxlength="32" />
+            </p>
+            <p>
+                <span>성별 : </span>
+                <label for="user_male">남성</label>
+                <input id="user_male" type="radio" checked value="M" name="gender">
+                <label for="user_female">여성</label>
+                <input id="user_female" type="radio" value="F" name="gender">
+            </p>
+            <p>
+                <label for="user_mobile1">핸드폰 번호 :</label>
+            <div>
+                <input type="text" name="mobile1" id="user_mobile1" maxlength="3" />
+                <input type="text" name="mobile2" id="user_mobile2" maxlength="4" />
+                <input type="text" name="mobile3" id="user_mobile3" maxlength="4" />
+            </div>
+            </p>
+            <p>
+                <label for="user_phone1">전화번호(선택) :</label>
+            <div>
+                <input type="text" class="one_third_input" name="phone1" id="user_phone1" maxlength="3" />
+                <input type="text" class="one_third_input" name="phone2" id="user_phone2" maxlength="4" />
+                <input type="text" class="one_third_input" name="phone3" id="user_phone3" maxlength="4" />
+            </div>
+            </p>
+            <p>
+                <label for="user_email">이메일 : </label>
+                <input type="email" id="user_email" name="email">
+            </p>
+            <p>
+                <label for="user_bio">자기소개 : </label>
+                <input type="text" id="user_bio" name="bio">
+            </p>
+            <p>
+                <!-- <label for="user_point">포인트</label> -->
+                <input type="hidden" id="user_point" name="point">
+            </p>
+        </fieldset>
         <p>
             <input type="submit" value="회원가입">
             <input type="reset" value="재작성">
