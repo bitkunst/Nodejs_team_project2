@@ -3,11 +3,11 @@ const { promisePool } = require('../../../db')
 
 // 브라우저에서 ajax로 요청하면 db에서 게시글 목록 전달
 const listApi = async (req, res) => {
-    const sql = `select idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, nickname 
+    const sql = `select idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, nickname , parent
                 from board 
                 left join user on board.b_userid = user.userid 
-                where board_name = 'qna' AND parent IS NULL
-                order by idx desc`
+                where board_name = 'qna'
+                order by if(ISNULL(parent), idx, parent) desc`
     let response = {
         errno: 1
     }
