@@ -95,4 +95,4 @@ const showList = async (viewArticle, blockArticle) => {
     createList(data, currentPage, viewArticle)
 }
 
-showList(10, 10)
+showList(15, 10)

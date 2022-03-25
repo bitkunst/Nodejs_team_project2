@@ -29,9 +29,10 @@
     {% endfor %}
 </ul>
 <a href="/board/qna/list">목록가기</a>
-<a href="/board/qna/update?idx={{item.idx}}">수정</a>
-<form action="http://localhost:4001/board/qna/delete" method="post">
+<a href="/board/qna/update/{{item.idx}}">수정</a>
+<form action="http://localhost:4001/api/board/delete" method="post">
     <input type="hidden" name="idx" value="{{item.idx}}">
+    <input type="hidden" name="idx" value="{{item.board_name}}">
     <input type="submit" value="삭제하기">
 </form>
 {% endblock %}

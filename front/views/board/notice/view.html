@@ -2,19 +2,24 @@
 {% block content %}
 <h3><a href="/board/notice/list">NOTICE</a></h3>
 <table>
-    <tr>
-        <td>{{item.idx}}</td>
-        <td>{{item.title}}</td>
-        <td>{{item.nickname}}</td>
-        <td>{{item.date}}</td>
-        <td>{{item.view}}</td>
-    </tr>
+    <thead>
+        <tr>
+            <td class="idx">{{item.idx}}</td>
+            <td class="titleView">{{item.title}}</td>
+            <td class="nickname">{{item.nickname}}</td>
+            <td class="date">{{item.date}}</td>
+            <td class="view">{{item.view}}</td>
+        </tr>
+    </thead>
 </table>
-<div id="content">{{item.content}}</div>
-<a href="/board/notice/list">목록가기</a>
-<a href="/board/notice/update?idx={{item.idx}}">수정</a>
-<form action="http://localhost:4001/board/notice/delete" method="post">
-    <input type="hidden" name="idx" value="{{item.idx}}">
-    <input type="submit" value="삭제하기">
-</form>
+<div id="contentView">{{item.content}}</div>
+<div id="btnDiv">
+    <a class="btn" href="/board/notice/list">목록가기</a>
+    <a class="btn" href="/board/notice/update/{{item.idx}}">수정</a>
+    <form action="http://localhost:4001/api/board/delete" method="post">
+        <input type="hidden" name="idx" value="{{item.idx}}">
+        <input type="hidden" name="board_name" value="{{item.board_name}}">
+        <input class="btn" type="submit" value="삭제">
+    </form>
+</div>
 {% endblock %}
