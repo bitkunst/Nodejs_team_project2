@@ -34,6 +34,44 @@ const writePost = async (req, res) => {
         values('${title}','${content}',now(), 0, 0, '${userid}', ${parent}, 1, '${cg_idx}','${board_name}') ;`
     try {
         const [result] = await promisePool.execute(sql1)
+        res.redirect(`http://localhost:3001/board/${board_name}/list`)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+// ajax로 프론트서버로 데이터 뿌려줌
+const getArticleApi = async (req, res) => {
+    const { idx } = req.body
+    const sql = `select idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, cg_idx, nickname, board_name 
+                from board 
+                left join user on board.b_userid = user.userid 
+                where idx = ${idx}`
+    let response = {
+        errno: 1
+    }
+    try {
+        const [result] = await promisePool.execute(sql)
+        response = {
+            ...response,
+            errno: 0,
+            result: result,
+        }
+        res.json(response)
+    } catch (e) {
+        console.log(e)
+        res.json(response)
+    }
+}
+
+const deleteApi = async (req, res) => {
+    const { idx, board_name } = req.body
+    console.log(idx, board_name)
+    const sql = `DELETE from board WHERE idx=${idx};` // board db에서 레코드 삭제
+    // img, hashtag, scrap, likes, comment에서 해당 idx와 연결된 레코드 모두 삭제 : 쿼리문 찾아보기 
+    try {
+        const [result] = await promisePool.execute(sql)
+        res.redirect(`http://localhost:3001/board/${board_name}/list`)
     } catch (e) {
         console.log(e)
     }
@@ -41,5 +79,7 @@ const writePost = async (req, res) => {
 
 module.exports = {
     writeCategory,
-    writePost
+    writePost,
+    getArticleApi,
+    deleteApi
 }

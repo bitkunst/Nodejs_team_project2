@@ -5,7 +5,7 @@ const listApi = async (req, res) => {
     const sql = `select idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, nickname 
                 from board 
                 left join user on board.b_userid = user.userid 
-                where board_name = 'notice' 
+                where board_name = 'notice' and active = 1
                 order by idx desc`
     let response = {
         errno: 1
