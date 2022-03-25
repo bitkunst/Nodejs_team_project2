@@ -17,8 +17,10 @@ exports.agree = (req, res) => {
 };
 
 exports.profile = async (req, res) => {
-    const token = req.cookies.AccessToken
-    const { userid, nickname } = decodePayload(token)
+    // To 종남
+    // req 객체 안에 사용자 정보 넣어서 userInfo 객체 만듦!!
+    // 확인하고 작업할 것!! 
+    console.log(req.userInfo)
     // 백서버로 요청을 보내고 사용자 정보를 가져오기 
     // const response = awiat axios.post()
     // res.render('user/profile.html', {

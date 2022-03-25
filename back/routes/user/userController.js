@@ -15,7 +15,6 @@ exports.login = async (req, res) => {
 
             // jwt토큰생성 // 생성 끝났어 그 다음 쿠키담아서보내고 리다이렉트 메인
             const { userid, nickname } = result[0]
-            console.log({ userid, nickname })
             const payload = {
                 userid,
                 nickname
@@ -39,7 +38,7 @@ exports.login = async (req, res) => {
 };
 
 exports.join = async (req, res) => {
-    const { userid, userpw, name, nickname, address, gender, mobile1, mobile2, mobile3, phone1, phone2, phone3, email, bio, point } = req.body
+    const { userid, userpw, name, nickname, address, gender, mobile1, mobile2, mobile3, phone1, phone2, phone3, email, bio } = req.body
     console.log(req.body)
     try {
         const sql = `INSERT INTO user
