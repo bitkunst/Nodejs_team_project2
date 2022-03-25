@@ -15,7 +15,7 @@ module.exports = (io) => {
             userInfo[socketId] = nickname
             try {
                 const sql = `SELECT content, 
-                                    userid, 
+                                    nickname, 
                                     DATE_FORMAT(date, "%Y-%m-%d %H : %i") AS date 
                              FROM chat 
                              WHERE room=?
@@ -35,7 +35,7 @@ module.exports = (io) => {
 
         ws.on('newMsg', async (msg, room, nickname, done)=>{
             try {
-                const sql = "INSERT INTO chat (room, content, userid) VALUES (?, ?, ?)"
+                const sql = "INSERT INTO chat (room, content, nickname) VALUES (?, ?, ?)"
                 const prepare = [room, msg, nickname]
                 const [rows,] = await promisePool.query(sql, prepare)
                 const {insertId} = rows
