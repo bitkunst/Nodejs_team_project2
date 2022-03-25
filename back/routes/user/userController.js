@@ -1,8 +1,9 @@
 require('dotenv').config()
 const { promisePool } = require('../../db')
 const { alertmove } = require('../../utils/alertmove.js');
+const { createToken } = require('../../utils/jwt.js')
 const jwt = require('jsonwebtoken')
-
+// const { createToken } = require('../../utils/jwt.js')
 
 // 회원정보 확인 후 DB에 데이터가 있으면 로그인, 없으면 경고문구
 exports.login = async (req, res) => {
@@ -10,31 +11,27 @@ exports.login = async (req, res) => {
         const { userid, userpw } = req.body;
         const sql = `SELECT * FROM user WHERE userid = "${userid}" AND userpw = "${userpw}"`;
         let [result] = await promisePool.query(sql);
-        console.log(result)
         if (result[0] !== undefined) {
 
             // jwt토큰생성 // 생성 끝났어 그 다음 쿠키담아서보내고 리다이렉트 메인
-            const { userid: uid, nickname } = result[0]
-            console.log(userid, nickname)
-            const option = {
-                algorithm: "HS256",
-            }
+            const { userid, nickname } = result[0]
+            console.log({ userid, nickname })
             const payload = {
-                uid,
+                userid,
                 nickname
             }
-            const secretKey = process.env.SALT
-            const jwt_token = jwt.sign(payload, secretKey, option)
-            console.log(jwt_token)
-            res.cookie('jwt', jwt_token, {
+            const jwt_token = createToken(payload)
+            res.cookie('AccessToken', jwt_token, {
                 path: '/',
                 httpOnly: true,
-                secure: true
+                secure: true,
+                domain: 'localhost'
             })
+
             res.redirect('http://localhost:3001')
         } else {
             res.send(alertmove('http://localhost:3001/user/login', '존재하지 않는 계정입니다.'));
-            // 경고문구 로그인 후 이용
+
         }
     } catch (error) {
         console.log(error);

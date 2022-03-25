@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('./userController.js');
-
+const { auth } = require('../../middleware/auth.js')
 
 
 router.get('/login', userController.login);
@@ -12,7 +12,7 @@ router.get('/agree', userController.agree);
 
 router.get('/welcome', userController.welcome);
 
-router.get('/profile', userController.profile);
+router.get('/profile', auth, userController.profile);
 
 router.get('/profile/update', userController.profileEdit);
 

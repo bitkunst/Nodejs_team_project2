@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const secretKey = process.env.SALT;
 const algorithm = process.env.JWT_ALG;
+
 const option = { algorithm };
 
 function createToken(payload) {
