@@ -41,6 +41,32 @@
     margin-top: 10px;
 }
 
+/* mention */
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .alert {
     background: transparent;
     text-align: center;
@@ -51,16 +77,50 @@
     color: #DDC6B6;
     font-style: italic;
     font-weight: bold;
-    opacity: 1;
-    transition: all 0.5s;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@-moz-keyframes fadeout { /* Firefox */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@-webkit-keyframes fadeout { /* Safari and Chrome */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 .alertOff {
-    opacity: 0;
+    animation: fadeout 2s;
+    -moz-animation: fadeout 2s; /* Firefox */
+    -webkit-animation: fadeout 2s; /* Safari and Chrome */
+    animation-fill-mode: forwards;
 }
 
 body::-webkit-scrollbar{
     display: none;
+}
+
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 .chat_wrap {
@@ -76,14 +136,12 @@ body::-webkit-scrollbar{
     background-color: #262223;
     border-radius: 5px;
     padding: 10px;
-    /* height: 100vh; */
-    /* overflow-y: scroll; */
     overflow-x: hidden;
     min-height: 700px;
 }
 
 .chat_wrap .item {
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .chat_wrap .item:first-child {
@@ -92,7 +150,7 @@ body::-webkit-scrollbar{
 
 .chat_wrap .item .box {
     display: inline-block;
-    max-width: 210px;
+    max-width: 500px;
     position: relative;
 }
 
@@ -122,10 +180,12 @@ body::-webkit-scrollbar{
 .chat_wrap .item .box .name {
     font-size: 12px;
     color: #999;
-    position: absolute;
-    right: -75px;
+    /* position: absolute; */
+    /* right: -75px; */
+    /* width: 70px; */
     bottom: 0;
-    width: 70px;
+    float: left;
+    margin-top: 4px;
 }
 
 .chat_wrap .item .box .time {
@@ -148,6 +208,7 @@ body::-webkit-scrollbar{
     width: 70px;
     margin-bottom: 12px;
     display: block;
+    float: left;
 }
 
 .chat_wrap .item.mymsg {
@@ -163,8 +224,9 @@ body::-webkit-scrollbar{
 }
 
 .chat_wrap .item.mymsg .box .name {
-    right: auto;
-    left: -75px;
+    /* right: auto; */
+    /* left: -75px; */
+    float: right;
 }
 
 .chat_wrap .item.mymsg .box .time {
@@ -197,7 +259,6 @@ body::-webkit-scrollbar{
     /* background: #fee600; */
     background-color: #DDC6B6;
     color: black;
-    /* font-weight: bold; */
 }
 
 /* Notice */

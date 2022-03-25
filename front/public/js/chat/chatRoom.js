@@ -1,10 +1,20 @@
 
 const roomMaker = document.querySelector('#roomMaker')
-const roomSubmit = document.querySelector('#roomSubmit')
+const roomMakerSubmit = document.querySelector('#roomMakerSubmit')
+const roomExploderSubmit = document.querySelector('#roomExploderSubmit')
+
 roomMaker.addEventListener('click', ()=>{
-    if (roomSubmit.classList.value == 'on') {
-        roomSubmit.classList.remove('on')
+    if (roomMakerSubmit.classList.value == 'on') {
+        roomMakerSubmit.classList.remove('on')
     } else {
-        roomSubmit.setAttribute('class', 'on')
+        roomMakerSubmit.setAttribute('class', 'on')
+    }
+})
+
+roomExploder.addEventListener('click', ()=>{
+    if (roomExploderSubmit.classList.value == 'on') {
+        roomExploderSubmit.classList.remove('on')
+    } else {
+        roomExploderSubmit.setAttribute('class', 'on')
     }
 })
