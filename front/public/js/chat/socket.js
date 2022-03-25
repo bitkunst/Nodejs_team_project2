@@ -94,10 +94,10 @@ function roomChat(rows, nickname, count) {
     // othersRows.forEach(v => addMessage(v.content, v.userid, v.date))
     // myRows.forEach(v => addMyMessage(v.content, v.date))
     rows.forEach(v => {
-        if (v.userid == nickname) {
+        if (v.nickname == nickname) {
             addMyMessage(v.content, v.date)
         } else {
-            addMessage(v.content, v.userid, v.date)
+            addMessage(v.content, v.nickname, v.date)
         }
     })
     msgForm.addEventListener('submit', handleMsgSubmit)
