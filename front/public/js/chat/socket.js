@@ -10,6 +10,7 @@ const roomName = location.href.split('?')[1].split('=')[1]
 const roomCount = document.querySelector('#roomCount')
 const msgForm = document.querySelector('#msgForm')
 const innerElement = document.querySelector('#chatBox')
+const nickname = document.querySelector('#nickname').value
 
 function addMessage(msg, user, date) {
     const item_div = document.createElement('div')
@@ -47,7 +48,7 @@ function addMyMessage(msg, date) {
     const name_span = document.createElement('span')
     const time_span = document.createElement('span')
     msg_p.innerHTML = msg
-    name_span.innerHTML = `By me`
+    name_span.innerHTML = `me`
     time_span.innerHTML = date
     item_div.setAttribute('class', 'item mymsg')
     box_div.setAttribute('class', 'box')
@@ -82,38 +83,43 @@ function handleMsgSubmit(e) {
     e.preventDefault()
     const msgInput = msgForm.querySelector('input')
     const value = msgInput.value
-    socket.emit('newMsg', value, roomName, (msg, date)=>{
+    socket.emit('newMsg', value, roomName, nickname, (msg, date)=>{
         addMyMessage(msg, date)
     })
     msgInput.value = ''
 }
 
-function roomChat(myRows, othersRows, count) {
+function roomChat(rows, nickname, count) {
     roomCount.innerHTML = `접속중 : ${count}`
-    othersRows.forEach(v => addMessage(v.content, v.userid, v.date))
-    myRows.forEach(v => addMyMessage(v.content, v.date))
+    // othersRows.forEach(v => addMessage(v.content, v.userid, v.date))
+    // myRows.forEach(v => addMyMessage(v.content, v.date))
+    rows.forEach(v => {
+        if (v.userid == nickname) {
+            addMyMessage(v.content, v.date)
+        } else {
+            addMessage(v.content, v.userid, v.date)
+        }
+    })
     msgForm.addEventListener('submit', handleMsgSubmit)
 }
 
 
-socket.emit('enterRoom', roomName, roomChat)
+socket.emit('enterRoom', roomName, nickname, roomChat)
 
-socket.on('newMsg', (msg, date)=>{
-    addMessage(msg, '익명', date)
+socket.on('newMsg', (msg, nickname, date)=>{
+    addMessage(msg, nickname, date)
 })
 
-socket.on('welcome', (user, countRoom)=>{
+socket.on('welcome', (nickname, countRoom)=>{
     roomCount.innerHTML = `접속중 : ${countRoom}`
-    addNotice(`${user} 님이 접속하셨습니다.`)
+    addNotice(`${nickname} 님이 접속하셨습니다.`)
 })
 
-socket.on('bye', (user, countRoom)=>{
+socket.on('bye', (nickname, countRoom)=>{
     roomCount.innerHTML = `접속중 : ${countRoom}`
-    addNotice(`${user} 님이 퇴장하셨습니다.`)
+    addNotice(`${nickname} 님이 퇴장하셨습니다.`)
 })
 
-// const firstMsg = document.querySelector('#firstMsg')
-// const mention = document.createElement('h5')
 
 const firstMsg = document.querySelector('#firstMsg')
 const mention = document.createElement('h5')

@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/chat_css/chat.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="/js/chat/popup.js" defer></script>
+    <script type="text/javascript" src="/js/chat/chatRoom.js" defer></script>
 </head>
 <body>
     <div id="header">
@@ -16,15 +17,26 @@
         <h1>BNW chat room!!</h1>
         <h2>📡Open Rooms📡</h2>
     </div>
+    {% if userid == 'admin' %}
     <div id="roomBtn">
         <button class="w-btn w-btn-gra2 w-btn-gra-anim" type="button" id="roomMaker">
-            Make a Room
+            📢Make a Room📢
         </button>
-        <form method="post" action="http://localhost:4001/api/chat/list" id="roomSubmit">
-            <input type="text" name="room" placeholder="채팅방 이름을 입력하세요">
+        <button class="w-btn w-btn-gra2 w-btn-gra-anim" type="button" id="roomExploder">
+            💣Explode a Room💣
+        </button>
+    </div>
+    <div id="roomInput">
+        <form method="post" action="http://localhost:4001/api/chat/list" id="roomMakerSubmit">
+            <input type="text" name="roomMaker" placeholder="채팅방 이름을 입력하세요">
             <button type="submit">make</button>
         </form>
+        <form method="post" action="http://localhost:4001/api/chat/list" id="roomExploderSubmit">
+            <input type="text" name="roomExploder" placeholder="채팅방 이름을 입력하세요">
+            <button type="submit">explode</button>
+        </form>
     </div>
+    {% endif %}
     <div id="roomlist">
         <ul>
             {% for item in result %}
