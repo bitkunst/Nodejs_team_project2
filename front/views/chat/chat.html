@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/chat_css/chat.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="/js/chat/popup.js" defer></script>
+    <script type="text/javascript" src="/js/chat/chatRoom.js" defer></script>
 </head>
 <body>
     <div id="header">
@@ -16,6 +17,7 @@
         <h1>BNW chat room!!</h1>
         <h2>📡Open Rooms📡</h2>
     </div>
+    {% if userid == 'admin' %}
     <div id="roomBtn">
         <button class="w-btn w-btn-gra2 w-btn-gra-anim" type="button" id="roomMaker">
             Make a Room
@@ -25,6 +27,7 @@
             <button type="submit">make</button>
         </form>
     </div>
+    {% endif %}
     <div id="roomlist">
         <ul>
             {% for item in result %}

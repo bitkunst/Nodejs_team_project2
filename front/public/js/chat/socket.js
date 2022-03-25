@@ -10,6 +10,7 @@ const roomName = location.href.split('?')[1].split('=')[1]
 const roomCount = document.querySelector('#roomCount')
 const msgForm = document.querySelector('#msgForm')
 const innerElement = document.querySelector('#chatBox')
+const nickname = document.querySelector('#nickname').value
 
 function addMessage(msg, user, date) {
     const item_div = document.createElement('div')
