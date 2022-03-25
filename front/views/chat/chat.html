@@ -7,6 +7,7 @@
     <title>Document</title>
     <link type="text/css" rel="stylesheet" href="/chat_css/chat.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/js/chat/popup.js" defer></script>
 </head>
 <body>
     <div id="header">
@@ -14,6 +15,15 @@
         <h1>to</h1>
         <h1>BNW chat room!!</h1>
         <h2>📡Open Rooms📡</h2>
+    </div>
+    <div id="roomBtn">
+        <button class="w-btn w-btn-gra2 w-btn-gra-anim" type="button" id="roomMaker">
+            Make a Room
+        </button>
+        <form method="post" action="http://localhost:4001/api/chat/list" id="roomSubmit">
+            <input type="text" name="room" placeholder="채팅방 이름을 입력하세요">
+            <button type="submit">make</button>
+        </form>
     </div>
     <div id="roomlist">
         <ul>
@@ -39,6 +49,5 @@
             필요시 관리자에게 문의 바랍니다.
         </p>
     </div>
-    <script type="text/javascript" src="/js/chat/popup.js"></script>
 </body>
 </html>
