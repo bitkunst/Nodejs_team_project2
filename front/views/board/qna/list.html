@@ -5,31 +5,31 @@
 <table>
     <thead>
         <tr>
-            <td>번호</td>
-            <td>제목</td>
-            <td>작성자</td>
-            <td>작성일</td>
-            <td>조회수</td>
-            <td>추천수</td>
+            <td class="idx">번호</td>
+            <td class="title">제목</td>
+            <td class="nickname">작성자</td>
+            <td class="date">작성일</td>
+            <td class="view">조회수</td>
+            <td class="likes">추천수</td>
         </tr>
     </thead>
     <tbody>
         <!-- template : boardList -->
     </tbody>
 </table>
-<a href="/board/qna/write">글쓰기</a>
 <div id="pagination">
-    <button id="prevBtn">👈</button>
+    <button class="pBtn" id="prevBtn">«</button>
     <div id="pageBtnDiv">
         <!-- template : pageList -->
     </div>
-    <button id="nextBtn">👉</button>
+    <button class="pBtn" id="nextBtn">»</button>
 </div>
+<div id="writeBtnDiv"><a href="/board/notice/write">글쓰기</a></div>
 
 <template id="boardList">
     <tr>
         <td>{num}</td>
-        <td><a href="/board/qna/view/{idx}">{title}</a></td>
+        <td class="title"><a href="/board/qna/view/{idx}">{title}</a></td>
         <td>{nickname}</td>
         <td>{date}</td>
         <td>{view}</td>
@@ -38,7 +38,7 @@
 </template>
 
 <template id="pageList">
-    <button class="pNum">{pNum}</button>
+    <button class="pNum pBtn">{pNum}</button>
 </template>
 
 <script type="text/javascript" src="../../../js/board/qnalist.js"></script>
