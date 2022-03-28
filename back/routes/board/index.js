@@ -12,7 +12,8 @@ router.use('/main', mainRouter);
 
 router.post('/writeCategory', boardCon.writeCategory)
 router.post('/write', boardCon.writePost)
-router.post('/view', boardCon.getArticleApi)
+router.post('/getArticle', boardCon.getArticleApi)
 router.post('/delete', boardCon.deleteApi)
+router.post('/update', boardCon.updateApi)
 
 module.exports = router;

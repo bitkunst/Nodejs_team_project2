@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/js/chat/popup.js" defer></script>
-</head>
-
-<body>
-    <h1>메인페이지</h1>
+{% extends "./_layout.html" %}
+{% block content %}
+<h1>메인페이지</h1>
 
     <a href="/user/login"><button>로그인</button></a>
     <a href="/user/agree"><button>회원가입</button></a>
     <p></p>
     <a href="javascript:openWindowPop('/chat/list', 'popup')" id="chat">채팅하기</a>
-</body>
-
-</html>
+{% endblock %}

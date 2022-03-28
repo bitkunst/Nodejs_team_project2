@@ -1,34 +1,37 @@
 {% extends "./_layout.html" %}
 {% block content %}
 <span>글쓰기</span>
-<form action="/board/write" method="post">
-    <select name="board_name">
-        <option value selected>게시판 선택</option>
-        <option value="notice">공지사항</option>
-        <option value="qna">Q&A</option>
-        <option value="board">게시판</option>
-    </select>
-    <!-- board db에서 가져오기? -->
-    <!-- board/notice/write면 notice에 selected가 가도록 자동 변경하는 식으로 모든 게시판의 글작성 페이지 하나로 통일 -->
-    <select name="cg_name">
-        <option value selected>카테고리 선택</option>
-        <option value="001">MOVIE</option>
-        <option value="001001">--review</option>
-        <option value="001002">--recommend</option>
-        <option value="002">MUSIC</option>
-        <option value="002001">--review</option>
-        <option value="002002">--recommend</option>
-        <option value="003">CARTOON</option>
-        <option value="003001">--review</option>
-        <option value="003002">--recommend</option>
-    </select>
+<form action="http://localhost:4001/api/board/update" method="post" id="writeForm">
+    <input type="hidden" name="idx" value="{{item.idx}}">
+    <div>
+        <select name="board_name" id="boardSelect">
+            <option class="boardMenu" value="notice">공지사항</option>
+            <option class="boardMenu" value="qna">Q&A</option>
+            <option class="boardMenu" value="main">게시판</option>
+        </select>
+        <!-- board db에서 가져오기? -->
+        <!-- board/notice/write면 notice에 selected가 가도록 자동 변경하는 식으로 모든 게시판의 글작성 페이지 하나로 통일 -->
+        <select name="cg_idx" id="cgSelect">
+        </select>
+    </div>
     <!-- 카테고리 셀렉트박스는 게시판항목이 board 일때만 활성화되도록 -->
     <!-- 세부카테고리 지정 없이 메인카테고리만 지정하는 것도 가능 -->
-    <input type="text" name="title" value="{{item.title}}">
-    <input type="file" name="upload" multiple> 
-    <!-- 🔥 수정할 때 기존에 업로드한 파일을 불러오는거 어떤 식으로 하면 될지 모르겠음 -->
-    <input type="text" name="content" value="{{item.content}}">
+    <input type="text" name="title" id="title" placeholder="제목을 입력하세요" value="{{item.title}}">
+    <input id="fileInput" type="file" name="upload" multiple> 
+    <textarea name="content" id="content" cols="30" rows="10">{{item.content}}</textarea>
     <!-- file upload 개수는 js로 제어 : upload.files.length였나 아무튼 그걸로 -->
-    <input type="submit" value="등록">
+    <input type="hidden" id="parent" name="parent" value=null>
+    <!-- qna로 post 시에만 parent인풋에 value로 질문글의 idx 넘어가도록, 그 외에는 value=null -->
+    <input id="submitBtn" type="submit" value="등록">
 </form>
+
+<input type="hidden" id="updateCg" value="{{item.cg_idx}}">
+
+<template id="cgOption">
+    <option class="cgMenu" value="{idx}">{cgName}</option>
+</template>
+
+
+<script type="text/javascript" src="/js/board/boardWrite.js"></script>
 {% endblock %}
+
