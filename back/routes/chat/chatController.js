@@ -27,6 +27,9 @@ const postChatList = async (req, res) => {
             const sql = 'DELETE FROM chatroom WHERE room=?'
             const prepare = [roomExploder]
             await promisePool.query(sql, prepare)
+
+            const sql2 = 'DELETE FROM chat WHERE room=?'
+            await promisePool.query(sql2, prepare)
             res.redirect('http://localhost:3001/chat/list')
         }
     } catch (err) {
