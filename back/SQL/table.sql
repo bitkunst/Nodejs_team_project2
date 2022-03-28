@@ -69,7 +69,8 @@ CREATE TABLE likes (
 CREATE TABLE img (
     iid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     bid INT NOT NULL,
-    img TEXT NOT NULL
+    img TEXT NOT NULL,
+    seq INT NOT NULL
 );
 
 CREATE TABLE chatroom (
