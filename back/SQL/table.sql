@@ -14,11 +14,12 @@ CREATE TABLE user (
 
 CREATE TABLE category (
     idx VARCHAR(6) NOT NULL PRIMARY KEY,
-    main VARCHAR(50) NOT NULL UNIQUE,
-    m_url VARCHAR(50) NOT NULL UNIQUE,
+    board_name VARCHAR(50) NOT NULL,
+    main VARCHAR(50) NOT NULL,
+    m_url VARCHAR(50) NOT NULL,
     m_key VARCHAR(3) NOT NULL,
-    sub VARCHAR(50) NULL UNIQUE,
-    s_url VARCHAR(50) NULL UNIQUE,
+    sub VARCHAR(50) NULL,
+    s_url VARCHAR(50) NULL,
     s_key VARCHAR(3) NULL
 );
 

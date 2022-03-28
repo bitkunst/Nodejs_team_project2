@@ -139,7 +139,7 @@ form {
 }
 
 /* content */
-#content {
+#contentBox {
     background-color: white;
     position: absolute;
     top: 30%;
