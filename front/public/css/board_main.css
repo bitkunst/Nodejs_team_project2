@@ -14,7 +14,10 @@
 
 
 #boardUl {
-    width: 80vw;
+    width: 1020px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .boardLi {
@@ -22,11 +25,12 @@
     height: 400px;
     margin: 20px;
     background: #DDC6B6;
-    float: left;
+    /* float: left; */
     border-radius: 10px;
+    align-self: baseline;
+    justify-self: flex-start;
 }
 
-/* boardLi 배치 => 반응형으로 크기 별 갯수 넣기... */
 
 
 

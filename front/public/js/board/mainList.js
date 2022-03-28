@@ -1,10 +1,20 @@
+const currentCg = document.location.href.split('?')[1]
+const cgArr = []
+if (currentCg !== undefined) {
+    currentCg.split('&').forEach((v, i) => cgArr[i] = v.split('=')[1])
+}
+console.log(cgArr)
+
 const getData = async (router) => {
     try {
         const option = {
             'Content-type': 'application/json',
             withCredentials: true
         }
-        const response = await axios.post(router, option)
+        const dataObj = {
+            cgArr
+        }
+        const response = await axios.post(router, dataObj, option)
         const errNo = response.data.errno
         const data = response.data.result
         if (errNo === 0) {
