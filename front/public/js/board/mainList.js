@@ -36,6 +36,7 @@ const createList = (data, currentPage, viewArticle) => {
     data.slice((currentPage - 1) * viewArticle, currentPage * viewArticle).forEach((v, i) => {
         str += boardElement
             .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)
+            .replace('{imageName}', v.img)
             .replace('{idx}', v.idx)
             .replace('{title}', v.title)
             .replace('{nickname}', v.nickname)

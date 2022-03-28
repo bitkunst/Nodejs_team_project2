@@ -29,6 +29,7 @@
     border-radius: 10px;
     align-self: baseline;
     justify-self: flex-start;
+    overflow: hidden;
 }
 
 
@@ -90,4 +91,16 @@
     margin: 0 15px;
     line-height: 26px;
     cursor: pointer;
+}
+
+.listImg {
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.listImg > img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
 }

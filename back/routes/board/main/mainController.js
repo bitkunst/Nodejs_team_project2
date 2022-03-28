@@ -5,9 +5,10 @@ const listApi = async (req, res) => {
     const { cgArr } = req.body
     // 1. cgArr로 카테고리 인덱스 조회 : 쿼리문 하나로 통합해서 쓸 수도 있을 것 같은데 방법을 잘 모르겠음..
     // sql1 : 모든 카테고리 조회시. cgArr.length=0
-    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, nickname 
+    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, nickname, img 
                 from board 
                 left join user on board.b_userid = user.userid 
+                left join img on img.bid = board.idx and img.seq = 1
                 where board.board_name = 'main' and active = 1
                 order by board.idx desc`
 
@@ -26,6 +27,8 @@ const listApi = async (req, res) => {
                 left join category as cg on board.cg_idx = cg.idx
                 where board.board_name = 'main' and active = 1 and m_url = '${cgArr[0]}' and s_url = '${cgArr[1]}'
                 order by board.idx desc`
+
+    const sqlImg = `select img from img where bid=idx limit 1,1`
     let response = {
         errno: 1
     }
@@ -38,6 +41,7 @@ const listApi = async (req, res) => {
         } else if (cgArr.length == 2) {
             [result] = await promisePool.execute(sql2)
         }
+        console.log(result)
         response = {
             ...response,
             errno: 0,
