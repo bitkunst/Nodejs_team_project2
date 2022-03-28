@@ -5,13 +5,14 @@
 // 4. 파일 선택 multiple인데 최대 개수 정해주기 : 최대 갯수 넘어가면 등록 버튼 비활성화 ⭕️
 // 5. 기본 게시판은 접근한 게시판 종류로 선택된 상태
 
-
+// 6. update로 접근 시 기존의 카테고리로 설정
 
 
 const boardPath = document.location.href;
 const fileInput = document.querySelector('#fileInput')
 const boardSelect = document.querySelector('#boardSelect')
 const boardMenu = document.querySelectorAll('.boardMenu')
+
 
 let currentBoard = boardPath.split('/')[4] // 접근한 보드
 if (currentBoard !== 'main') {
@@ -36,6 +37,22 @@ const init = async () => {
     }
     const data = await getCg(currentBoard)
     createCg(data)
+
+    // write가 아닌 update로 접근 시 기존글의 카테고리를 바로 띄워주기 & submit버튼 활성화
+    if (boardPath.split('/')[5] === 'update') {
+        const updateCg = document.querySelector('#updateCg').value
+        const cgMenu = document.querySelectorAll('.cgMenu')
+        cgMenu.forEach(v => {
+            console.log(updateCg, v.value)
+            if (v.value === updateCg) {
+                v.setAttribute('selected', '')
+            }
+        })
+        if (cgSelect.value != '' && title.value != '' && fileInput.files.length <= 5) {
+            submitBtn.disabled = false
+        }
+        else { submitBtn.disabled = true }
+    }
 }
 
 // 게시판 선택 이벤트 발생 시 파일 업로드 인풋 보이기/안보이기
@@ -117,3 +134,4 @@ init()
 // ❗️ 추가할 부분 
 // 페이지에 접근한 유저가 관리자인지 확인 후 아니라면 게시판 종류에서 공지사항 항목 없애기
 // 카테고리 미선택, 제목 미등록 시 파일 등록 못하도록 submit 버튼 막기
+

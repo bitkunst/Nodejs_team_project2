@@ -77,9 +77,25 @@ const deleteApi = async (req, res) => {
     }
 }
 
+const updateApi = async (req, res) => {
+    const { idx, board_name, cg_idx, title, parent, upload, content } = req.body
+    //const { userid } = req.user // 나중에 로그인 기능 되면 cookie-parsing해서 유저정보 담아놓고 사용
+    const userid = 'admin'
+    // qna에서 parent 설정해주는 sql은 따로 작성
+    let sql = `
+        UPDATE board SET title = '${title}',content='${content}', cg_idx='${cg_idx}', board_name='${board_name}' WHERE idx = ${idx};`
+    try {
+        const [result] = await promisePool.execute(sql)
+        res.redirect(`http://localhost:3001/board/${board_name}/list`)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 module.exports = {
     writeCategory,
     writePost,
     getArticleApi,
-    deleteApi
+    deleteApi,
+    updateApi
 }

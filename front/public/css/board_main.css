@@ -1,3 +1,7 @@
+#main {
+    background: #262223;
+}
+
 #main > h3 {
     margin: 50px;
 }
@@ -5,59 +9,28 @@
 #main > h3 > a {
     font-size: 30px;
     font-family: 'Song Myung', serif;
+    color: #DDC6B6;
 }
 
-#main > table {
-    width: 80%;
-    border-collapse : collapse;
-    font-family: 'Song Myung', serif;
+
+#boardUl {
+    width: 80vw;
 }
 
-#main > table > thead {
-    margin-bottom: 100px;
+.boardLi {
+    width: 300px;
+    height: 400px;
+    margin: 20px;
+    background: #DDC6B6;
+    float: left;
+    border-radius: 10px;
 }
 
-#main > table > thead > tr > td {
-    background-color: rgba(38, 34, 35, 0.5);
-    text-align: center;
-    height: 30px;
-    padding: 14px 14px;
-    font-size: 14px;
-}
+/* boardLi 배치 => 반응형으로 크기 별 갯수 넣기... */
 
-.idx {
-    width: 60px;
-}
 
-.nickname {
-    width: 80px;
-}
 
-.date {
-    width: 100px;
-}
-
-.view {
-    width: 80px;
-}
-
-.likes {
-    width: 80px;
-}
-
-#main > table > tbody > tr > td {
-    border-bottom: 0.5px solid rgba(38, 34, 35, 0.2);
-    text-align: center;
-    height: 30px;
-    padding: 7px 14px;
-    font-size: 12px;
-}
-
-#main > table > tbody > tr > .title {
-    text-align: left;
-    padding-left: 30px;
-}
-
+/* paging */
 #pagination {
     width: 80%;
     display: flex;
@@ -76,8 +49,8 @@
 #writeBtnDiv > a {
     padding: 7px 14px;
     height: fit-content;
-    background: #262223;
-    color: #ffffff;
+    background: #DDC6B6;
+    color: #000000;
     font-family: 'Song Myung', serif;
     font-size: 12px;
     border-radius: 5px;
