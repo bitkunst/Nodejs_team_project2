@@ -3,7 +3,7 @@ const finder = document.querySelector(".finder")
 const form = document.querySelector("form")
 const search = document.querySelector('#search')
 const content = document.querySelector('#content')
-const table = document.querySelector('#table')
+const searchTemplate = document.querySelector('#searchTemplate')
 
 input.addEventListener("focus", () => {
     finder.classList.add("active")
@@ -29,7 +29,6 @@ form.addEventListener("submit", async (e) => {
     }, 1000);
   
     const data = search.value
-    console.log(data)
     const payload = {
         data
     }
@@ -42,29 +41,17 @@ form.addEventListener("submit", async (e) => {
 });
 
 function makeList(data) {
-    table.innerHTML = ''
+    content.innerHTML = ''
+    let str = ''
     data.forEach(v => {
-        const tr = document.createElement('tr')
-        const td1 = document.createElement('td')
-        const td2 = document.createElement('td')
-        const td3 = document.createElement('td')
-        const td4 = document.createElement('td')
-        const td5 = document.createElement('td')
-    
-        td1.innerHTML = v.idx
-        td2.innerHTML = v.title
-        td3.innerHTML = v.nickname
-        td4.innerHTML = v.date
-        td5.innerHTML = v.view
-        tr.append(td1)
-        tr.append(td2)
-        tr.append(td3)
-        tr.append(td4)
-        tr.append(td5)
-        table.append(tr)
-        console.log(table)
+        str += searchTemplate.innerHTML.replace('{idx}', v.idx)
+                            .replace('{category}', v.board_name)
+                            .replace('{title}', v.title)
+                            .replace('{date}', v.date)
+                            .replace('{summary}', v.content)
     })
-    content.append(table)
+    console.log(str)
+    content.innerHTML = str
 }
 
 
