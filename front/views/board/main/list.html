@@ -8,7 +8,7 @@
         <div class="listImg"><img src="{listImg}" alt=""></div>
         <!-- axios로 img 가져오기 -->
         <div>
-            <p><a class="title" href="/board/main/:{idx}">글제목</a><button class="likesBtn">❤️</button></p>
+            <p><a class="title" href="/board/main/{idx}">글제목</a><button class="likesBtn">❤️</button></p>
             <div>
                 <div><img src="{profileImg}" alt="">프사</div>
                 <span>{nickname}</span>
@@ -51,7 +51,7 @@
         <!-- axios로 img 가져오기 -->
         <div>
             <span>{num}</span>
-            <p><a class="title" href="/board/main/:{idx}">{title}</a><button class="likesBtn">❤️</button></p>
+            <p><a class="title" href="/board/main/view/{idx}">{title}</a><button class="likesBtn">❤️</button></p>
             <div>
                 <div><img src="{profileImg}" alt="">이미지</div>
                 <span>{nickname}</span>

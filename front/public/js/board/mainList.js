@@ -33,7 +33,9 @@ const getData = async (router) => {
 const createList = (data, currentPage, viewArticle) => {
     const boardElement = document.querySelector('#boardList').innerHTML
     let str = ''
+
     data.slice((currentPage - 1) * viewArticle, currentPage * viewArticle).forEach((v, i) => {
+        if (v.img == undefined) { v.img = 'js1648455420407.png' }
         str += boardElement
             .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)
             .replace('{imageName}', v.img)
