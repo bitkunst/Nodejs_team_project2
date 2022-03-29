@@ -18,28 +18,38 @@
                 <div class="finder__outer">
                   <div class="finder__inner">
                     <div class="finder__icon" ref="icon"></div>
-                    <input class="finder__input" type="text" name="search" id="search" onkeyup="getData()">
+                    <input class="finder__input" type="text" name="search" id="searchInput" placeholder="검색어를 입력하세요" onkeyup="getData()">
                   </div>
                 </div>
               </div>
             </form>
-          </div>
+        </div>
+        <div id="close">
+            <span><a href="/">X</a></span>
+        </div>
     </div>
+
     <div id="contentBox">
         <div id="userInfo">
-            <h2>
-                회원정보
-            </h2>
         </div>
+
         <div id="content">
-            <h2>
-                게시글
-            </h2>
         </div>
     </div>
+
+    <template id="userTemplate">
+        <div class="userBox">
+            <h2>닉네임 : {nickname}</h2>
+            <h2>이메일 : {email}</h2>
+            <h2>자기소개</h2>
+            <p>{bio}</p>
+        </div>
+    </template>
+
+
     <template id="searchTemplate">
         <div class="item">
-            <a href="#">이미지</a>
+            <a href="#"><img src="http://localhost:4001/uploads/{img}" id="img"></a>
             <div class="description">
                 <div class="category">
                     <span>no.{idx}</span>
@@ -48,7 +58,8 @@
                 <h2 class="title">
                     <a href="#">{title}</a>
                 </h2>
-                <div class="date">
+                <div class="info">
+                    <span>{nickname}</span>
                     <span>{date}</span>
                 </div>
                 <p class="summary">

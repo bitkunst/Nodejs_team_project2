@@ -5,13 +5,34 @@ body {
   color: #292929;
   background-color: #262223;
 }
+
+a, li {
+    list-style: none;
+    text-decoration: none;
+}
+
 /* search box */
 #header {
     display: inline-block;
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#close {
+    font-size: 100px;
+    color: #DDC6B6;
+    position: relative;
+    left: 700%;
+}
+
+#close > span > a:link {
+    color: #DDC6B6;
+}
+
+#close > span > a:visited {
+    color: #DDC6B6;
 }
 
 .searchBox {
@@ -140,7 +161,45 @@ form {
 
 /* content */
 #contentBox {
-    background-color: white;
+    /* background-color: #DDC6B6; */
     position: absolute;
-    top: 30%;
+    width: 60vw;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.userBox {
+    background-color: #DDC6B6;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.item {
+    border-top: 1px solid white;
+    padding: 10px 20px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #DDC6B6;
+    border-radius: 15px;
+    margin-top: 25px;
+}
+
+.item > .description > .category {
+    position: relative;
+    top: -20px;
+    font-size: 20px;
+}
+
+/* #contentBox > #content {
+    position: relative;
+} */
+
+#img {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
 }
