@@ -1,7 +1,7 @@
 {% extends "./_layout.html" %}
 {% block content %}
 <span>글쓰기</span>
-<form action="http://localhost:4001/api/board/write" method="post" id="writeForm">
+<form action="http://localhost:4001/api/board/write" method="post" id="writeForm" enctype="multipart/form-data">
     <div>
         <select name="board_name" id="boardSelect">
             <option class="boardMenu" value="notice">공지사항</option>
@@ -18,9 +18,11 @@
     <input type="text" name="title" id="title" placeholder="제목을 입력하세요">
     <input id="fileInput" type="file" name="upload" multiple> 
     <textarea name="content" id="content" cols="30" rows="10"></textarea>
+    <div id="hashtag"></div>
     <!-- file upload 개수는 js로 제어 : upload.files.length였나 아무튼 그걸로 -->
     <input type="hidden" id="parent" name="parent" value=null>
     <!-- qna로 post 시에만 parent인풋에 value로 질문글의 idx 넘어가도록, 그 외에는 value=null -->
+    <input type="hidden" name="hsInput" id="hsInput">
     <input id="submitBtn" type="submit" value="등록">
 </form>
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Song+Myung&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/layout2.css" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/js/chat/popup.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <div><label id="hamburger" for="navi-flag">
+                메뉴
+            </label></div>
+            <h1><a href="/">LOGO</a></h1>
+            <div>
+                <a href="/search"><img id="searchIconImg" src="/img/searchIcon.png" alt=""></a>
+                <a href="/user/login">로그인</a>
+            </div>
+            <div id="menu">
+                <input type="checkbox" id="navi-flag">
+                <label id="hamburger" for="navi-flag">
+                    <!-- <div id="hbgdiv"></div> -->
+                </label>
+                <ul id="navimenu">
+                    <!-- 여기부터 -->
+                    <li>
+                        <h3><a href="/board/main/movie">MAIN CATEGORY 1</a></h3>
+                        <ul>
+                            <li><a href="board/main/movie/review">SUB CATEGORY 1</a></li>
+                            <li><a href="board/main/movie/recommend">SUB CATEGORY 2</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3><a href="/board/main/movie">MAIN CATEGORY 2</a></h3>
+                        <ul>
+                            <li><a href="board/main/movie/review">SUB CATEGORY 1</a></li>
+                            <li><a href="board/main/movie/recommend">SUB CATEGORY 2</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li>
+                        <h3><a href="/board/main/movie">MAIN CATEGORY 3</a></h3>
+                        <ul>
+                            <li><a href="board/main/movie/review">SUB CATEGORY 1</a></li>
+                            <li><a href="board/main/movie/recommend">SUB CATEGORY 2</a></li>
+                        </ul>
+                    </li> -->
+                    <!-- 여기까지를 카테고리 db 참조해서 자동으로 구현되도록 -->
+                    <li>
+                        <h3><a href="/board/notice/list">공지사항</a></h3>
+                        <h3><a href="/board/qna/list">Q&A</a></h3>
+                        <h3><a href="/user/profile">마이페이지</a></h3>
+                    </li>
+                    <!-- 관리자용 -->
+                    <!-- <li>
+                        <h3><a href="/board/main/movie">ADMIN</a></h3>
+                        <ul>
+                            <li><a href="admin/user">USER관리</a></li>
+                            <li><a href="admin/board">BOARD관리</a></li>
+                            <li><a href="admin/CATEGORY">CATEGORY관리</a></li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div id="footer"></div>
+    </div>
+</body>
+</html>

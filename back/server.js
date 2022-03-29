@@ -1,7 +1,7 @@
 const express = require('express')
 const http = require('http')
 const SocketIO = require('socket.io')
-const socket = require('./public/js/socket.js')
+const socket = require('./socket.js')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const router = require('./routes/index.js')
@@ -16,6 +16,7 @@ const io = SocketIO(server, {
 })
 socket(io)
 
+app.use(express.static('./public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())

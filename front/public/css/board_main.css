@@ -1,0 +1,170 @@
+#main {
+    background: #262223;
+}
+
+#main > h3 {
+    margin: 50px;
+}
+
+#main > h3 > a {
+    font-size: 30px;
+    font-family: 'Song Myung', serif;
+    color: #DDC6B6;
+}
+
+
+#boardUl {
+    width: 1020px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.boardLi {
+    width: 300px;
+    height: 450px;
+    margin: 50px 20px;
+    background: #DDC6B6;
+    /* float: left; */
+    border-radius: 10px;
+    align-self: baseline;
+    justify-self: flex-start;
+    overflow: hidden;
+    cursor: pointer;
+    color: #262223;
+}
+
+.boardLi:hover {
+    position: relative;
+    bottom: 5px;
+    right: 5px;
+    z-index: 3;
+}
+
+
+
+
+/* paging */
+#pagination {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+#writeBtnDiv {
+    width: 80%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+#writeBtnDiv > a {
+    padding: 7px 14px;
+    height: fit-content;
+    background: #DDC6B6;
+    color: #000000;
+    font-family: 'Song Myung', serif;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+#pageBtnDiv {
+    display: flex;
+    justify-content: space-around;
+}
+.pBtn {
+    all : unset;
+    display: block;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    border-radius: 13px;
+    background:  rgba(38, 34, 35, 0.5);
+    font-size: 15px;
+    color: #ffffff;
+    margin: 0 5px;
+    font-family: 'Song Myung', serif;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+#nextBtn {
+    margin: 0 15px;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+#prevBtn {
+    margin: 0 15px;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+.listImg {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.listImg > img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.liInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.num {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.title {
+    font-size: 24px;
+    font-family: 'Song Myung', serif;
+    color: #262223;
+}
+
+.nickname {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.date {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.info {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.hstg {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.likeBtn {
+    all: unset;
+    margin: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+    padding: 3px;
+    background: rgba(38, 34, 35, 0.5);
+    /* border: 1px solid #262223; */
+    border-radius: 3px;
+    position: relative;
+    bottom: 3px;
+}
+
+.likeBtn:hover {
+    background: rgba(38, 34, 35, 0.9);
+}

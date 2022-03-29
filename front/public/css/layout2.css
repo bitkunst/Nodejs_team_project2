@@ -1,0 +1,125 @@
+*{margin: 0; padding: 0; box-sizing: border-box; font-weight: 400;}
+ul,li{list-style: none;}
+a{text-decoration: none; color: #000;}
+
+#wrap{
+    width: 100%;
+    min-height: 100vh;
+}
+
+#header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    background: #DDC6B6;
+    position: fixed;
+    padding: 0 20px;
+    z-index: 5;
+}
+
+/* 헤더메뉴 */
+
+#header > h1 > a {
+    color: #262223;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+#header > #menu {
+    position: absolute;
+    top: 60px;
+}
+
+#navi-flag {
+    display: none;
+}
+
+#navi-flag + #hamburger{
+    display: block;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    z-index: 2;
+
+}
+
+#navi-flag + #hamburger > #hbgdiv {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: #DDC6B6;
+}
+
+#navi-flag:checked + #hamburger > #hbgdiv {
+    background: #262223;
+    z-index: 2;
+}
+
+#navi-flag + #hamburger + #navimenu {
+    display: none;
+    position: fixed;
+    left: 0px;
+    top: -30vh;
+    background: #262223;
+    width: 100%;
+    height: 30vh;
+    transition: all 2s;
+
+}
+
+#navi-flag:checked + #hamburger + #navimenu {
+    background: #DDC6B6;
+    top: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+}
+
+#navimenu > li{
+    display: block;
+    width: 33%;
+}
+
+#navimenu > li > h3 > a{
+    display: block;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 28px;
+    color: #262223;
+    padding-bottom: 20px;
+}
+
+#navimenu > li > ul > li > a{
+    display: block;
+    font-family: "HDM";
+    font-size: 18px;
+    color: #262223;
+    padding-top: 20px;
+}
+
+#searchIconImg {
+    width: 30px;
+    height: 30px;
+}
+
+
+#main {
+    padding: 70px 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #262223;
+}
+
+#main > h1{
+    margin: 50px;
+    color: #ffffff;
+}
+/* 메인페이지에서 추가로 필요한 CSS는 별도의 css 파일 생성 후 작업해주세요 (게시판에서도 같이 쓰는 레이아웃css라) */
+

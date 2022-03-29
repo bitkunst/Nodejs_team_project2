@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #262223;
+    color: #DDC6B6;
+}
+
+li, a {
+    text-decoration: none;
+    color: #DDC6B6;
+    list-style: none;
+}
+
+/* Header */
+#header {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* left: 50%;     */
+    /* transform: translateX(-50%); */
+}
+
+#header > h2 {
+    margin-top: 70px;
+}
+
+/* room maker */
+#roomBtn {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+@keyframes gradient1 {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn-gra2 {
+    background: linear-gradient(45deg, #DDC6B6, #e73c7e, #23a6d5, #23d5ab);
+    color: white;
+}
+
+.w-btn-gra-anim {
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+}
+
+#roomInput {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+#roomInput > form:nth-child(1) {
+    display: none;
+}
+
+#roomInput > form:nth-child(1).on {
+    display: block;
+}
+
+#roomInput > form:nth-child(2) {
+    display: none;
+}
+
+#roomInput > form:nth-child(2).on {
+    display: block;
+}
+
+#roomInput > form:nth-child(1) > input {
+    border: 0;
+    width: 200px;
+    background: #ddd;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+#roomInput > form:nth-child(2) > input {
+    border: 0;
+    width: 200px;
+    background: #ddd;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+#roomInput > form:nth-child(1) > input::placeholder {
+    color: #999;
+}
+
+#roomInput > form:nth-child(2) > input::placeholder {
+    color: #999;
+}
+
+#roomInput > form:nth-child(1) > button {
+    border: none;
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-family: "paybooc-Light", sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    height: 40px;
+    margin-top: 5px;
+    background-color: #DDC6B6;
+    color: #262223;
+}
+
+#roomInput > form:nth-child(2) > button {
+    border: none;
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-family: "paybooc-Light", sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    height: 40px;
+    margin-top: 5px;
+    background-color: #DDC6B6;
+    color: #262223;
+}
+
+
+/* open rooms */
+#roomlist {
+    width: 100%;
+    /* display: block; */
+    /* height: 60vh; */
+    /* position: absolute; */
+    /* overflow-y: auto; */
+}
+
+#roomlist > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* position: relative; */
+    /* left: 50%; */
+    /* top: 50%; */
+    /* transform: translate(-50%, -50%); */
+    margin-top: 30px;
+    /* height: 500px; */
+}
+
+#roomlist > ul > li {
+    margin-top: 30px;
+    /* position: absolute; */
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+.w-btn-neon2 {
+    position: relative;
+    border: none;
+    min-width: 200px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        #DDC6B6 0%,
+        #DDC6B6 100%
+    );
+    border-radius: 1000px;
+    color: #262223;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px #DDC6B6;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.w-btn-neon2:hover {
+    transform: scale(1.2);
+}
+
+.w-btn-neon2:hover::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px solid #DDC6B6;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+}
+
+#footer {
+    width: 100%;
+    /* transform: translateX(-50%); */
+    /* position: absolute; */
+    /* bottom: 0; */
+    margin-top: 70px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

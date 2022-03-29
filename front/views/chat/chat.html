@@ -5,19 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="/chat_css/chat.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/js/chat/popup.js" defer></script>
+    <script type="text/javascript" src="/js/chat/chatRoom.js" defer></script>
 </head>
 <body>
-    <h1>Welcome to BNW chatroom!!</h1>
+    <div id="header">
+        <h1>Welcome</h1>
+        <h1>to</h1>
+        <h1>BNW chat room!!</h1>
+        <h2>📡Open Rooms📡</h2>
+    </div>
+    {% if userid == 'admin' %}
+    <div id="roomBtn">
+        <button class="w-btn w-btn-gra2 w-btn-gra-anim" type="button" id="roomMaker">
+            📢Make a Room📢
+        </button>
+        <button class="w-btn w-btn-gra2 w-btn-gra-anim" type="button" id="roomExploder">
+            💣Explode a Room💣
+        </button>
+    </div>
+    <div id="roomInput">
+        <form method="post" action="http://localhost:4001/api/chat/list" id="roomMakerSubmit">
+            <input type="text" name="roomMaker" placeholder="채팅방 이름을 입력하세요">
+            <button type="submit">make</button>
+        </form>
+        <form method="post" action="http://localhost:4001/api/chat/list" id="roomExploderSubmit">
+            <input type="text" name="roomExploder" placeholder="채팅방 이름을 입력하세요">
+            <button type="submit">explode</button>
+        </form>
+    </div>
+    {% endif %}
     <div id="roomlist">
-        <h2>Open Rooms</h2>
         <ul>
             {% for item in result %}
-            <li><a href="javascript:openWindowPop(`http://localhost:3001/chat/room?name={{item.room}}`, `{{item.room}}`)">{{item.room}}</a></li>
+            <li>
+                <a href="javascript:openWindowPop(`http://localhost:3001/chat/room?name={{item.room}}`, `{{item.room}}`)">
+                    <button class="w-btn-neon2" type="button">
+                        {{item.room}}
+                    </button>
+                </a>
+            </li>
             {% endfor %}
         </ul>
     </div>
-
-    <script type="text/javascript" src="/js/chat/popup.js"></script>
+    <div id="footer">
+        <h3>
+            🚨Notice🚨
+        </h3>
+        <p>
+            채팅방은 관리자만 생성할 수 있습니다.
+        </p>
+        <p>
+            필요시 관리자에게 문의 바랍니다.
+        </p>
+    </div>
 </body>
 </html>

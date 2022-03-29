@@ -13,7 +13,9 @@ router.post('/join', userController.join);
 
 // router.get('/profile', userController.profile);
 
-// router.post('/profile', userController.profilecheck);
+router.post('/profile', userController.profile);
+
+router.post('/idchk', userController.idchk);
 
 // router.get('/welcome', userController.welcome);
 

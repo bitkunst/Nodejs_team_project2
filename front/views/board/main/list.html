@@ -1,36 +1,33 @@
-{% extends "../_layout.html" %}
+{% extends "./_layout.html" %}
 {% block content %}
 
 <h3><a href="/board/main/list">BOARD</a></h3>
-<ul>
+<ul id="boardUl">
     <!-- 임시데이터 -->
-    <li>
+    <li class="boardLi">
+        <div class="listImg"><img src="{listImg}" alt=""></div>
+        <!-- axios로 img 가져오기 -->
         <div>
-            <p><a href="/board/main/:{idx}">글제목</a><button>❤️</button></p>
+            <p><a class="title" href="/board/main/{idx}">글제목</a><button class="likesBtn">❤️</button></p>
             <div>
-                <div><img src="" alt="">프사</div>
-                <span>닉네임자리</span>
+                <div><img src="{profileImg}" alt="">프사</div>
+                <span>{nickname}</span>
             </div>
             <div>
-                <span>2022.03.22</span>
-                <span>조회수 0</span>
-                <span>좋아요 0</span>
+                <span>{date}</span>
+                <span>view {view}</span>
+                <span>like {likes}</span>
             </div>
         </div>
         <div>
-            <img src="" alt="">이미지
-            <div>
-                <span>#해시태그1</span>
-                <span>#해시태그2</span>
-                <span>#해시태그3</span>
-            </div>
+            <span>{hstg1}</span>
+            <!-- for문으로 3개만  -->
         </div>
     </li>
     <!-- template : boardList -->
 </ul>
-<a href="/board/main/write">글쓰기</a>
 <div id="pagination">
-    <button id="prevBtn">👈</button>
+    <button class="pBtn" id="prevBtn">«</button>
     <div id="pageBtnDiv">
         <!-- 임시 -->
         <button>1</button>
@@ -38,35 +35,32 @@
         <button>3</button>
         <!-- template : pageList -->
     </div>
-    <button id="nextBtn">👉</button>
+    <button class="pBtn" id="nextBtn">»</button>
 </div>
+<div id="writeBtnDiv"><a href="/board/main/write">글쓰기</a></div>
+
+
+<template id="pageList">
+    <button class="pNum pBtn">{pNum}</button>
+</template>
+
 
 <template id="boardList">
-    <li>
-        <div>
-            <p><a href="/board/main/:{idx}">{title}</a><button>❤️</button></p>
+    <li class="boardLi">
+        <div class="listImg"><img src="http://localhost:4001/uploads/{imageName}" alt=""></div>
+        <!-- axios로 img 가져오기 -->
+        <div class="liInfo">
+            <span class="num">{num}</span>
+            <p><a class="title" href="/board/main/view/{idx}">{title}</a><button class="likeBtn">❤️</button></p>
+            <span class="date">{date} &nbsp;·&nbsp; {nickname}</span>
+            <span class="info">✔️ {view} &nbsp;·&nbsp;❤️ {likes}</span>
             <div>
-                <div><img src="{userPic}" alt=""></div>
-                <span>{nickname}</span>
-            </div>
-            <div>
-                <span>{date}</span>
-                <span>{view}</span>
-                <span>{likes}</span>
-            </div>
-        </div>
-        <div>
-            <img src="{img1}" alt="">
-            <div>
-                <span>{ht1}</span>
-                <span>{ht2}</span>
-                <span>{ht3}</span>
+                <span class="hstg">#{hstg1}</span>
+                <!-- for문으로 3개만  -->
             </div>
         </div>
     </li>
 </template>
 
-<template id="pageList">
-    <button>{pNum}</button>
-</template>
+<script type="text/javascript" src="/js/board/mainList.js"></script>
 {% endblock %}

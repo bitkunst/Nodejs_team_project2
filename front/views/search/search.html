@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="/search_css/search.css">
+    <script type="text/javascript" src="/js/search/search.js" defer></script>
+    <script type="text/javascript" src="/js/search/search_axios.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="searchBox">
+            <form autocomplete="off">
+              <div class="finder">
+                <div class="finder__outer">
+                  <div class="finder__inner">
+                    <div class="finder__icon" ref="icon"></div>
+                    <input class="finder__input" type="text" name="search" id="searchInput" placeholder="검색어를 입력하세요" onkeyup="getData()">
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div id="close">
+            <span><a href="/">X</a></span>
+        </div>
+    </div>
+
+    <div id="contentBox">
+        <div id="userInfo">
+        </div>
+
+        <div id="content">
+        </div>
+    </div>
+
+    <template id="userTemplate">
+        <div class="userBox">
+            <h2>닉네임 : {nickname}</h2>
+            <h2>이메일 : {email}</h2>
+            <h2>자기소개</h2>
+            <p>{bio}</p>
+        </div>
+    </template>
+
+
+    <template id="searchTemplate">
+        <div class="item">
+            <a href="#"><img src="http://localhost:4001/uploads/{img}" id="img"></a>
+            <div class="description">
+                <div class="category">
+                    <span>no.{idx}</span>
+                    <a href="#">{category}</a>
+                </div>
+                <h2 class="title">
+                    <a href="#">{title}</a>
+                </h2>
+                <div class="info">
+                    <span>{nickname}</span>
+                    <span>{date}</span>
+                </div>
+                <p class="summary">
+                    {summary}
+                </p>
+            </div>
+        </div>
+    </template>
+</body>
+</html>

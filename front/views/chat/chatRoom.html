@@ -5,20 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link type="text/css" rel="stylesheet" href="/chat_css/chatRoom.css">
+    <script type="text/javascript" src="http://localhost:4001/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/chat/socket.js" defer></script>
 </head>
 <body>
-    <h1 id="roomName">Room : {{roomName}}</h1>
-    <h2 id="roomCount"></h2>
-    <div id="chatbox">
-        <ul></ul>
-        <form id="msg">
-            <input type="text" placholder="message" required>
-            <button type="submit">Send</button>
+    <div id="header">
+        <h1 id="roomName">Room : {{roomName}}</h1>
+        <h3 id="roomCount"></h3>
+        <input type="hidden" id="nickname" value="{{nickname}}">
+    </div>
+    <div id="firstMsg"></div>
+    <div class="chat_wrap">
+        <div class="inner" id="chatBox"></div>
+
+        <form id="msgForm">
+            <input type="text" placeholder="내용 입력" required>
+            <button type="submit" class="w-btn w-btn-blue">Send</button>
         </form>
-    </div>    
-
-
-    <script type="text/javascript" src="http://localhost:4001/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="/js/chat/socket.js"></script>
+    </div>
 </body>
 </html>

@@ -100,14 +100,17 @@
     margin: 0 5px;
     font-family: 'Song Myung', serif;
     line-height: 26px;
+    cursor: pointer;
 }
 
 #nextBtn {
     margin: 0 15px;
     line-height: 26px;
+    cursor: pointer;
 }
 
 #prevBtn {
     margin: 0 15px;
     line-height: 26px;
+    cursor: pointer;
 }

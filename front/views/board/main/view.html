@@ -1,99 +1,99 @@
-{% extends "../_layout.html" %}
+{% extends "./_layout2.html" %}
 {% block content %}
-<h3><a href="/board/main/list">BOARD</a></h3>
-<table>
-    <tr>
-        <td>{{item.idx}}</td>
-        <td>{{item.title}}</td>
-        <td>{{item.nickname}}</td>
-        <td>{{item.date}}</td>
-        <td>{{item.view}}</td>
-    </tr>
-</table>
-<div id="content">{{item.content}}</div>
-<div>
-    {% for item in htList %}
-    <span>#{{item.ht}}</span>
-    {% endfor %}
+<div id="background">
+    <div id="info">
+        <span id="cg">{{item.cg_idx}}</span>
+        <h1 id="title">{{item.title}}</h1>
+        <span id="date">{{item.date}}</span>
+        <span id="nickname">by {{item.nickname}}</span>
+        <p id="count">조회수 {{item.view}}  ❤️ {{item.likes}}</p>
+    </div>
 </div>
-<div>
-    <a href="/board/main/list">목록가기</a>
-    <!-- 게시글 좋아요 -->
-    <form method="post" action="http://localhost:4001/api/board/main/like">
-        <input type="hidden" name="bid" value="{{item.idx}}">
-        <input type="hidden" name="likes" value="{{item.likes}}">
-        <input type="hidden" name="l_userid" value="{{userInfo.userid}}">
-        <input type="submit" value="❤️">
-    </form>
-    <!-- 게시글 스크랩 -->
-    <form method="post" action="http://localhost:4001/api/board/main/scrap">
-        <input type="hidden" name="bid" value="{{item.idx}}">
-        <input type="hidden" name="s_userid" value="{{userInfo.userid}}">
-        <input type="submit" value="스크랩">
-    </form>
-    <!-- 게시글 작성자 = 로그인한 사용자 일때만 보여줄 부분 -->
-    <a href="/board/main/update?idx={{item.idx}}">수정</a>
-    <form action="http://localhost:4001/board/main/delete" method="post">
-        <input type="hidden" name="idx" value="{{item.idx}}">
-        <input type="submit" value="삭제하기">
-    </form>
-    <!--  -->
-</div>
-<div id="comment">
-    <span>댓글 {{commentNum}}개</span>
+<div id="mainContent">
+    <div id="content">{{item.content}}</div>
     <div>
-        <!-- 댓글입력 -->
-        <form action="http://localhost:4001/api/comment/write" method="post">
-            <div><img src="{{userInfo.pic}}" alt=""></div>
-            <input type="text" name="commentInput">
-            <input type="hidden" name="parent" value="null">
-            <input type="submit">
+        {% for item in htList %}
+        <span>#{{item.ht}}</span>
+        {% endfor %}
+    </div>
+    <div id="btnDiv">
+        <a class="btn" href="/board/main/list">목록가기</a>
+        <!-- 게시글 작성자 = 로그인한 사용자 일때만 보여줄 부분 -->
+        <a class="btn" href="/board/main/update/{{item.idx}}">수정</a>
+        <form action="http://localhost:4001/api/board/delete" method="post">
+            <input type="hidden" name="idx" value="{{item.idx}}">
+            <input type="hidden" name="board_name" value="{{item.board_name}}">
+            <input class="btn" type="submit" value="삭제">
         </form>
-        <div id="commentlist">
-            <ul>
-                <!-- 이 부분을 ajax 하면서 템플릿으로 돌릴 예정... -->
-                {% for comment in commentdb %}
-                <li>
-                    <div id="commentInfo">
-                        <div id="commentInfoP">
-                            <span>{{comment.cid}}</span>
-                            {% if comment.b_userid == comment.c_userid %}
-                            <span class="writer">작성자</span> 
-                            {% endif %}
-                            <span>{{comment.c_date}}</span>
-                            <span>❤️ {{comment.c_likes}}</span>
+        <!--  -->
+        <!-- 게시글 좋아요 -->
+        <form id="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
+            <input type="hidden" id="likeFlag">
+            <input type="hidden" name="l_userid" value="{{userInfo.userid}}">
+            <input id="likeBtn" class="btn" type="submit">
+        </form>
+        <!-- 게시글 스크랩 -->
+        <form id="scrapBtn" method="post" action="http://localhost:4001/api/board/main/scrap">
+            <input id="idx" type="hidden" name="idx" value="{{item.idx}}">
+            <input class="btn" type="submit" value="스크랩">
+        </form>
+    </div>
+    <div id="comment">
+        <span>댓글 {{commentNum}}개</span>
+        <div>
+            <!-- 댓글입력 -->
+            <form action="http://localhost:4001/api/comment/write" method="post">
+                <div><img src="{{userInfo.pic}}" alt=""></div>
+                <input type="text" name="commentInput">
+                <input type="hidden" name="parent" value="null">
+                <input type="submit">
+            </form>
+            <div id="commentlist">
+                <ul>
+                    <!-- 이 부분을 ajax 하면서 템플릿으로 돌릴 예정... -->
+                    {% for comment in commentdb %}
+                    <li>
+                        <div id="commentInfo">
+                            <div id="commentInfoP">
+                                <span>{{comment.cid}}</span>
+                                {% if comment.b_userid == comment.c_userid %}
+                                <span class="writer">작성자</span> 
+                                {% endif %}
+                                <span>{{comment.c_date}}</span>
+                                <span>❤️ {{comment.c_likes}}</span>
+                            </div>
+                            <div id="commentForm">
+                                <!-- 댓글 좋아요 (해보고 되면 넣고 아니면 그냥 이 부분 뺴기) -->
+                                <form method="post" action="http://localhost:4001/api/comment/like">
+                                    <input type="hidden" name="cid" value="{{comment.cid}}">
+                                    <input type="hidden" name="c_likes" value="{{comment.c_likes}}">
+                                    <input type="submit" value="❤️">
+                                </form>
+                                <!-- 작성자와 로그인한 사용자가 같은 댓글에만 수정/삭제 버튼 -->
+                                {% if comment.c_userid == userInfo.userid %}
+                                <!-- 수정용 form... 아직 잘 모르겠음. -->
+                                <form method="post" action="http://localhost:4001/api/comment/delete">
+                                    <input type="hidden" name="bid" value="{{reply.bid}}">
+                                    <input type="submit" value="삭제">
+                                </form>
+                                {% endif %}
+                                <form action="http://localhost:4001/api/comment/write" method="post">
+                                    <div><img src="{{userInfo.pic}}" alt=""></div>
+                                    <input type="text" name="commentInput">
+                                    <input type="hidden" name="parent" value="comment.cid">
+                                    <input type="submit" value="작성">
+                                </form>
+                            </div>
                         </div>
-                        <div id="commentForm">
-                            <!-- 댓글 좋아요 (해보고 되면 넣고 아니면 그냥 이 부분 뺴기) -->
-                            <form method="post" action="http://localhost:4001/api/comment/like">
-                                <input type="hidden" name="cid" value="{{comment.cid}}">
-                                <input type="hidden" name="c_likes" value="{{comment.c_likes}}">
-                                <input type="submit" value="❤️">
-                            </form>
-                            <!-- 작성자와 로그인한 사용자가 같은 댓글에만 수정/삭제 버튼 -->
-                            {% if comment.c_userid == userInfo.userid %}
-                            <!-- 수정용 form... 아직 잘 모르겠음. -->
-                            <form method="post" action="http://localhost:4001/api/comment/delete">
-                                <input type="hidden" name="bid" value="{{reply.bid}}">
-                                <input type="submit" value="삭제">
-                            </form>
-                            {% endif %}
-                            <form action="http://localhost:4001/api/comment/write" method="post">
-                                <div><img src="{{userInfo.pic}}" alt=""></div>
-                                <input type="text" name="commentInput">
-                                <input type="hidden" name="parent" value="comment.cid">
-                                <input type="submit" value="작성">
-                            </form>
-                        </div>
-                    </div>
-                    <p>{{reply.reply}}</p>
-                </li>
-                {% endfor %}
-                <!-- Template end -->
-            </ul>
+                        <p>{{reply.reply}}</p>
+                    </li>
+                    {% endfor %}
+                    <!-- Template end -->
+                </ul>
+            </div>
         </div>
     </div>
-
-        
 </div>
+
+<script type="text/javascript" src="/js/board/viewAjax.js"></script>
 {% endblock %}
