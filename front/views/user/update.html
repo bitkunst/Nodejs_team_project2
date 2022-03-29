@@ -10,12 +10,12 @@
 
 <body>
     <h3>회원정보 수정</h3>
-    <form name="form" method="post" action="/user/update" onSubmit="formCheck()">
+    <form name="form" method="post" action="http://localhost:4001/api/user/profile" onSubmit="formCheck()">
         <table>
             <tbody class="tbody">
                 <tr>
                     <td> 아이디 : </td>
-                    <!-- <td> {{user.userid}} </td> -->
+                    <td> {{user.userid}} </td>
                 </tr>
                 <tr>
                     <td> 비밀번호 : </td>
@@ -26,16 +26,12 @@
                     <td> <input type="text" name="nickname" value=""> </td>
                 </tr>
                 <tr>
-                    <td> 생년월일 : </td>
-                    <!-- <td> {{user.birth}} </td> -->
-                </tr>
-                <tr>
                     <td> 성별 : </td>
-                    <!-- <td> {{user.gender}} </td> -->
+                    <td> {{user.gender}} </td>
                 </tr>
                 <tr>
                     <td> Mobile </td>
-                    <td> <input type="text" name="phone" value=""> </td>
+                    <td> <input type="text" name="mobile" value=""> </td>
                 </tr>
 
             </tbody>
