@@ -5,27 +5,35 @@ const listApi = async (req, res) => {
     const { cgArr } = req.body
     // 1. cgArr로 카테고리 인덱스 조회 : 쿼리문 하나로 통합해서 쓸 수도 있을 것 같은데 방법을 잘 모르겠음..
     // sql1 : 모든 카테고리 조회시. cgArr.length=0
-    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, nickname, img 
+    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img 
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
+                left join likes on board.idx = likes.bid
                 where board.board_name = 'main' and active = 1
+                group by board.idx
                 order by board.idx desc`
 
     // sql2 : 메인 카테고리로 조회시. cgArr.length = 1
-    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, nickname 
+    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img  
                 from board 
                 left join user on board.b_userid = user.userid 
+                left join img on img.bid = board.idx and img.seq = 1
                 left join category as cg on board.cg_idx = cg.idx
+                left join likes on board.idx = likes.bid
                 where board.board_name = 'main' and active = 1 and m_url = '${cgArr[0]}'
+                group by board.idx
                 order by board.idx desc`
 
     // sql3 : 서브카테고리로 조회시. cgArr.length = 2
-    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, nickname 
+    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img  
                 from board 
                 left join user on board.b_userid = user.userid 
+                left join img on img.bid = board.idx and img.seq = 1
                 left join category as cg on board.cg_idx = cg.idx
+                left join likes on board.idx = likes.bid
                 where board.board_name = 'main' and active = 1 and m_url = '${cgArr[0]}' and s_url = '${cgArr[1]}'
+                group by board.idx
                 order by board.idx desc`
 
     const sqlImg = `select img from img where bid=idx limit 1,1`
@@ -33,6 +41,7 @@ const listApi = async (req, res) => {
         errno: 1
     }
     try {
+        await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`)
         let result
         if (cgArr.length == 0) {
             [result] = await promisePool.execute(sql0)
@@ -127,6 +136,7 @@ const likeApi = async (req, res) => {
     likeFlag = parseInt(likeFlag)
     //const { userid } = req.userInfo
     const userid = 'admin'
+    // likes db에 추가
     const sql1 = `INSERT INTO likes(bid, l_userid) values(${idx},'${userid}')`
     const sql2 = `DELETE FROM likes WHERE bid=${idx} and l_userid='${userid}'`
     let response = {

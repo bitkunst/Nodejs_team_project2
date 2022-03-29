@@ -58,10 +58,11 @@ const writePost = async (req, res) => {
 // ajax로 프론트서버로 데이터 뿌려줌
 const getArticleApi = async (req, res) => {
     const { idx } = req.body
-    const sql = `select idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, cg_idx, nickname, board_name 
+    const sql = `select idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, nickname, board_name 
                 from board 
                 left join user on board.b_userid = user.userid 
-                where idx = ${idx}`
+                left join likes on board.idx = likes.bid
+                where idx = ${idx};`
     let response = {
         errno: 1
     }
