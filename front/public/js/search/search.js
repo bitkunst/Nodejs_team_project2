@@ -1,9 +1,12 @@
 const input = document.querySelector(".finder__input")
 const finder = document.querySelector(".finder")
 const form = document.querySelector("form")
-const search = document.querySelector('#search')
+const searchInput = document.querySelector('#searchInput')
 const content = document.querySelector('#content')
+const userInfo = document.querySelector('#userInfo')
 const searchTemplate = document.querySelector('#searchTemplate')
+const userTemplate = document.querySelector('#userTemplate')
+const contentBox = document.querySelector('#contentBox')
 
 input.addEventListener("focus", () => {
     finder.classList.add("active")
@@ -28,7 +31,7 @@ form.addEventListener("submit", async (e) => {
     }
     }, 1000);
   
-    const data = search.value
+    const data = searchInput.value
     const payload = {
         data
     }
@@ -36,37 +39,107 @@ form.addEventListener("submit", async (e) => {
         withCredentials: true
     })
 
-    makeList(response.data)
+    getUser(response.data)
 
 });
+
+// (page-1)*num
+// page*num - 1
+
+function scrollPaging(arr, num) {
+    const viewData = {}
+    let viewArr = []
+    const total_page = Math.ceil(arr.length/num)
+    for (let i=1; i<=total_page; i++) {
+        // let start = (i-1)*num
+        let end = (i*num)-1
+        for(let j=0; j<=end; j++) {
+            if ((j+1) > arr.length) { break }
+            viewArr.push(j)
+        }
+        viewData[i] = viewArr
+        viewArr = []
+    }
+    return viewData
+}
+
+function getUser(data) {
+    userInfo.innerHTML = ''
+    let str = ''
+    if(data[0].nickname == searchInput.value) {
+        str += userTemplate.innerHTML.replace('{nickname}', data[0].nickname)
+        .replace('{email}', data[0].email)
+        .replace('{bio}', data[0].bio)
+    } else {
+        str = ''
+    }
+    userInfo.innerHTML = str
+}
+
+// function makeList(data, page) {
+//     content.innerHTML = ''
+//     let str = ''
+//     const scrollData = scrollPaging(data, 5)
+//     console.log('배열?', scrollData)
+
+//     scrollData[page].forEach(v => {
+//         str += searchTemplate.innerHTML.replace('{idx}', data[v].idx)
+//                                        .replace('{category}', data[v].board_name)
+//                                        .replace('{title}', data[v].title)
+//                                        .replace('{nickname}', data[v].nickname)
+//                                        .replace('{date}', data[v].date)
+//                                        .replace('{summary}', data[v].content)
+//                                        .replace('{img}', data[v].img)
+//     })
+//     content.innerHTML = str
+// }
 
 function makeList(data) {
     content.innerHTML = ''
     let str = ''
     data.forEach(v => {
         str += searchTemplate.innerHTML.replace('{idx}', v.idx)
-                            .replace('{category}', v.board_name)
-                            .replace('{title}', v.title)
-                            .replace('{date}', v.date)
-                            .replace('{summary}', v.content)
+                                       .replace('{category}', v.board_name)
+                                       .replace('{title}', v.title)
+                                       .replace('{nickname}', v.nickname)
+                                       .replace('{date}', v.date)
+                                       .replace('{summary}', v.content)
+                                       .replace('{img}', v.img)
     })
-    console.log(str)
     content.innerHTML = str
 }
 
 
 async function getData() {
-
+    userInfo.innerHTML = ''
     content.innerHTML = ''
-    const data = search.value
+    const data = searchInput.value
     const payload = {
         data
     }
     const response = await axios.post('http://localhost:4001/api/search', payload, {
         withCredentials: true
     })
-    console.log(response.data)
-    if(response.data.length > 0) {
+    // console.log(response.data.result)
+    if (response.data.length > 0) {
+        // let page = 1
+        // makeList(response.data, page)
+        // console.log(window.innerHeight + window.scrollY)
+        // window.addEventListener('scroll', ()=>{
+        //     let val = window.innerHeight + window.scrollY
+        //     console.log(val)
+        //     console.log(val >= document.body.offsetHeight)
+        //     if (val >= document.body.offsetHeight) {
+        //         console.log('페이지?', page)
+        //         page++
+        //         makeList(response.data, page)
+        //     }
+        // })
+        // if (window.innerHeight >= document.body.offsetHeight) {
+        //     console.log('페이지?', page)
+        //     makeList(response.data, page)
+        // }
+
         makeList(response.data)
     }
 }
