@@ -52,13 +52,15 @@ exports.join = async (req, res) => {
                   values
                   ("${userid}", "${userpw}", "${name}", "${nickname}", "${address}","${gender}","${mobile1}-${mobile2}-${mobile3}",
                   "${email}","${bio}",0)`;
+        const [result] = await promisePool.execute(sql2);
         if (phone1 == '' || phone2 == '' || phone3 == '') {
-            await promisePool.query(sql2);
+            const [result] = await promisePool.execute(sql2);
+            console.log(result)
         } else {
             await promisePool.query(sql);
         }
     } catch (error) {
-
+        console.log(error)
     }
     res.send(
         alertmove(
@@ -68,56 +70,31 @@ exports.join = async (req, res) => {
     );
 };
 
+exports.profile = async (req, res) => {
+    res.send('프로필수정완료') // 로직짜야함
+};
 
-// userid userpw  name nickname  adress gender mobile  phone  email   bio    point
-// exports.join = async (req, res) => {
-//     const { userid, userpw, name, nickname, adress, gender, mobile, phone } =
-//         req.body;
-//     const conn = await pool.getConnection();
-//     const sql = `INSERT INTO user 
-//                 (userid, userpw, name, nickname, adress, gender, mobile, phone, email, bio, point)
-//                 VALUES
-//                 (?,?,?,?,?,?,?,?,?,?,'0')`;
-//     const prepare = [
-//         userid,
-//         userpw,
-//         name,
-//         nickname,
-//         adress,
-//         gender,
-//         mobile,
-//         phone,
-//         email,
-//         bio,
-//         point
-//     ];
-//     let data = {
-//         result: 'fail',
-//         err: 'fail',
-//     };
-//     try {
-//         const [result] = await conn.query(sql, prepare);
-//         data = {
-//             ...data,
-//             result,
-//         };
-//         const cookieOpt = {
-//             path: '/',
-//             httpOnly: true,
-//             secure: true,
-//             domain: 'localhost',
-//         };
-//         res.cookie('name', 'kong', cookieOpt);
-//     } catch (err) {
-//         data = {
-//             ...data,
-//             err,
-//         };
-//         console.log(err);
-//     } finally {
-//         res.send(data);
-//         conn.release();
-//         res.redirect('/')
-//     }
-// };
+exports.idchk = async (req, res) => {
+    const { userid } = req.body;
+    console.log(req.body)
 
+    const sql = `SELECT * FROM user WHERE userid = "${userid}"`
+    let [result] = await promisePool.query(sql)
+
+    if (userid == '') {
+        // res.send('아무문자값')
+        res.json({ a: 1 })
+    }
+    if (result.length === 0) {
+        console.log('사용가능한 id입니다.')
+    } else {
+        console.log('아이디 중복')
+    }
+
+    console.log(result)
+    // res.json(result)
+    // res.send(alertmove('/user/join', 'id값을 입력하세요'))
+};
+
+//가져온 정보를 갖고 result.length !== 중복안돼 가입해 alert
+// else 아이디가 중복된다.alert span
