@@ -19,9 +19,10 @@
     <div id="btnDiv">
         <a class="btn" href="/board/main/list">목록가기</a>
         <!-- 게시글 작성자 = 로그인한 사용자 일때만 보여줄 부분 -->
-        <a class="btn" href="/board/main/update?idx={{item.idx}}">수정</a>
-        <form action="http://localhost:4001/board/main/delete" method="post">
+        <a class="btn" href="/board/main/update/{{item.idx}}">수정</a>
+        <form action="http://localhost:4001/api/board/delete" method="post">
             <input type="hidden" name="idx" value="{{item.idx}}">
+            <input type="hidden" name="board_name" value="{{item.board_name}}">
             <input class="btn" type="submit" value="삭제">
         </form>
         <!--  -->

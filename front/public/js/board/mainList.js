@@ -3,7 +3,6 @@ const cgArr = []
 if (currentCg !== undefined) {
     currentCg.split('&').forEach((v, i) => cgArr[i] = v.split('=')[1])
 }
-console.log(cgArr)
 
 const getData = async (router) => {
     try {
@@ -114,3 +113,4 @@ const showList = async (viewArticle, blockArticle) => {
 }
 
 showList(12, 10)
+

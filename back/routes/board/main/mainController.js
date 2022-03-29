@@ -50,7 +50,6 @@ const listApi = async (req, res) => {
         } else if (cgArr.length == 2) {
             [result] = await promisePool.execute(sql2)
         }
-        console.log(result)
         response = {
             ...response,
             errno: 0,

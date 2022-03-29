@@ -102,3 +102,18 @@ textarea:focus {
     margin: 10px 5px;
     cursor: pointer;
 }
+
+#hashtag {
+    margin-top: 30px;
+    width: 100%;
+    border: 2px solid #262223;
+    padding: 10px;
+}
+
+.ht {
+    margin: 10px;
+    background-color: rgba(38, 34, 35, 0.3);
+    color: #ffffff;
+    padding: 7px 10px;
+    border-radius: 5px;
+}
