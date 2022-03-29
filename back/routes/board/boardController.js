@@ -25,7 +25,7 @@ const writeCategory = async (req, res) => {
 // 해시태그 db에 해시태그 저장 <- 프론트 만들어주기
 // qna에서 a(답변, 답글) 지정 시 parent 값 넣어주기
 const writePost = async (req, res) => {
-    const { board_name, cg_idx, title, parent, content } = req.body
+    const { board_name, cg_idx, title, parent, content, hsInput } = req.body
     const files = []
     req.files.forEach(v => {
         files.push(v.filename)
@@ -47,7 +47,10 @@ const writePost = async (req, res) => {
             const [result2] = await promisePool.execute(sql2)
         }
         // 해시태그가 있으면 해시태그 db에 추가
-
+        console.log(hsInput)
+        if (hsInput != undefined) {
+            console.log()
+        }
 
         res.redirect(`http://localhost:3001/board/${board_name}/list`)
     } catch (e) {
@@ -58,10 +61,11 @@ const writePost = async (req, res) => {
 // ajax로 프론트서버로 데이터 뿌려줌
 const getArticleApi = async (req, res) => {
     const { idx } = req.body
-    const sql = `select idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, likes, cg_idx, nickname, board_name 
+    const sql = `select idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, nickname, board_name 
                 from board 
                 left join user on board.b_userid = user.userid 
-                where idx = ${idx}`
+                left join likes on board.idx = likes.bid
+                where idx = ${idx};`
     let response = {
         errno: 1
     }

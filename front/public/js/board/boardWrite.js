@@ -135,3 +135,20 @@ init()
 // 페이지에 접근한 유저가 관리자인지 확인 후 아니라면 게시판 종류에서 공지사항 항목 없애기
 // 카테고리 미선택, 제목 미등록 시 파일 등록 못하도록 submit 버튼 막기
 
+// 해시태그 탐색 후 화면에 보이게 : textarea에 blur 이벤트로
+const contentElement = document.querySelector('#content')
+const hashtag = document.querySelector('#hashtag')
+const hsInput = document.querySelector('#hsInput')
+contentElement.addEventListener('change', blurHander)
+
+function blurHander(e) {
+    let content = e.target.value
+    const htArr = content.split(' ').filter(v => v[0] == '#' && v.length !== 1)
+    let str = ''
+    htArr.forEach(v => {
+        str += `<span class='ht'>${v}</span>`
+        hsInput.value += v
+    })
+    console.log(str)
+    hashtag.innerHTML = str
+}

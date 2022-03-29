@@ -3,7 +3,6 @@ const cgArr = []
 if (currentCg !== undefined) {
     currentCg.split('&').forEach((v, i) => cgArr[i] = v.split('=')[1])
 }
-console.log(cgArr)
 
 const getData = async (router) => {
     try {
@@ -33,7 +32,9 @@ const getData = async (router) => {
 const createList = (data, currentPage, viewArticle) => {
     const boardElement = document.querySelector('#boardList').innerHTML
     let str = ''
+
     data.slice((currentPage - 1) * viewArticle, currentPage * viewArticle).forEach((v, i) => {
+        if (v.img == undefined) { v.img = 'js1648455420407.png' }
         str += boardElement
             .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)
             .replace('{imageName}', v.img)
@@ -112,3 +113,4 @@ const showList = async (viewArticle, blockArticle) => {
 }
 
 showList(12, 10)
+

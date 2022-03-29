@@ -22,14 +22,23 @@
 
 .boardLi {
     width: 300px;
-    height: 400px;
-    margin: 20px;
+    height: 450px;
+    margin: 50px 20px;
     background: #DDC6B6;
     /* float: left; */
     border-radius: 10px;
     align-self: baseline;
     justify-self: flex-start;
     overflow: hidden;
+    cursor: pointer;
+    color: #262223;
+}
+
+.boardLi:hover {
+    position: relative;
+    bottom: 5px;
+    right: 5px;
+    z-index: 3;
 }
 
 
@@ -95,12 +104,67 @@
 
 .listImg {
     width: 300px;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
 }
 
 .listImg > img {
     width: 300px;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
+}
+
+.liInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.num {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.title {
+    font-size: 24px;
+    font-family: 'Song Myung', serif;
+    color: #262223;
+}
+
+.nickname {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.date {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.info {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.hstg {
+    font-size: 12px;
+    font-family: 'Song Myung', serif;
+}
+
+.likeBtn {
+    all: unset;
+    margin: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+    padding: 3px;
+    background: rgba(38, 34, 35, 0.5);
+    /* border: 1px solid #262223; */
+    border-radius: 3px;
+    position: relative;
+    bottom: 3px;
+}
+
+.likeBtn:hover {
+    background: rgba(38, 34, 35, 0.9);
 }
