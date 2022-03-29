@@ -3,7 +3,7 @@ const { decodePayload } = require('../utils/jwt.js')
 exports.auth = (req, res, next) => {
     const token = req.cookies.AccessToken;
     try {
-        const {userid, nickname} = decodePayload(token)
+        const { userid, nickname } = decodePayload(token)
         const userInfo = {
             userid,
             nickname

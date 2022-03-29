@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="/"><img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8wcq_KtJZXzvJBQw9ddZYFGR1WFgCHjVlhA&usqp=CAU"></a>
+    <script scr="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        window.kakao.init("5f7ac60ffa549fb49c43418555cd9b9e");
+
+        function kakaologin() {
+            window.kakao.auth.login({
+                scope: 'profile,account_email,gender',
+                success: function (authobj) {
+                    console.log(authobj);
+                    window.kakao.API.request({
+                        url: '/v2/user/me',
+                        success: res => {
+                            const kakao_account = res.kakao_account;
+                            console.log(kakao_account)
+                        }
+                    })
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
