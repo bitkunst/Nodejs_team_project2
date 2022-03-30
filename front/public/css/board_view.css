@@ -220,3 +220,11 @@
     margin: 3px 10px;
     cursor: pointer;
 }
+
+.reComDiv {
+    display: none;
+}
+
+#repBtnDiv {
+    display: none;
+}

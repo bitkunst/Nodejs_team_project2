@@ -78,8 +78,24 @@
                 <input type="hidden" name="cid" value="{cid}" class="cid">
                 <button class="comUdtBtn btn2">수정</button>
             </div>
+            <div>
+                <input type="hidden" name="cid" value="{cid}" class="cid">
+                <button class="reComBtn btn2">답글</button>
+            </div>
         </div>
-        
+    </li>
+    <li class="reComDiv">
+        <div id="commentForm">
+            <div id="inputDiv">
+                <span>{{user.nickname}}</span>
+                <input type="text" name="commentInput" id="replyInput" placeholder="댓글을 입력해주세요.">
+                <input type="hidden" name="parent" value="null">
+            </div>
+            <div id="repBtnDiv">
+                <button id="replyCancelBtn">취소</button>
+                <button id="replyBtn">입력</button>
+            </div>
+        </div>
     </li>
 </template>
 

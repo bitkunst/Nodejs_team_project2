@@ -170,6 +170,7 @@ async function viewComment() {
         if (response.data.errno === 0) {
             const commentArr = response.data.result
             renderComment(commentArr)
+
         }
         else {
             alert('db에러발생')
@@ -197,12 +198,12 @@ function renderComment(Arr) {
     })
     commentUl.innerHTML = str
     commentCount.innerHTML = `댓글 ${Arr.length}개`
-
     // 댓글삭제 addEvent
     const commentLi = document.querySelectorAll('.commentLi')
     commentLi.forEach(v => {
         v.querySelector('.comUdtBtn').addEventListener('click', updateHandler)
         v.querySelector('.comDelBtn').addEventListener('click', deleteHandler)
+        v.querySelector('.reComBtn').addEventListener('click', replyHandler)
     })
 }
 
@@ -266,4 +267,59 @@ async function updateHandler(e) {
             alert('axios 통신 중 문제가 발생했습니다')
         }
     }
+}
+
+
+// 3-5. 대댓글 작성
+async function replyHandler(e) {
+    e.target.addEventListener('click', async (e) => {
+        reComDiv.style.display = 'none'
+        viewComment()
+    })
+    const reComDiv = e.target.parentNode.parentNode.parentNode.nextSibling.nextSibling
+    const cid = e.target.parentNode.querySelector('input').value
+    reComDiv.style.display = 'flex'
+    const replyBtn = reComDiv.querySelector('.replyBtn')
+
+    const replyInput = reComDiv.querySelector('#replyInput')
+    console.log(replyInput)
+    replyInput.addEventListener('focus', () => {
+        const repBtnDiv = reComDiv.querySelector('#repBtnDiv')
+        const replyCancelBtn = reComDiv.querySelector('#replyCancelBtn')
+
+        repBtnDiv.style.display = 'flex'
+        replyCancelBtn.addEventListener('click', () => {
+            console.log('hi')
+            replyInput.value = ''
+            repBtnDiv.style.display = 'none'
+        })
+    })
+
+    /*
+    replyBtn.addEventListener('click', updateAxios)
+    async function updateAxios() {
+        try {
+            let cngCom = commentContent.querySelector('.cngCom').value
+            const router = 'http://localhost:4001/api/comment/update'
+            const option = {
+                'Content-type': 'application/json',
+                withCredentials: true
+            }
+            const data = { cid, cngCom }
+
+            const response = await axios.post(router, data, option)
+
+            if (response.data.errno === 0) {
+                viewComment()
+            }
+            else {
+                alert('db에러발생')
+            }
+        }
+        catch (e) {
+            console.log(`axios 통신 중 에러발생 : ${e.message}`)
+            alert('axios 통신 중 문제가 발생했습니다')
+        }
+    }
+    */
 }
