@@ -1,4 +1,3 @@
-console.log('왜 안돼...ㅠㅠ')
 const currentCg = document.location.href.split('?')[1]
 const cgArr = []
 if (currentCg !== undefined) {
@@ -104,7 +103,6 @@ const showList = async (viewArticle, blockArticle) => {
     const router = 'http://localhost:4001/api/board/main/list'
     const data = await getData(router)
     // const totalRecord = data.length
-    console.log(data)
 
     let currentBlock = 1
     let currentPage = 1
