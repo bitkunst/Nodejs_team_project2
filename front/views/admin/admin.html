@@ -1,0 +1,129 @@
+{% extends "./admin_layout.html" %}
+{% block content %}
+<div id="adminWrap">
+    <h1>관리자 페이지</h1>
+    <ul>
+        <li>
+            <form method="get" action="" id="manageUser">
+                <button type="submit">회원 관리</button>
+            </form>
+        </li>
+        <li>
+            <form method="get" action="" id="manageCg">
+                <button type="submit">카테고리 관리</button>
+            </form>
+        </li>
+        <li>
+            <form method="get" action="" id="manageBoard">
+                <button type="submit">게시물 관리</button>
+            </form>
+        </li>
+    </ul>
+
+    <div id="adminContent">
+        <div id="userList">
+            <ul></ul>
+        </div>
+        <div id="userInfo">
+            <div>
+                <ul id="userInfoUl"></ul>
+                <ul id="userImgUl"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template -->
+<template id="userListTemp">
+    <li class="useridList">
+        <span>{userid}</span>
+        <input type="hidden" value="{userid}" id="useridInput">
+    </li>
+</template>
+
+<template id="userInfoTemp">
+    <li>
+        <div>
+            <span>아이디 : </span>
+            <span>{userid}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>비밀번호 : </span>
+            <span>{userpw}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>이름 : </span>
+            <span>{name}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>닉네임 : </span>
+            <span>{nickname}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>주소 : </span>
+            <span>{address}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>성별 : </span>
+            <span>{gender}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>휴대전화 : </span>
+            <span>{mobile}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>전화 : </span>
+            <span>{phone}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>이메일 : </span>
+            <span>{email}</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <span>포인트 : </span>
+            <span id="pointInfo">{point}</span>
+        </div>
+    </li>
+    <li>
+        <form method="post" action="" id="pointForm">
+            <p>
+                <input type="hidden" value="{userid}" name="userid" id="apiUserid">
+                <input type="text" name="point" id="userPoint" placeholder="지급할 포인트를 입력하세요" style="width: 250px; height: 30px;">
+                <button type="submit">포인트 지급</button>
+            </p>
+        </form>
+    </li>
+</template>
+
+<template id="userImgTemp">
+    <li>
+        <div></div>
+    </li>
+    <li>
+        <div>
+            <span>자기소개</span>
+            <span>{bio}</span>
+        </div>
+    </li>
+</template>
+
+
+{% endblock %}

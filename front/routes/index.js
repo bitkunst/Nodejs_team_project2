@@ -3,6 +3,7 @@ const userRouter = require('./user/userRouter.js')
 const boardRouter = require('./board')
 const chatRouter = require('./chat')
 const searchRouter = require('./search')
+const adminRouter = require('./admin')
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -13,6 +14,7 @@ router.use('/user', userRouter)
 router.use('/board', boardRouter)
 router.use('/chat', chatRouter)
 router.use('/search', searchRouter)
+router.use('/admin', adminRouter)
 
 module.exports = router
 

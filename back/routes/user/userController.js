@@ -51,7 +51,6 @@ exports.join = async (req, res) => {
                   values
                   ("${userid}", "${userpw}", "${name}", "${nickname}", "${address}","${gender}","${mobile1}-${mobile2}-${mobile3}",
                   "${email}","${bio}",0)`;
-        const [result] = await promisePool.execute(sql2);
         if (phone1 == '' || phone2 == '' || phone3 == '') {
             const [result] = await promisePool.execute(sql2);
             console.log(result)

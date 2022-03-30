@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/js/user/user.js"></script>
 </head>
 
 <body>
@@ -20,18 +22,18 @@
             <button>수정</button>
         </form>
         <form method="post" action="/user/profile">
-
             <input type="hidden" name="userid">
             <button class="delete" type="submit">탈퇴하기</button>
         </form>
     </div>
     <div id="profile">
-        <h5><a href="#">작성한 글 보기</a></h5>
+        <h5>
+            <a href="/user/profile/board">작성 글 보기</a>
+        </h5>
         <h5><a href="#">작성 댓글 보기</a></h5>
         <h5><a href="#">스크랩 보기</a></h5>
         <h5><a href="#">Point 보기</a></h5>
 
     </div>
 </body>
-
 </html>

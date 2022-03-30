@@ -14,6 +14,8 @@ router.get('/welcome', userController.welcome);
 
 router.get('/profile', auth, userController.profile);
 
+router.get('/profile/board', auth, userController.profileBoard)
+
 router.get('/profile/update', userController.profileEdit);
 
 
