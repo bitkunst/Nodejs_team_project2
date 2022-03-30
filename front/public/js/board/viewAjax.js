@@ -120,7 +120,7 @@ const cancelBtn = document.querySelector('#cancelBtn')
 const commentBtn = document.querySelector('#commentBtn')
 
 commentInput.addEventListener('focus', () => {
-    comBtnDiv.style.display = 'block'
+    comBtnDiv.style.display = 'flex'
     cancelBtn.addEventListener('click', () => {
         commentInput.value = ''
         comBtnDiv.style.display = 'none'
@@ -137,8 +137,7 @@ commentBtn.addEventListener('click', async (e) => {
         }
         const data = {
             bid: idx,
-            comment: commentInput.value,
-            c_userid: c_userid.value
+            comment: commentInput.value
         }
         const response = await axios.post(router, data, option)
         const errNo = response.data.errno
@@ -236,7 +235,7 @@ async function deleteHandler(e) {
 
 // 3-4. 댓글 수정
 async function updateHandler(e) {
-    const commentContent = e.target.parentNode.parentNode.querySelector('.commentContent')
+    const commentContent = e.target.parentNode.parentNode.parentNode.querySelector('.commentContent')
     const cid = e.target.parentNode.querySelector('input').value
     const originalComment = commentContent.innerHTML
     commentContent.innerHTML = `<input type="text" class="cngCom" value="${originalComment}"><button class="cngBtn">수정</button>`
