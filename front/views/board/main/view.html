@@ -65,7 +65,7 @@
 <template id="commentTemplate">
     <li class="commentLi">
         <div>
-            <span class="c_nickname">{c_userid}</span>
+            <span class="c_nickname">{nickname}</span>
             <span class="c_date">&nbsp;&nbsp;&nbsp;&nbsp;{c_date}</span>
             <p class="commentContent">{comment}</p>
         </div>
@@ -94,6 +94,27 @@
             <div id="repBtnDiv">
                 <button id="replyCancelBtn">취소</button>
                 <button id="replyBtn">입력</button>
+            </div>
+        </div>
+    </li>
+</template>
+
+<template id="commentTemplate2">
+    <li class="commentLi">
+        <div> &nbsp; </div>
+        <div class="commentDiv2">
+            <span class="c_nickname">{nickname}</span>
+            <span class="c_date">&nbsp;&nbsp;&nbsp;&nbsp;{c_date}</span>
+            <p class="commentContent">{comment}</p>
+        </div>
+        <div class="c_btnDiv">
+            <div>
+                <input type="hidden" name="cid" value="{cid}" class="cid">
+                <button class="comDelBtn btn2">삭제</button>
+            </div>
+            <div>
+                <input type="hidden" name="cid" value="{cid}" class="cid">
+                <button class="comUdtBtn btn2">수정</button>
             </div>
         </div>
     </li>

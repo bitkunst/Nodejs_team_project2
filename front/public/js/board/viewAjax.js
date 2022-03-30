@@ -170,7 +170,6 @@ async function viewComment() {
         if (response.data.errno === 0) {
             const commentArr = response.data.result
             renderComment(commentArr)
-
         }
         else {
             alert('db에러발생')
@@ -178,7 +177,7 @@ async function viewComment() {
     }
     catch (e) {
         console.log(`axios 통신 중 에러발생 : ${e.message}`)
-        alert('axios 통신 중 문제가 발생했습니다')
+        // alert('axios 통신 중 문제가 발생했습니다')
     }
 }
 
@@ -186,15 +185,23 @@ async function viewComment() {
 function renderComment(Arr) {
     const commentUl = document.querySelector('#commentUl')
     const c_template = document.querySelector('#commentTemplate').innerHTML
+    const c_template2 = document.querySelector('#commentTemplate2').innerHTML
     const commentCount = document.querySelector('#commentCount')
     let str = ''
     Arr.forEach(v => {
-        str += c_template
-            .replace(/{cid}/gi, v.cid)
-            .replace(/{comment}/gi, v.comment)
-            .replace(/{c_date}/gi, v.c_date)
-            .replace(/{c_userid}/gi, v.c_userid)
-            .replace(/{parent}/gi, v.parent)
+        if (v.parent == 0) {
+            str += c_template
+                .replace(/{cid}/gi, v.cid)
+                .replace(/{comment}/gi, v.comment)
+                .replace(/{c_date}/gi, v.c_date)
+                .replace(/{nickname}/gi, v.nickname)
+        } else {
+            str += c_template2
+                .replace(/{cid}/gi, v.cid)
+                .replace(/{comment}/gi, v.comment)
+                .replace(/{c_date}/gi, v.c_date)
+                .replace(/{nickname}/gi, v.nickname)
+        }
     })
     commentUl.innerHTML = str
     commentCount.innerHTML = `댓글 ${Arr.length}개`
@@ -203,7 +210,9 @@ function renderComment(Arr) {
     commentLi.forEach(v => {
         v.querySelector('.comUdtBtn').addEventListener('click', updateHandler)
         v.querySelector('.comDelBtn').addEventListener('click', deleteHandler)
-        v.querySelector('.reComBtn').addEventListener('click', replyHandler)
+        if (v.querySelector('.reComBtn')) {
+            v.querySelector('.reComBtn').addEventListener('click', replyHandler)
+        }
     })
 }
 
@@ -278,11 +287,11 @@ async function replyHandler(e) {
     })
     const reComDiv = e.target.parentNode.parentNode.parentNode.nextSibling.nextSibling
     const cid = e.target.parentNode.querySelector('input').value
+    const bid = document.querySelector('#idx').value
     reComDiv.style.display = 'flex'
-    const replyBtn = reComDiv.querySelector('.replyBtn')
+    const replyBtn = reComDiv.querySelector('#replyBtn')
 
     const replyInput = reComDiv.querySelector('#replyInput')
-    console.log(replyInput)
     replyInput.addEventListener('focus', () => {
         const repBtnDiv = reComDiv.querySelector('#repBtnDiv')
         const replyCancelBtn = reComDiv.querySelector('#replyCancelBtn')
@@ -295,17 +304,17 @@ async function replyHandler(e) {
         })
     })
 
-    /*
-    replyBtn.addEventListener('click', updateAxios)
-    async function updateAxios() {
+    replyBtn.addEventListener('click', replyAxios)
+    async function replyAxios() {
         try {
-            let cngCom = commentContent.querySelector('.cngCom').value
-            const router = 'http://localhost:4001/api/comment/update'
+            const replyContent = replyInput.value
+            const router = 'http://localhost:4001/api/comment/reply'
             const option = {
                 'Content-type': 'application/json',
                 withCredentials: true
             }
-            const data = { cid, cngCom }
+            const data = { bid, cid, replyContent }
+            console.log(data)
 
             const response = await axios.post(router, data, option)
 
@@ -321,5 +330,5 @@ async function replyHandler(e) {
             alert('axios 통신 중 문제가 발생했습니다')
         }
     }
-    */
+
 }

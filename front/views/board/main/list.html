@@ -47,18 +47,20 @@
 
 <template id="boardList">
     <li class="boardLi">
-        <div class="listImg"><img src="http://localhost:4001/uploads/{imageName}" alt=""></div>
-        <!-- axios로 img 가져오기 -->
-        <div class="liInfo">
-            <span class="num">{num}</span>
-            <p><a class="title" href="/board/main/view/{idx}">{title}</a><button class="likeBtn">❤️</button></p>
-            <span class="date">{date} &nbsp;·&nbsp; {nickname}</span>
-            <span class="info">✔️ {view} &nbsp;·&nbsp;❤️ {likes}</span>
-            <div>
-                <span class="hstg">#{hstg1}</span>
-                <!-- for문으로 3개만  -->
+        <a href="/board/main/view/{idx}">
+            <div class="listImg"><img src="http://localhost:4001/uploads/{imageName}" alt=""></div>
+            <!-- axios로 img 가져오기 -->
+            <div class="liInfo">
+                <span class="num">{num}</span>
+                <p><a class="title" href="/board/main/view/{idx}">{title}</a><button class="likeBtn">❤️</button></p>
+                <span class="date">{date} &nbsp;·&nbsp; {nickname}</span>
+                <span class="info">✔️ {view} &nbsp;·&nbsp;❤️ {likes}</span>
+                <div>
+                    <span class="hstg">#{hstg1}</span>
+                    <!-- for문으로 3개만  -->
+                </div>
             </div>
-        </div>
+        </a>
     </li>
 </template>
 

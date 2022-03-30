@@ -11,7 +11,9 @@ const viewApi = async (req, res) => {
         errno: 1
     }
     try {
-        let sql1 = `SELECT cid, comment, DATE_FORMAT(c_date,'%Y-%m-%d') as c_date, bid, c_userid from comment where bid = ${bid};`
+        let sql1 = `SELECT cid, comment, DATE_FORMAT(c_date,'%Y-%m-%d') as c_date, bid, nickname, parent from comment 
+                    left join user on comment.c_userid = user.userid
+                    where bid = ${bid} order by if(parent=0, cid, parent);`
         const [result] = await promisePool.execute(sql1)
         response = {
             ...response,
@@ -34,8 +36,8 @@ const writeApi = async (req, res) => {
     }
     try {
         let sql1 = `
-        INSERT INTO comment(bid, c_date, comment, c_userid) 
-        values(${bid},now(), '${comment}', '${userinfo.userid}') ;`
+        INSERT INTO comment(bid, c_date, comment, c_userid, parent) 
+        values(${bid},now(), '${comment}', '${userinfo.userid}', 0) ;`
         const [result] = await promisePool.execute(sql1)
         response = {
             ...response,
@@ -93,24 +95,26 @@ const deleteApi = async (req, res) => {
 
 // 댓글 좋아요 기능은 시간 되면 넣기..
 // 이미 좋아요 누른 사용자인지 확인 후 아니라면 like 테이블에 추가하고 board 테이블의 like 필드의 레코드 값 +1
-const likeApi = async (req, res) => {
-    const sql = ``
+const replyApi = async (req, res) => {
+    const { bid, cid, replyContent } = req.body
+    const token = req.cookies.AccessToken
+    const userinfo = decodePayload(token)
     let response = {
         errno: 1
     }
-    const conn = await pool.getConnection()
     try {
-        const [result] = await conn.execute(sql)
+        let sql1 = `INSERT INTO comment(comment, c_date, bid, c_userid, parent) 
+                    VALUES('${replyContent}', now(), ${bid}, '${userinfo.userid}', ${cid});`
+        const [result] = await promisePool.execute(sql1)
+        console.log(result)
         response = {
             ...response,
             errno: 0,
-            result: result,
         }
         res.json(response)
     } catch (e) {
         console.log(e)
-        res.json(response)
-    } finally { conn.release() }
+    }
 }
 
 
@@ -121,5 +125,5 @@ module.exports = {
     writeApi,
     updateApi,
     deleteApi,
-    likeApi,
+    replyApi,
 }
