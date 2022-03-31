@@ -57,10 +57,13 @@ const getManageBoard = async (req, res)=>{
                              title, 
                              nickname, 
                              DATE_FORMAT(date, '%Y-%m-%d') AS date,
-                             likes
+                             COUNT(lid) AS likes
                       FROM board AS b
                       LEFT JOIN user AS u
                       ON b.b_userid = u.userid
+                      LEFT JOIN likes AS l
+                      ON b.idx = l.bid
+                      GROUP BY b.idx
                       ORDER BY likes DESC`
         const [rows2,] = await promisePool.query(sql2)
         const sql3 = `SELECT idx, 
@@ -101,7 +104,7 @@ const postManageBoard = async (req, res)=>{
                      ON b.b_userid = u.userid
                      ORDER BY idx DESC`
         const [rows,] = await promisePool.query(sql2)
-        console.log(rows)
+        // console.log(rows)
         res.json(rows)
     } catch(err) {
         console.log(err)
