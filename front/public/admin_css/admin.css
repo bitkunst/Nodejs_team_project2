@@ -89,3 +89,11 @@
     width: 400px;
     padding: 7px 14px;
 }
+
+
+
+/* adminContent3 */
+#adminContent3 {
+    display: flex;
+    justify-content: space-evenly;
+}

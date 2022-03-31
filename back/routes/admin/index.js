@@ -12,4 +12,6 @@ router.get('/manage/category', adminController.getManageCg)
 
 router.get('/manage/board', adminController.getManageBoard)
 
+router.post('/manage/board', adminController.postManageBoard)
+
 module.exports = router

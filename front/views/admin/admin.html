@@ -31,6 +31,30 @@
             </div>
         </div>
     </div>
+
+    <div id="adminContent3">
+        <div id="boardList">
+            <!-- <table>
+                <thead>
+                    <tr>
+                        <td>번호</td>
+                        <td>제목</td>
+                        <td>작성자</td>
+                        <td>날짜</td>
+                        <td>글관리</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table> -->
+        </div>
+        <div id="likesList">
+            <ul></ul>
+        </div>
+        <div id="viewList">
+            <ul></ul>
+        </div>
+    </div>
 </div>
 
 <!-- Template -->
@@ -125,5 +149,23 @@
     </li>
 </template>
 
+<!-- <template id="boardListTemp">
+    <tr>
+        <td>{idx}</td>
+        <td>{title}</td>
+        <td>{nickname}</td>
+        <td>{date}</td>
+        <td>
+            <form class="boardManageForm">
+                <select class="selectBox">
+                    <option value="1">보이기</option>
+                    <option value="0">내리기</option>
+                </select>
+                <input type="hidden" value="{idx}" class="boardIdx">
+                <button type="submit">저장</button>
+            </form>
+        </td>
+    </tr>
+</template> -->
 
 {% endblock %}
