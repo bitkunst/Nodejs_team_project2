@@ -19,12 +19,14 @@
     <div id="btnDiv">
         <a class="btn" href="/board/main/list">목록가기</a>
         <!-- 게시글 작성자 = 로그인한 사용자 일때만 보여줄 부분 -->
+        {% if userCheck %}
         <a class="btn" href="/board/main/update/{{item.idx}}">수정</a>
         <form action="http://localhost:4001/api/board/delete" method="post">
             <input type="hidden" name="idx" value="{{item.idx}}">
             <input type="hidden" name="board_name" value="{{item.board_name}}">
             <input class="btn" type="submit" value="삭제">
         </form>
+        {% endif %}
         <!--  -->
         <!-- 게시글 좋아요 -->
         <form id="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
@@ -45,6 +47,7 @@
             <div id="inputDiv">
                 <span>{{user.nickname}}</span>
                 <input type="text" name="commentInput" id="commentInput" placeholder="댓글을 입력해주세요.">
+                <input type="hidden" id="b_userid" value="{{user.userid}}">
                 <input type="hidden" name="parent" value="null">
             </div>
             <div id="comBtnDiv">
@@ -65,7 +68,7 @@
 <template id="commentTemplate">
     <li class="commentLi">
         <div>
-            <span class="c_nickname">{c_userid}</span>
+            <span class="c_nickname">{nickname}</span>
             <span class="c_date">&nbsp;&nbsp;&nbsp;&nbsp;{c_date}</span>
             <p class="commentContent">{comment}</p>
         </div>
@@ -79,6 +82,7 @@
                 <button class="comUdtBtn btn2">수정</button>
             </div>
             <div>
+                <input type="hidden" name="c_userid" value="{c_userid}" class="c_userid">
                 <input type="hidden" name="cid" value="{cid}" class="cid">
                 <button class="reComBtn btn2">답글</button>
             </div>
@@ -99,28 +103,26 @@
     </li>
 </template>
 
-<template id="c_c">
-    <div id="commentForm">
-        <!-- 댓글 좋아요 (해보고 되면 넣고 아니면 그냥 이 부분 뺴기) -->
-        <form method="post" action="http://localhost:4001/api/comment/like">
-            <input type="hidden" name="cid" value="{{comment.cid}}">
-            <input type="hidden" name="c_likes" value="{{comment.c_likes}}">
-            <input type="submit" value="❤️">
-        </form>
-        <!-- 작성자와 로그인한 사용자가 같은 댓글에만 수정/삭제 버튼 -->
-        {% if comment.c_userid == userInfo.userid %}
-        <!-- 수정용 form... 아직 잘 모르겠음. -->
-        <form method="post" action="http://localhost:4001/api/comment/delete">
-            <input type="hidden" name="bid" value="{{reply.bid}}">
-            <input type="submit" value="삭제">
-        </form>
-        {% endif %}
-        <form action="http://localhost:4001/api/comment/write" method="post">
-            <div><img src="{{userInfo.pic}}" alt=""></div>
-            <input type="text" name="commentInput">
-            <input type="hidden" name="parent" value="comment.cid">
-            <input type="submit" value="작성">
-        </form>
-    </div>
+<template id="commentTemplate2">
+    <li class="commentLi">
+        <div> &nbsp; </div>
+        <div class="commentDiv2">
+            <span class="c_nickname">{nickname}</span>
+            <span class="c_date">&nbsp;&nbsp;&nbsp;&nbsp;{c_date}</span>
+            <p class="commentContent">{comment}</p>
+        </div>
+        <div class="c_btnDiv">
+            
+            <div>
+                <input type="hidden" name="cid" value="{cid}" class="cid">
+                <button class="comDelBtn btn2">삭제</button>
+            </div>
+            <div>
+                <input type="hidden" name="cid" value="{cid}" class="cid">
+                <button class="comUdtBtn btn2">수정</button>
+            </div>
+        </div>
+    </li>
 </template>
+
 {% endblock %}
