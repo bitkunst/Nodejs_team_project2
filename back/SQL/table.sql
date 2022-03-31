@@ -6,7 +6,7 @@ CREATE TABLE user (
     address VARCHAR(100) NULL,
     gender CHAR(1) NOT NULL,
     mobile VARCHAR(20) NOT NULL,
-    phone VARCHAR(20) NULL,
+    phone VARCHAR(20) NULL DEFAULT '전화번호 없음',
     email VARCHAR(50) NOT NULL,
     bio TEXT NULL,
     point INT NOT NULL DEFAULT 0

@@ -1,0 +1,99 @@
+#adminWrap {
+    padding: 70px 0;
+    width: 100%;
+    min-height: 100vh;
+    background: #262223;
+    color: white;
+}
+
+#adminWrap > ul {
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+}
+
+#adminWrap > #adminContent {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#adminWrap > #adminContent > #userList {
+    width: 20vw;
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 15px;
+    background-color: #DDC6B6;
+    color: #262223;
+}
+
+#adminWrap > #adminContent > #userList > ul {
+    overflow-y: auto;
+}
+
+#adminWrap > #adminContent > #userList > ul > li {
+    margin-top: 20px;
+}
+
+#adminWrap > #adminContent > #userList > ul > li > span {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#adminWrap > #adminContent > #userInfo> div {
+    margin-top: 30px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    background-color: #DDC6B6;
+    color: #262223;
+}
+
+
+#adminWrap > #adminContent > #userInfo > div > ul > li {
+    margin-top: 20px;
+    font-size: 17px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#adminWrap > #adminContent > #userInfo> div > ul > li > div {
+    width: 330px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#adminWrap > #adminContent > #userInfo > div > ul > li > div > span {
+    width: 150px;
+}
+
+
+
+#adminWrap > #adminContent > #userInfo > div > ul > li:last-child > div {
+    display: flex;
+    flex-direction: column;
+}
+
+#adminWrap > #adminContent > #userInfo > div > ul > li:last-child > div > span:first-child {
+    text-align: left !important;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#adminWrap > #adminContent > #userInfo > div > ul > li:last-child > div > span:last-child {
+    margin-top: 10px;
+    border: 1px solid;
+    height: 15vh;
+    width: 400px;
+    padding: 7px 14px;
+}
+
+
+
+/* adminContent3 */
+#adminContent3 {
+    display: flex;
+    justify-content: space-evenly;
+}
