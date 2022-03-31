@@ -12,10 +12,21 @@
     color: white;
 }
 
+.on {
+    display: inline-block;
+}
+
+.off {
+    display: none !important;
+}
+
 #adminWrap > #adminContent {
     display: flex;
     justify-content: flex-start;
+    /* float: left;
+    width: 100%; */
 }
+
 
 #adminWrap > #adminContent > #userList {
     width: 20vw;
@@ -24,6 +35,7 @@
     border-radius: 15px;
     background-color: #DDC6B6;
     color: #262223;
+    display: inline-block;
 }
 
 #adminWrap > #adminContent > #userList > ul {
@@ -40,7 +52,11 @@
     cursor: pointer;
 }
 
-#adminWrap > #adminContent > #userInfo> div {
+#adminWrap > #adminContent > #userInfo {
+    display: inline-block;
+}
+
+#adminWrap > #adminContent > #userInfo > div {
     margin-top: 30px;
     margin-left: 30px;
     display: flex;
@@ -96,4 +112,93 @@
 #adminContent3 {
     display: flex;
     justify-content: space-evenly;
+    background-color: #DDC6B6;
+    color: #262223;
+    border-radius: 15px;
+    width: 90vw;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 20px 40px;
+}
+
+#adminContent3 > #boardList {
+    border-right: 1px solid #262223;
+    width: 30vw;
+    /* display: flex;
+    justify-content: center; */
+}
+
+#adminContent3 > #likesList {
+    border-right: 1px solid #262223;
+    width: 30vw;
+    /* display: flex;
+    justify-content: center; */
+}
+
+#adminContent3 > #viewList {
+    width: 30vw;
+    /* display: flex;
+    justify-content: center; */
+}
+
+
+#adminContent3 > #boardList > table {
+    text-align: center;
+    padding: 7px 14px;
+    width: 90%;
+    height: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#adminContent3 > #boardList > table > thead > tr > td {
+    border-bottom: 3px solid #999;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#adminContent3 > #boardList > table > tbody > tr > td {
+    border-top: 1px solid #999;
+    padding: 10px 0px;
+}
+
+#adminContent3 > #likesList > table {
+    text-align: center;
+    padding: 7px 14px;
+    width: 90%;
+    height: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#adminContent3 > #likesList > table > thead > tr > td {
+    border-bottom: 3px solid #999;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#adminContent3 > #likesList > table > tbody > tr > td {
+    border-top: 1px solid #999;
+    padding: 10px 0px;
+}
+
+#adminContent3 > #viewList > table {
+    text-align: center;
+    padding: 7px 14px;
+    width: 90%;
+    height: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#adminContent3 > #viewList > table > thead > tr > td {
+    border-bottom: 3px solid #999;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#adminContent3 > #viewList > table > tbody > tr > td {
+    border-top: 1px solid #999;
+    padding: 10px 0px;
 }

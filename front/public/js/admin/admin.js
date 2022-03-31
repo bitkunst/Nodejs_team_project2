@@ -1,3 +1,4 @@
+const adminContents = document.querySelectorAll('.adminContents')
 const adminContent = document.querySelector('#adminContent')
 const manageUser = document.querySelector('#manageUser')
 const manageCg = document.querySelector('#manageCg')
@@ -21,6 +22,15 @@ let userArr = []
 // manageUser
 manageUser.addEventListener('submit', async (e)=>{
     e.preventDefault()
+
+    for (let i=0; i<adminContents.length; i++) {
+        if (i == 0) {
+            adminContents[i].setAttribute('class', 'on') 
+        } else {
+            adminContents[i].setAttribute('class', 'off')
+        }
+    }    
+
     const response = await axios.get('http://localhost:4001/api/admin/manage/user', {
         withCredentials: true
     })
@@ -99,6 +109,7 @@ manageUser.addEventListener('submit', async (e)=>{
 
 function tableFormat(field) {
     const table = document.createElement('table')
+    const thead = document.createElement('thead')
     const tr = document.createElement('tr')
     const tdNum = document.createElement('td')
     const tdTitle = document.createElement('td')
@@ -109,20 +120,30 @@ function tableFormat(field) {
     tdNum.innerHTML = '번호'
     tdTitle.innerHTML = '제목'
     tdNickname.innerHTML = '작성자'
-    tdDate.innerHTML = '날짜'
+    tdDate.innerHTML = '작성일'
     _td.innerHTML = field
     tr.append(tdNum)
     tr.append(tdTitle)
     tr.append(tdNickname)
     tr.append(tdDate)    
     tr.append(_td)
-    table.append(tr)
+    thead.append(tr)
+    table.append(thead)
     return table
 }
 
 // manageBoard
 manageBoard.addEventListener('submit', async (e)=>{
     e.preventDefault()
+
+    for (let i=0; i<adminContents.length; i++) {
+        if (i == 1) {
+            adminContents[i].setAttribute('class', 'on') 
+        } else {
+            adminContents[i].setAttribute('class', 'off')
+        }
+    } 
+
     const response = await axios.get('http://localhost:4001/api/admin/manage/board', {
         withCredentials: true
     })
@@ -135,6 +156,7 @@ manageBoard.addEventListener('submit', async (e)=>{
     likesList.innerHTML = ''
     viewList.innerHTML = ''
     const tableB = tableFormat('글관리')
+    const tbodyB = document.createElement('tbody')
     boardArr1.forEach(v => {
         const tr = document.createElement('tr')
         const tdNum = document.createElement('td')
@@ -177,11 +199,13 @@ manageBoard.addEventListener('submit', async (e)=>{
         tr.append(tdNickname)
         tr.append(tdDate)    
         tr.append(tdActive)
-        tableB.append(tr)
+        tbodyB.append(tr)
     })
+    tableB.append(tbodyB)
     boardList.append(tableB)
 
     const tableL = tableFormat('좋아요')
+    const tbodyL = document.createElement('tbody')
     boardArr2.forEach(v => {
         const tr = document.createElement('tr')
         const tdNum = document.createElement('td')
@@ -200,11 +224,13 @@ manageBoard.addEventListener('submit', async (e)=>{
         tr.append(tdNickname)
         tr.append(tdDate)    
         tr.append(tdLikes)
-        tableL.append(tr)
+        tbodyL.append(tr)
     })
+    tableL.append(tbodyL)
     likesList.append(tableL)
 
     const tableV = tableFormat('조회수')
+    const tbodyV = document.createElement('tbody')
     boardArr3.forEach(v => {
         const tr = document.createElement('tr')
         const tdNum = document.createElement('td')
@@ -223,8 +249,9 @@ manageBoard.addEventListener('submit', async (e)=>{
         tr.append(tdNickname)
         tr.append(tdDate)    
         tr.append(tdView)
-        tableV.append(tr)
+        tbodyV.append(tr)
     })
+    tableV.append(tbodyV)
     viewList.append(tableV)
 
     const boardManageForm = document.querySelectorAll('.boardManageForm')
@@ -246,12 +273,4 @@ manageBoard.addEventListener('submit', async (e)=>{
             }
         })
     }
-    // const boardIdx = document.querySelector('#boardIdx').value
-    // const selectBox = boardManageForm.querySelector('#selectBox')
-    // const selected = selectBox.options[selectBox.selectedIndex].value
-    // boardManageForm.addEventListener('submit', async (e)=>{
-    //     e.preventDefault()
-    //     console.log(selected)
-    //     const response = await axios.post('http://localhost:4001/api/admin/manage/board', )
-    // })
 })
