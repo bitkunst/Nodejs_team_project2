@@ -3,6 +3,7 @@ let likeFlag = document.querySelector('#likeFlag') // 1은 누른 상태, 0은 �
 const likeFrm = document.querySelector('#likeFrm')
 const likeBtn = document.querySelector('#likeBtn')
 const idx = document.querySelector('#idx').value
+const b_userid = document.querySelector('#b_userid').value
 
 const renderLike = async () => {
     try {
@@ -137,6 +138,7 @@ commentBtn.addEventListener('click', async (e) => {
         }
         const data = {
             bid: idx,
+            b_userid,
             comment: commentInput.value
         }
         const response = await axios.post(router, data, option)
@@ -195,12 +197,14 @@ function renderComment(Arr) {
                 .replace(/{comment}/gi, v.comment)
                 .replace(/{c_date}/gi, v.c_date)
                 .replace(/{nickname}/gi, v.nickname)
+                .replace(/{c_userid}/gi, v.c_userid)
         } else {
             str += c_template2
                 .replace(/{cid}/gi, v.cid)
                 .replace(/{comment}/gi, v.comment)
                 .replace(/{c_date}/gi, v.c_date)
                 .replace(/{nickname}/gi, v.nickname)
+                .replace(/{c_userid}/gi, v.c_userid)
         }
     })
     commentUl.innerHTML = str
@@ -286,7 +290,8 @@ async function replyHandler(e) {
         viewComment()
     })
     const reComDiv = e.target.parentNode.parentNode.parentNode.nextSibling.nextSibling
-    const cid = e.target.parentNode.querySelector('input').value
+    const cid = e.target.parentNode.querySelector('.cid').value
+    const c_userid = e.target.parentNode.querySelector('.c_userid').value
     const bid = document.querySelector('#idx').value
     reComDiv.style.display = 'flex'
     const replyBtn = reComDiv.querySelector('#replyBtn')
@@ -298,7 +303,6 @@ async function replyHandler(e) {
 
         repBtnDiv.style.display = 'flex'
         replyCancelBtn.addEventListener('click', () => {
-            console.log('hi')
             replyInput.value = ''
             repBtnDiv.style.display = 'none'
         })
@@ -313,7 +317,7 @@ async function replyHandler(e) {
                 'Content-type': 'application/json',
                 withCredentials: true
             }
-            const data = { bid, cid, replyContent }
+            const data = { bid, cid, c_userid, replyContent }
             console.log(data)
 
             const response = await axios.post(router, data, option)

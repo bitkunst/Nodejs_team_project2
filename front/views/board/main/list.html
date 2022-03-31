@@ -52,12 +52,22 @@
             <!-- axios로 img 가져오기 -->
             <div class="liInfo">
                 <span class="num">{num}</span>
-                <p><a class="title" href="/board/main/view/{idx}">{title}</a><button class="likeBtn">❤️</button></p>
+                <p><a class="title" href="/board/main/view/{idx}">{title}</a>
+                    <form class="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
+                        <input type="hidden" class="likeFlag">
+                        <input type="hidden" class="idx" value="{idx}">
+                        <input type="hidden" name="l_userid" value="{{userInfo.userid}}">
+                        <input class="likeBtn" class="btn" type="submit">
+                    </form> 
+                </p>
                 <span class="date">{date} &nbsp;·&nbsp; {nickname}</span>
                 <span class="info">✔️ {view} &nbsp;·&nbsp;❤️ {likes}</span>
                 <div>
-                    <span class="hstg">#{hstg1}</span>
-                    <!-- for문으로 3개만  -->
+                    <span class="hstg">{hstg1}</span>
+                    <span class="hstg">{hstg2}</span>
+                    <span class="hstg">{hstg3}</span>
+                    <span class="hstg">{hstg4}</span>
+                    <span class="hstg">{hstg5}</span>
                 </div>
             </div>
         </a>
