@@ -10,7 +10,7 @@
         </li>
         <li>
             <form method="get" action="" id="manageCg">
-                <button type="submit">카테고리 관리</button>
+                <button>카테고리 관리</button>
             </form>
         </li>
         <li>
@@ -32,9 +32,19 @@
         </div>
     </div>
 
-    <div id="adminContent2" class="">
-        {% block manageCg %}
-        {% endblock %}
+    <div id="adminContent2" class="adminContents off">
+        <ul id="commentUl">
+        </ul>
+        <div id="commentForm">
+            <div id="inputDiv">
+                <input type="text" name="mainInput" id="mainInput" placeholder="카테고리명">
+                <input type="text" name="m_urlInput" id="m_urlInput" placeholder="카테고리URL">
+            </div>
+            <div id="comBtnDiv">
+                <button id="cancelBtn">취소</button>
+                <button id="commentBtn">입력</button>
+            </div>
+        </div>
     </div>
 
     <div id="adminContent3" class="adminContents off">
@@ -157,4 +167,69 @@
         </td>
     </tr>
 </template> -->
+
+<template id="commentTemplate">
+    <li class="commentLi">
+        <div>
+            <!-- <span>{idx}</span> -->
+            <span>{main}</span>
+            <span>{m_url}</span>
+            <!-- <span>{sub}</span>
+            <span>{s_url}</span> -->
+        </div>
+        <div class="c_btnDiv">
+            <div>
+                <input type="hidden" name="idx" value="{idx}" class="idx">
+                <button class="comDelBtn btn2">삭제</button>
+            </div>
+            <div>
+                <input type="hidden" name="idx" value="{idx}" class="idx">
+                <button class="comUdtBtn btn2">수정</button>
+            </div>
+            <div>
+                <input type="hidden" name="c_userid" value="{c_userid}" class="c_userid">
+                <input type="hidden" name="cid" value="{cid}" class="cid">
+                <button class="reComBtn btn2">추가</button>
+            </div>
+        </div>
+    </li>
+    <li class="reComDiv">
+        <div id="commentForm">
+            <div id="inputDiv">
+                <input type="hidden" name="main" id="main" value="{main}">
+                <input type="text" name="subInput" id="subInput" placeholder="서브카테고리명">
+                <input type="text" name="s_urlInput" id="s_urlInput" placeholder="서브카테고리URL">
+            </div>
+            <div id="repBtnDiv">
+                <button id="replyCancelBtn">취소</button>
+                <button id="replyBtn">입력</button>
+            </div>
+        </div>
+    </li>
+</template>
+
+<template id="commentTemplate2">
+    <li class="commentLi">
+        <div> &nbsp; </div>
+        <div class="commentDiv2">
+            <!-- <span>{idx}</span>
+            <span>{main}</span>
+            <span>{m_url}</span> -->
+            <span>{sub}</span>
+            <span>{s_url}</span>
+        </div>
+        <div class="c_btnDiv">
+            
+            <div>
+                <input type="hidden" name="idx" value="{idx}" class="idx">
+                <button class="comDelBtn btn2">삭제</button>
+            </div>
+            <div>
+                <input type="hidden" name="idx" value="{idx}" class="idx">
+                <button class="comUdtBtn btn2">수정</button>
+            </div>
+        </div>
+    </li>
+</template>
+
 {% endblock %}
