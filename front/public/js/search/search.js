@@ -98,13 +98,17 @@ function makeList(data) {
     content.innerHTML = ''
     let str = ''
     data.forEach(v => {
+        if (v.sub == null) {
+            v.sub = '' 
+        }
         str += searchTemplate.innerHTML.replace('{idx}', v.idx)
-                                       .replace('{category}', v.board_name)
+                                       .replace('{category}', (v.main + '/' + v.sub))
                                        .replace('{title}', v.title)
                                        .replace('{nickname}', v.nickname)
                                        .replace('{date}', v.date)
                                        .replace('{summary}', v.content)
                                        .replace('{img}', v.img)
+                                       .replace('{url}', ('board/' + v.board_name + '/view/' + v.idx))
     })
     content.innerHTML = str
 }
