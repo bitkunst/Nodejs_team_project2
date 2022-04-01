@@ -138,17 +138,20 @@ init()
 // 해시태그 탐색 후 화면에 보이게 : textarea에 blur 이벤트로
 const contentElement = document.querySelector('#content')
 const hashtag = document.querySelector('#hashtag')
-const hsInput = document.querySelector('#hsInput')
+const hstg = document.querySelector('#hstg')
 contentElement.addEventListener('change', blurHander)
+let hstgArr = []
 
 function blurHander(e) {
     let content = e.target.value
     const htArr = content.split(' ').filter(v => v[0] == '#' && v.length !== 1)
     let str = ''
+    hstgArr = []
     htArr.forEach(v => {
         str += `<span class='ht'>${v}</span>`
-        hsInput.value += v
+        hstgArr.push(v)
     })
-    console.log(str)
     hashtag.innerHTML = str
+    hstg.value = JSON.stringify(hstgArr)
+    console.log(hstg)
 }

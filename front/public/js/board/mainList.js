@@ -1,10 +1,13 @@
-console.log('왜 안돼...ㅠㅠ')
+
+
+// 0. 카테고리 식별
 const currentCg = document.location.href.split('?')[1]
 const cgArr = []
 if (currentCg !== undefined) {
     currentCg.split('&').forEach((v, i) => cgArr[i] = v.split('=')[1])
 }
 
+// 1. 리스트 데이터 가져오기
 const getData = async (router) => {
     try {
         const option = {
@@ -30,32 +33,38 @@ const getData = async (router) => {
     }
 }
 
+// 2. 데이터로 리스트 생성(🔥ajax로 좋아요 상태 받아오고 보여주는 함수를 여기에 넣을 거임.)
 const createList = (data, currentPage, viewArticle) => {
     const boardElement = document.querySelector('#boardList').innerHTML
     let str = ''
-
+    console.log(data)
     data.slice((currentPage - 1) * viewArticle, currentPage * viewArticle).forEach((v, i) => {
         if (v.img == undefined) { v.img = 'js1648455420407.png' }
+        const hstgArr = ['', '', '', '', '']
+        if (v.hashtag != undefined) { v.hashtag.split('-').slice(0, 5).forEach((v, i) => hstgArr[i] = v) }
+
         str += boardElement
             .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)
             .replace('{imageName}', v.img)
-            .replace('{idx}', v.idx)
+            .replace(/{idx}/gi, v.idx)
             .replace('{title}', v.title)
             .replace('{nickname}', v.nickname)
             .replace('{date}', v.date)
             .replace('{view}', v.view)
             .replace('{likes}', v.likes)
+            .replace('{hstg1}', hstgArr[0])
+            .replace('{hstg2}', hstgArr[1])
+            .replace('{hstg3}', hstgArr[2])
+            .replace('{hstg4}', hstgArr[3])
+            .replace('{hstg5}', hstgArr[4])
     })
     const boardUl = document.querySelector('#boardUl')
     boardUl.innerHTML = str
-
-    // 여기에 해시태그 최대 3개 가져오는 코드 넣기 🔥
 }
 
+// 3. 페이징 위한 버튼 생성
 const createBtn = (data, currentBlock, viewArticle, blockArticle) => {
     const totalRecord = data.length
-    //const viewArticle = 10 // 한 화면에 보일 게시물 수
-    //const blockArticle = 10 // 한번에 보이는 페이지버튼 개수
     const totalPage = Math.ceil(totalRecord / viewArticle)
     const totalBlock = Math.ceil(totalPage / blockArticle)
 
@@ -79,10 +88,9 @@ const createBtn = (data, currentBlock, viewArticle, blockArticle) => {
     })
 }
 
+// 4. 페이지버튼 블록 바꾸기 (1~10/ 11~20 단위로)
 const changeBtn = (data, currentBlock, viewArticle, blockArticle) => {
     const totalRecord = data.length
-    //const viewArticle = 10 // 한 화면에 보일 게시물 수
-    //const blockArticle = 10 // 한번에 보이는 페이지버튼 개수
     const totalPage = Math.ceil(totalRecord / viewArticle)
     const totalBlock = Math.ceil(totalPage / blockArticle)
 
@@ -100,11 +108,12 @@ const changeBtn = (data, currentBlock, viewArticle, blockArticle) => {
     })
 }
 
+
+// 위의 함수를 가져와서 원하는 페이지당 게시글 수(viewArticle), 버튼 블록의 버튼 수(blockArticle)를 지정 후 화면 렌더링
+// 순서는 버튼 블록 -> 버튼 -> 리스트 순서로 연결되어 있음
 const showList = async (viewArticle, blockArticle) => {
     const router = 'http://localhost:4001/api/board/main/list'
     const data = await getData(router)
-    // const totalRecord = data.length
-    console.log(data)
 
     let currentBlock = 1
     let currentPage = 1

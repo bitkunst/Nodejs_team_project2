@@ -1,7 +1,7 @@
 //  api/comment CRUD
 
 const express = require('express');
-const commentCon = require('./commentController.js')
+const commentCon = require('./adminCgController.js')
 const router = express.Router();
 
 router.post('/view', commentCon.viewApi) // 프론트서버에서 ajax 요청시 db에서 해당 idx의 글 정보, 현재 접속한 유저 정보 전달
