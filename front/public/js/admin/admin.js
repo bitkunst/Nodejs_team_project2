@@ -107,6 +107,8 @@ manageUser.addEventListener('submit', async (e)=>{
 // manageCg
 
 
+
+// manageBoard
 function tableFormat(field) {
     const table = document.createElement('table')
     const thead = document.createElement('thead')
@@ -132,7 +134,6 @@ function tableFormat(field) {
     return table
 }
 
-// manageBoard
 manageBoard.addEventListener('submit', async (e)=>{
     e.preventDefault()
 
