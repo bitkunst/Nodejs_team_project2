@@ -1,9 +1,17 @@
 {% extends "./_layout.html" %}
 {% block content %}
+
 <h1>메인페이지</h1>
 
-    <a href="/user/login"><button>로그인</button></a>
-    <a href="/user/agree"><button>회원가입</button></a>
-    <p></p>
-    <a href="javascript:openWindowPop('/chat/list', 'popup')" id="chat">채팅하기</a>
+{% if userInfo %}
+<a href="/user/logout"><button>로그아웃</button></a>
+{% else %}
+<a href="/user/login"><button>로그인</button></a>
+{% endif %}
+<a href="/user/profile"><button>마이프로필</button></a>
+<a href="/kakao/login"><button>카카오 로그인</button></a>
+<a href="/user/agree"><button>회원가입</button></a>
+<p></p>
+<a href="javascript:openWindowPop('/chat/list', 'popup')" id="chat">채팅하기</a>
+
 {% endblock %}
