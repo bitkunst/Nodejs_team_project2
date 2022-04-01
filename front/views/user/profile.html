@@ -6,34 +6,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="/js/user/user.js"></script>
 </head>
 
 <body>
-    <h3>Profile</h3>
-    <p><span>{{ nickname }}</span>님 반갑습니다.</p>
-    <p>이름 :</p>
-    <p>성별 : </p>
-    <p>mobile : </p>
-    </div>
-    <div>
-        <form method="post" action="/user/profile/update">
-            <button>수정</button>
-        </form>
-        <form method="post" action="/user/profile">
-            <input type="hidden" name="userid">
-            <button class="delete" type="submit">탈퇴하기</button>
-        </form>
-    </div>
-    <div id="profile">
-        <h5>
-            <a href="/user/profile/board">작성 글 보기</a>
-        </h5>
-        <h5><a href="#">작성 댓글 보기</a></h5>
-        <h5><a href="#">스크랩 보기</a></h5>
-        <h5><a href="#">Point 보기</a></h5>
+    <div id="profile_wrap">
+        <h3>My Profile</h3>
+        <div>
+            <div id="profile_left">
+                <table>
+                    <tbody class="tbody">
+                        <tr>
+                            <td> 아이디 : </td>
+                            <td> {{user.userid}}</td>
+                        </tr>
 
+                        <tr>
+                            <td> 별명 : </td>
+                            <td> {{user.nickname}}</td>
+                        </tr>
+                        <tr>
+                            <td> 주소 : </td>
+                            <td> {{user.address}} </td>
+                        </tr>
+                        <tr>
+                            <td> 성별 : </td>
+                            <td> {{user.gender}} </td>
+                        </tr>
+                        <tr>
+                            <td> 핸드폰 :</td>
+                            <td> {{user.mobile}}</td>
+                        </tr>
+                        <tr>
+                            {% if user.phone %}
+                            <td> phone :</td>
+                            <td> {{user.phone}}</td>
+                            {% else %}
+                            <td>집전화: </td>
+                            <td> 없음</td>
+
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td> email :</td>
+                            <td> {{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td> 자기소개 :</td>
+                            <td> {{user.bio}}</td>
+                        </tr>
+                        <tr>
+                            <td> 포인트 :</td>
+                            <td> {{user.point}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="button">
+                    <button><a href="/">home</a></button>
+                    <button><a href="/board/main/list">Board</a></button>
+                    <button><a href="/user/profile/update">Edit</a></button>
+                    <form method="post" action="/user/profile">
+                        <input type="hidden" name="userid" value="{{user.userid}}">
+                        <button class="delete" type="submit">탈퇴하기</button>
+                    </form>
+                </div>
+            </div>
+            <div id="profile_right">
+                <div>
+                    <div>
+                        <h5><a href="/board/main/list">작성한 글 보기</a></h5>
+                    </div>
+                    <div>
+                        <h5><a href="/board/main/list">작성 댓글 보기</a></h5>
+                    </div>
+                    <div>
+                        <h5><a href="/board/main/list">스크랩 보기</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

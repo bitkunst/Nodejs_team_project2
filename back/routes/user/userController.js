@@ -2,10 +2,8 @@ require('dotenv').config()
 const { promisePool } = require('../../db')
 const { alertmove } = require('../../utils/alertmove.js');
 const { createToken } = require('../../utils/jwt.js')
-const jwt = require('jsonwebtoken')
-// const { createToken } = require('../../utils/jwt.js')
+const jwt = require('jsonwebtoken');
 
-// 회원정보 확인 후 DB에 데이터가 있으면 로그인, 없으면 경고문구
 exports.login = async (req, res) => {
     try {
         const { userid, userpw } = req.body;
@@ -13,7 +11,6 @@ exports.login = async (req, res) => {
         let [result] = await promisePool.query(sql);
         if (result[0] !== undefined) {
 
-            // jwt토큰생성 // 생성 끝났어 그 다음 쿠키담아서보내고 리다이렉트 메인
             const { userid, nickname } = result[0]
             const payload = {
                 userid,
@@ -39,7 +36,6 @@ exports.login = async (req, res) => {
 
 exports.join = async (req, res) => {
     const { userid, userpw, name, nickname, address, gender, mobile1, mobile2, mobile3, phone1, phone2, phone3, email, bio } = req.body
-    console.log(req.body)
     try {
         const sql = `INSERT INTO user
                   (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point)
@@ -53,46 +49,76 @@ exports.join = async (req, res) => {
                   "${email}","${bio}",0)`;
         if (phone1 == '' || phone2 == '' || phone3 == '') {
             const [result] = await promisePool.execute(sql2);
-            console.log(result)
         } else {
             await promisePool.query(sql);
         }
+        res.send(
+            alertmove(
+                'http://localhost:3001/user/welcome',
+                '회원가입이 완료되었습니다.'
+            )
+        );
     } catch (error) {
-        console.log(error)
+        res.send(alertmove('http://localhost:3001/user/join', '사용중인 아이디 혹은 닉네임입니다.'))
     }
-    res.send(
-        alertmove(
-            'http://localhost:3001/user/welcome',
-            '회원가입이 완료되었습니다.'
-        )
-    );
-};
-
-exports.profile = async (req, res) => {
-    res.send('프로필수정완료') // 로직짜야함
 };
 
 exports.idchk = async (req, res) => {
     const { userid } = req.body;
-    console.log(req.body)
-
     const sql = `SELECT * FROM user WHERE userid = "${userid}"`
     let [result] = await promisePool.query(sql)
 
     if (userid == '') {
-        // res.send('아무문자값')
-        res.json({ a: 1 })
-    }
-    if (result.length === 0) {
-        console.log('사용가능한 id입니다.')
+        res.send({ err: 0 })
+    } else if (result.length == 1) {
+        res.send({ err: 1 })
     } else {
-        console.log('아이디 중복')
+        res.send({ err: 2 })
     }
 
-    console.log(result)
-    // res.json(result)
-    // res.send(alertmove('/user/join', 'id값을 입력하세요'))
 };
 
-//가져온 정보를 갖고 result.length !== 중복안돼 가입해 alert
-// else 아이디가 중복된다.alert span
+exports.nickchk = async (req, res) => {
+    const { nickname } = req.body;
+
+    const sql = `SELECT * FROM user WHERE nickname = "${nickname}"`
+    let [result] = await promisePool.query(sql)
+
+    if (nickname == '') {
+        res.send({ er: 0 })
+    } else if (result.length == 1) {
+        res.send({ er: 1 })
+    } else {
+        res.send({ er: 2 })
+    }
+};
+
+exports.profile = async (req, res) => {
+    const { userid } = req.body
+    const sql = `SELECT * FROM user WHERE userid=?`
+    const prepare = [userid]
+    let [[result]] = await promisePool.execute(sql, prepare)
+
+    res.json(result) // result값을 브라우저 profile로
+}
+
+exports.profileUpdate = async (req, res) => {
+    try {
+        let { userpw, nickname, address, mobile1, mobile2, mobile3, phone1, phone2, phone3, email, bio, userid } = req.body
+        let phone = phone1 + '-' + phone2 + '-' + phone3
+        const mobile = mobile1 + '-' + mobile2 + '-' + mobile3
+        if (phone == '--') {
+            phone = null
+        }
+        const sql = `UPDATE user SET userpw=?, nickname=?, address=?, mobile=?, phone=?, email=?, bio=? WHERE userid=?`
+        const prepare = [userpw, nickname, address, mobile, phone, email, bio, userid]
+        const [result] = await promisePool.execute(sql, prepare)
+
+        res.send(alertmove('http://localhost:3001/user/profile', '수정이 완료되었습니다.'))
+    } catch (err) {
+        if (err.errno == 1062) {
+            res.send(alertmove('http://localhost:3001/user/profile/update', '사용 중인 닉네임입니다.'))
+        }
+    }
+}
+
