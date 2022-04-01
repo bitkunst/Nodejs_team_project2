@@ -105,6 +105,248 @@ manageUser.addEventListener('submit', async (e) => {
 })
 
 // manageCg
+manageCg.addEventListener('submit', (e)=>{
+    e.preventDefault()
+
+    for (let i = 0; i < adminContents.length; i++) {
+        if (i == 1) {
+            adminContents[i].setAttribute('class', 'on')
+        } else {
+            adminContents[i].setAttribute('class', 'off')
+        }
+    }
+
+    // 3. comment ajax
+    // 3-1. 댓글 인풋 클릭 시 댓글 submit 버튼 생성, 취소 누르면 사라짐
+    const commentForm = document.querySelector('#commentForm')
+    const mainInput = document.querySelector('#mainInput')
+    const m_urlInput = document.querySelector('#m_urlInput')
+    const comBtnDiv = document.querySelector('#comBtnDiv')
+    const cancelBtn = document.querySelector('#cancelBtn')
+    const commentBtn = document.querySelector('#commentBtn')
+
+    mainInput.addEventListener('focus', () => {
+        comBtnDiv.style.display = 'flex'
+        cancelBtn.addEventListener('click', () => {
+            mainInput.value = ''
+            comBtnDiv.style.display = 'none'
+        })
+    })
+
+    // 3-2. 댓글 작성 후 db에 저장 : write
+    commentBtn.addEventListener('click', async (e) => {
+        try {
+            const main = mainInput.value
+            const m_url = m_urlInput.value
+            const router = 'http://localhost:4001/api/admin/manage/category/write'
+            const option = {
+                'Content-type': 'application/json',
+                withCredentials: true
+            }
+            const data = {
+                main, m_url
+            }
+            const response = await axios.post(router, data, option)
+            const errNo = response.data.errno
+            if (errNo === 0) {
+                mainInput.value = ''
+                m_urlInput.value = ''
+                viewComment()
+            } else {
+                alert(response.data.errMsg)
+            }
+        }
+        catch (e) {
+            console.log(`axios 통신 중 에러발생 : ${e.message}`)
+            alert('axios 통신 중 문제가 발생했습니다')
+        }
+    })
+
+    // 3-3. 댓글 불러오기 : view
+    viewComment()
+    async function viewComment() {
+        try {
+            const router = 'http://localhost:4001/api/admin/manage/category/view'
+            const option = {
+                'Content-type': 'application/json',
+                withCredentials: true
+            }
+            const response = await axios.post(router, option)
+            if (response.data.errno === 0) {
+                const commentArr = response.data.result
+                renderComment(commentArr)
+            }
+            else {
+                alert('db에러발생')
+            }
+        }
+        catch (e) {
+            console.log(`axios 통신 중 에러발생 : ${e.message}`)
+            // alert('axios 통신 중 문제가 발생했습니다')
+        }
+    }
+
+    // 3-3-1. 댓글 리스트 화면에 랜더링 해주는 함수 : view 서브함수
+    function renderComment(Arr) {
+        const commentUl = document.querySelector('#commentUl')
+        const c_template = document.querySelector('#commentTemplate').innerHTML
+        const c_template2 = document.querySelector('#commentTemplate2').innerHTML
+        const commentCount = document.querySelector('#commentCount')
+        let str = ''
+        Arr.forEach(v => {
+            if (v.idx.length == 3) {
+                str += c_template
+                    .replace(/{idx}/gi, v.idx)
+                    .replace(/{main}/gi, v.main)
+                    .replace(/{m_url}/gi, v.m_url)
+                    .replace(/{sub}/gi, v.sub)
+                    .replace(/{s_url}/gi, v.s_url)
+            } else {
+                str += c_template2
+                    .replace(/{idx}/gi, v.idx)
+                    .replace(/{main}/gi, v.main)
+                    .replace(/{m_url}/gi, v.m_url)
+                    .replace(/{sub}/gi, v.sub)
+                    .replace(/{s_url}/gi, v.s_url)
+            }
+        })
+        commentUl.innerHTML = str
+        // 댓글삭제 addEvent
+        const commentLi = document.querySelectorAll('.commentLi')
+        commentLi.forEach(v => {
+            v.querySelector('.comUdtBtn').addEventListener('click', updateHandler)
+            v.querySelector('.comDelBtn').addEventListener('click', deleteHandler)
+            if (v.querySelector('.reComBtn')) {
+                v.querySelector('.reComBtn').addEventListener('click', replyHandler)
+            }
+        })
+    }
+
+    // 3-4. 댓글 삭제
+    async function deleteHandler(e) {
+        console.log('삭제')
+        const idx = e.target.parentNode.querySelector('input').value
+        try {
+            const router = 'http://localhost:4001/api/admin/manage/category/delete'
+            const option = {
+                'Content-type': 'application/json',
+                withCredentials: true
+            }
+            const data = { idx }
+
+            const response = await axios.post(router, data, option)
+
+            if (response.data.errno === 0) {
+                viewComment()
+            }
+            else {
+                alert('db에러발생')
+            }
+        }
+        catch (e) {
+            console.log(`axios 통신 중 에러발생 : ${e.message}`)
+            alert('axios 통신 중 문제가 발생했습니다')
+        }
+    }
+
+
+    // 3-4. 댓글 수정
+    async function updateHandler(e) {
+        const commentContent = e.target.parentNode.parentNode.parentNode.querySelector('.commentContent')
+        const cid = e.target.parentNode.querySelector('input').value
+        const originalComment = commentContent.innerHTML
+        commentContent.innerHTML = `<input type="text" class="cngCom" value="${originalComment}"><button class="cngBtn">수정</button>`
+        const cngBtn = commentContent.querySelector('.cngBtn')
+        cngBtn.addEventListener('click', updateAxios)
+
+        async function updateAxios() {
+            try {
+                let cngCom = commentContent.querySelector('.cngCom').value
+                const router = 'http://localhost:4001/api/admin/manage/category/update'
+                const option = {
+                    'Content-type': 'application/json',
+                    withCredentials: true
+                }
+                const data = { cid, cngCom }
+
+                const response = await axios.post(router, data, option)
+
+                if (response.data.errno === 0) {
+                    viewComment()
+                }
+                else {
+                    alert('db에러발생')
+                }
+            }
+            catch (e) {
+                console.log(`axios 통신 중 에러발생 : ${e.message}`)
+                alert('axios 통신 중 문제가 발생했습니다')
+            }
+        }
+    }
+
+
+    // 3-5. 대댓글 작성
+    async function replyHandler(e) {
+        e.target.addEventListener('click', async (e) => {
+            reComDiv.style.display = 'none'
+            viewComment()
+        })
+        const reComDiv = e.target.parentNode.parentNode.parentNode.nextSibling.nextSibling
+        const main = reComDiv.querySelector('#main')
+        const subInput = reComDiv.querySelector('#subInput')
+        const s_urlInput = reComDiv.querySelector('#s_urlInput')
+
+        reComDiv.style.display = 'flex'
+        const replyBtn = reComDiv.querySelector('#replyBtn')
+
+        const replyInput = reComDiv.querySelector('#replyInput')
+        subInput.addEventListener('focus', () => {
+            const repBtnDiv = reComDiv.querySelector('#repBtnDiv')
+            const replyCancelBtn = reComDiv.querySelector('#replyCancelBtn')
+
+            repBtnDiv.style.display = 'flex'
+            replyCancelBtn.addEventListener('click', () => {
+                replyInput.value = ''
+                repBtnDiv.style.display = 'none'
+            })
+        })
+
+        replyBtn.addEventListener('click', replyAxios)
+        async function replyAxios() {
+            try {
+                //const main = e.target.parentNode.parentNode.querySelector('#main').value
+                //const sub = e.target.parentNode.parentNode.querySelector('#sub').value
+                //const s_url = e.target.parentNode.parentNode.querySelector('#s_url').value
+                const router = 'http://localhost:4001/api/admin/manage/category/reply'
+                const option = {
+                    'Content-type': 'application/json',
+                    withCredentials: true
+                }
+                const data = {
+                    main: main.value,
+                    sub: subInput.value,
+                    s_url: s_urlInput.value
+                }
+                console.log(data)
+
+                const response = await axios.post(router, data, option)
+
+                if (response.data.errno === 0) {
+                    viewComment()
+                }
+                else {
+                    alert('db에러발생')
+                }
+            }
+            catch (e) {
+                console.log(`axios 통신 중 에러발생 : ${e.message}`)
+                alert('axios 통신 중 문제가 발생했습니다')
+            }
+        }
+    }
+
+})
 
 
 
@@ -138,7 +380,7 @@ manageBoard.addEventListener('submit', async (e) => {
     e.preventDefault()
 
     for (let i = 0; i < adminContents.length; i++) {
-        if (i == 1) {
+        if (i == 2) {
             adminContents[i].setAttribute('class', 'on')
         } else {
             adminContents[i].setAttribute('class', 'off')
@@ -276,235 +518,3 @@ manageBoard.addEventListener('submit', async (e) => {
     }
 })
 
-
-
-
-// 3. comment ajax
-// 3-1. 댓글 인풋 클릭 시 댓글 submit 버튼 생성, 취소 누르면 사라짐
-const commentForm = document.querySelector('#commentForm')
-const mainInput = document.querySelector('#mainInput')
-const m_urlInput = document.querySelector('#m_urlInput')
-const comBtnDiv = document.querySelector('#comBtnDiv')
-const cancelBtn = document.querySelector('#cancelBtn')
-const commentBtn = document.querySelector('#commentBtn')
-
-mainInput.addEventListener('focus', () => {
-    comBtnDiv.style.display = 'flex'
-    cancelBtn.addEventListener('click', () => {
-        mainInput.value = ''
-        comBtnDiv.style.display = 'none'
-    })
-})
-
-// 3-2. 댓글 작성 후 db에 저장 : write
-commentBtn.addEventListener('click', async (e) => {
-    try {
-        const main = mainInput.value
-        const m_url = m_urlInput.value
-        const router = 'http://localhost:4001/api/admin/manage/category/write'
-        const option = {
-            'Content-type': 'application/json',
-            withCredentials: true
-        }
-        const data = {
-            main, m_url
-        }
-        const response = await axios.post(router, data, option)
-        const errNo = response.data.errno
-        if (errNo === 0) {
-            mainInput.value = ''
-            m_urlInput.value = ''
-            viewComment()
-        } else {
-            alert(response.data.errMsg)
-        }
-    }
-    catch (e) {
-        console.log(`axios 통신 중 에러발생 : ${e.message}`)
-        alert('axios 통신 중 문제가 발생했습니다')
-    }
-})
-
-// 3-3. 댓글 불러오기 : view
-viewComment()
-async function viewComment() {
-    try {
-        const router = 'http://localhost:4001/api/admin/manage/category/view'
-        const option = {
-            'Content-type': 'application/json',
-            withCredentials: true
-        }
-        const response = await axios.post(router, option)
-        if (response.data.errno === 0) {
-            const commentArr = response.data.result
-            renderComment(commentArr)
-        }
-        else {
-            alert('db에러발생')
-        }
-    }
-    catch (e) {
-        console.log(`axios 통신 중 에러발생 : ${e.message}`)
-        // alert('axios 통신 중 문제가 발생했습니다')
-    }
-}
-
-// 3-3-1. 댓글 리스트 화면에 랜더링 해주는 함수 : view 서브함수
-function renderComment(Arr) {
-    const commentUl = document.querySelector('#commentUl')
-    const c_template = document.querySelector('#commentTemplate').innerHTML
-    const c_template2 = document.querySelector('#commentTemplate2').innerHTML
-    const commentCount = document.querySelector('#commentCount')
-    let str = ''
-    Arr.forEach(v => {
-        if (v.idx.length == 3) {
-            str += c_template
-                .replace(/{idx}/gi, v.idx)
-                .replace(/{main}/gi, v.main)
-                .replace(/{m_url}/gi, v.m_url)
-                .replace(/{sub}/gi, v.sub)
-                .replace(/{s_url}/gi, v.s_url)
-        } else {
-            str += c_template2
-                .replace(/{idx}/gi, v.idx)
-                .replace(/{main}/gi, v.main)
-                .replace(/{m_url}/gi, v.m_url)
-                .replace(/{sub}/gi, v.sub)
-                .replace(/{s_url}/gi, v.s_url)
-        }
-    })
-    commentUl.innerHTML = str
-    // 댓글삭제 addEvent
-    const commentLi = document.querySelectorAll('.commentLi')
-    commentLi.forEach(v => {
-        v.querySelector('.comUdtBtn').addEventListener('click', updateHandler)
-        v.querySelector('.comDelBtn').addEventListener('click', deleteHandler)
-        if (v.querySelector('.reComBtn')) {
-            v.querySelector('.reComBtn').addEventListener('click', replyHandler)
-        }
-    })
-}
-
-// 3-4. 댓글 삭제
-async function deleteHandler(e) {
-    console.log('삭제')
-    const idx = e.target.parentNode.querySelector('input').value
-    try {
-        const router = 'http://localhost:4001/api/admin/manage/category/delete'
-        const option = {
-            'Content-type': 'application/json',
-            withCredentials: true
-        }
-        const data = { idx }
-
-        const response = await axios.post(router, data, option)
-
-        if (response.data.errno === 0) {
-            viewComment()
-        }
-        else {
-            alert('db에러발생')
-        }
-    }
-    catch (e) {
-        console.log(`axios 통신 중 에러발생 : ${e.message}`)
-        alert('axios 통신 중 문제가 발생했습니다')
-    }
-}
-
-
-// 3-4. 댓글 수정
-async function updateHandler(e) {
-    const commentContent = e.target.parentNode.parentNode.parentNode.querySelector('.commentContent')
-    const cid = e.target.parentNode.querySelector('input').value
-    const originalComment = commentContent.innerHTML
-    commentContent.innerHTML = `<input type="text" class="cngCom" value="${originalComment}"><button class="cngBtn">수정</button>`
-    const cngBtn = commentContent.querySelector('.cngBtn')
-    cngBtn.addEventListener('click', updateAxios)
-
-    async function updateAxios() {
-        try {
-            let cngCom = commentContent.querySelector('.cngCom').value
-            const router = 'http://localhost:4001/api/admin/manage/category/update'
-            const option = {
-                'Content-type': 'application/json',
-                withCredentials: true
-            }
-            const data = { cid, cngCom }
-
-            const response = await axios.post(router, data, option)
-
-            if (response.data.errno === 0) {
-                viewComment()
-            }
-            else {
-                alert('db에러발생')
-            }
-        }
-        catch (e) {
-            console.log(`axios 통신 중 에러발생 : ${e.message}`)
-            alert('axios 통신 중 문제가 발생했습니다')
-        }
-    }
-}
-
-
-// 3-5. 대댓글 작성
-async function replyHandler(e) {
-    e.target.addEventListener('click', async (e) => {
-        reComDiv.style.display = 'none'
-        viewComment()
-    })
-    const reComDiv = e.target.parentNode.parentNode.parentNode.nextSibling.nextSibling
-    const main = reComDiv.querySelector('#main')
-    const subInput = reComDiv.querySelector('#subInput')
-    const s_urlInput = reComDiv.querySelector('#s_urlInput')
-
-    reComDiv.style.display = 'flex'
-    const replyBtn = reComDiv.querySelector('#replyBtn')
-
-    const replyInput = reComDiv.querySelector('#replyInput')
-    subInput.addEventListener('focus', () => {
-        const repBtnDiv = reComDiv.querySelector('#repBtnDiv')
-        const replyCancelBtn = reComDiv.querySelector('#replyCancelBtn')
-
-        repBtnDiv.style.display = 'flex'
-        replyCancelBtn.addEventListener('click', () => {
-            replyInput.value = ''
-            repBtnDiv.style.display = 'none'
-        })
-    })
-
-    replyBtn.addEventListener('click', replyAxios)
-    async function replyAxios() {
-        try {
-            //const main = e.target.parentNode.parentNode.querySelector('#main').value
-            //const sub = e.target.parentNode.parentNode.querySelector('#sub').value
-            //const s_url = e.target.parentNode.parentNode.querySelector('#s_url').value
-            const router = 'http://localhost:4001/api/admin/manage/category/reply'
-            const option = {
-                'Content-type': 'application/json',
-                withCredentials: true
-            }
-            const data = {
-                main: main.value,
-                sub: subInput.value,
-                s_url: s_urlInput.value
-            }
-            console.log(data)
-
-            const response = await axios.post(router, data, option)
-
-            if (response.data.errno === 0) {
-                viewComment()
-            }
-            else {
-                alert('db에러발생')
-            }
-        }
-        catch (e) {
-            console.log(`axios 통신 중 에러발생 : ${e.message}`)
-            alert('axios 통신 중 문제가 발생했습니다')
-        }
-    }
-}
