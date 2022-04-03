@@ -52,14 +52,15 @@ const writePost = async (req, res) => {
             const [result2] = await promisePool.execute(sql2)
         }
         // 해시태그가 있으면 해시태그 db에 추가
-        if (hstg != undefined) {
+        if (hstg[0] != undefined) {
+            console.log(hstg.length)
             const hstgArr = JSON.parse(hstg)
             let hstgSql = `INSERT INTO hashtag(bid, hstg) values`
             hstgArr.forEach(v => {
                 hstgSql += `(${result.insertId}, '${v}'),`
             })
             hstgSql = hstgSql.replace(/,$/, '');
-            await promisePool.execute(hstgSql)
+            const [result3] = await promisePool.execute(hstgSql)
         }
 
         res.redirect(`http://localhost:3001/board/${board_name}/list`)

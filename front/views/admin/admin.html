@@ -41,7 +41,7 @@
                 <input type="text" name="m_urlInput" id="m_urlInput" placeholder="카테고리URL">
             </div>
             <div id="comBtnDiv">
-                <button id="cancelBtn">취소</button>
+                <!-- <button id="cancelBtn">취소</button> -->
                 <button id="commentBtn">입력</button>
             </div>
         </div>
@@ -170,13 +170,14 @@
 
 <template id="commentTemplate">
     <li class="commentLi">
-        <div>
+        <div class="commentDiv2">
             <!-- <span>{idx}</span> -->
             <span>{main}</span>
             <span>{m_url}</span>
             <!-- <span>{sub}</span>
             <span>{s_url}</span> -->
         </div>
+        <div class="emptyDiv"> &nbsp; </div>
         <div class="c_btnDiv">
             <div>
                 <input type="hidden" name="idx" value="{idx}" class="idx">
@@ -201,7 +202,7 @@
                 <input type="text" name="s_urlInput" id="s_urlInput" placeholder="서브카테고리URL">
             </div>
             <div id="repBtnDiv">
-                <button id="replyCancelBtn">취소</button>
+                <!-- <button id="replyCancelBtn">취소</button> -->
                 <button id="replyBtn">입력</button>
             </div>
         </div>
@@ -210,7 +211,7 @@
 
 <template id="commentTemplate2">
     <li class="commentLi">
-        <div> &nbsp; </div>
+        <div class="emptyDiv"> &nbsp; ➡️ &nbsp; </div>
         <div class="commentDiv2">
             <!-- <span>{idx}</span>
             <span>{main}</span>

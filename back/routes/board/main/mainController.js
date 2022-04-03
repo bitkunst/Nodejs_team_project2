@@ -1,3 +1,4 @@
+const { decode } = require('jsonwebtoken')
 const { promisePool } = require('../../../db')
 const { decodePayload } = require('../../../utils/jwt')
 
@@ -5,6 +6,7 @@ const { decodePayload } = require('../../../utils/jwt')
 // 브라우저에서 ajax로 요청하면 db에서 게시글 목록 전달
 const listApi = async (req, res) => {
     const { cgArr } = req.body
+    console.log(req.cookies)
     // 1. cgArr로 카테고리 인덱스 조회 : 쿼리문 하나로 통합해서 쓸 수도 있을 것 같은데 방법을 잘 모르겠음..
     // sql1 : 모든 카테고리 조회시. cgArr.length=0
     const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
@@ -115,8 +117,8 @@ const deleteApi = async (req, res) => {
 
 const checkLikeApi = async (req, res) => {
     const { idx } = req.body
-    //const { userid } = req.userInfo
-    const userid = 'admin'
+    const token = req.cookies.AccessToken
+    const userid = decodePayload(token).userid
     const sql1 = `SELECT * FROM likes where bid=${idx} and l_userid='${userid}'`
     let response = {
         errno: 1
@@ -139,6 +141,7 @@ const checkLikeApi = async (req, res) => {
 
 // 이미 좋아요 누른 사용자인지 확인 후 아니라면 like 테이블에 추가하고 board 테이블의 like 필드의 레코드 값 +1
 const likeApi = async (req, res) => {
+    console.log('like')
     let { idx, likeFlag } = req.body
     likeFlag = parseInt(likeFlag)
     const token = req.cookies.AccessToken

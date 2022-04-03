@@ -1,0 +1,221 @@
+#adminContent2 {
+    width: 100vw;
+    padding: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 댓글 CSS */
+/* #comment {
+    width:70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 3px solid orange;
+}
+
+#commentCount {
+    width: 100%;
+    color: orange;
+    font-family: 'Song Myung', serif;
+    margin-top: 20px;
+} */
+
+#commentForm {
+    margin: 20px 0;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#commentForm > #inputDiv {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#commentForm > #inputDiv > #mainInput {
+    all: unset;
+    width: 300px;
+    padding: 7px 14px;
+    margin: 10px 0;
+    margin-right: 20px;
+    border-bottom: 2px solid #bebebe;
+    color: #bebebe;
+    font-family: 'Song Myung', serif;
+
+}
+
+#commentForm > #inputDiv > #m_urlInput {
+    all: unset;
+    width: 300px;
+    padding: 7px 14px;
+    margin: 10px 0;
+    border-bottom: 2px solid #bebebe;
+    color: #bebebe;
+    font-family: 'Song Myung', serif;
+
+}
+
+#comBtnDiv {
+    /* display: none; */
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+#cancelBtn {
+    all: unset;
+    padding: 7px 14px;
+    height: fit-content;
+    color: #bebebe;
+    font-family: 'Song Myung', serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#cancelBtn:hover {
+    background: #bebebe;
+    color: #000000;
+}
+
+#commentBtn {
+    all: unset;
+    padding: 7px 14px;
+    height: fit-content;
+    font-family: 'Song Myung', serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    background: #bebebe;
+    color: #000000;
+}
+
+
+/* 댓글리스트 */
+#commentUl {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 2px solid #DDC6B6;
+}
+
+#commentUl > .commentLi {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    border-left: 2px solid #DDC6B6;
+    border-right: 2px solid #DDC6B6;
+    border-bottom: 2px solid #DDC6B6;
+    padding: 15px;
+}
+
+.reComDiv {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-left: 2px solid #DDC6B6;
+    border-right: 2px solid #DDC6B6;
+    border-bottom: 2px solid #DDC6B6;
+}
+
+#commentUl > .commentLi > .emptyDiv {
+    width: 5%;
+    padding-top: 7px;
+}
+
+#commentUl > .commentLi > .commentDiv2 {
+    width: 75%;
+}
+
+#commentUl > .commentLi > .commentDiv2 > span{
+    padding: 2px 5px;
+    font-family: 'Song Myung', serif;
+    font-size: 16px;
+    color: #bebebe;
+}
+
+#commentUl > .commentLi > div > span:nth-child(1){
+    font-size: 20px;
+    border-bottom: 2px solid orange;
+}
+
+
+#commentUl > .commentLi > .c_btnDiv {
+    width:20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.btn2 {
+    all: unset;
+    padding: 5px 7px;
+    height: fit-content;
+    background: #bebebe;
+    color: #000000;
+    font-family: 'Song Myung', serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 3px 10px;
+    cursor: pointer;
+}
+
+.reComDiv {
+    display: none;
+}
+
+#repBtnDiv {
+    display: flex;
+    align-items: center;
+}
+
+.commentDiv2 {
+    width: 85%;
+}
+
+#subInput {
+    all: unset;
+    width: 300px;
+    padding: 7px 14px;
+    margin: 10px 0;
+    margin-right: 20px;
+    border-bottom: 2px solid #bebebe;
+    color: #bebebe;
+    font-family: 'Song Myung', serif;
+
+}
+
+#s_urlInput {
+    all: unset;
+    width: 300px;
+    padding: 7px 14px;
+    margin: 10px 0;
+    border-bottom: 2px solid #bebebe;
+    color: #bebebe;
+    font-family: 'Song Myung', serif;
+
+}
+
+#replyBtn {
+    all: unset;
+    padding: 5px 7px;
+    height: fit-content;
+    font-family: 'Song Myung', serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    background: #bebebe;
+    color: #000000;
+}

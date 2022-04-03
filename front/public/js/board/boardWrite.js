@@ -91,7 +91,7 @@ const createCg = (data) => {
     data.forEach((v, i) => {
         str += cgOption
             .replace('{idx}', v.idx)
-            .replace('{cgName}', v.sub == null ? v.main : v.main + v.sub)
+            .replace('{cgName}', v.sub == null ? v.main : v.main + ' - ' + v.sub)
     })
     const cgSelect = document.querySelector('#cgSelect')
     cgSelect.innerHTML = str
@@ -153,5 +153,4 @@ function blurHander(e) {
     })
     hashtag.innerHTML = str
     hstg.value = JSON.stringify(hstgArr)
-    console.log(hstg)
 }
