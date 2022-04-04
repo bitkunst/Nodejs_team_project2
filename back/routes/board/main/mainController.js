@@ -6,21 +6,22 @@ const { decodePayload } = require('../../../utils/jwt')
 // 브라우저에서 ajax로 요청하면 db에서 게시글 목록 전달
 const listApi = async (req, res) => {
     const { cgArr } = req.body
-    console.log(req.cookies)
+    const userinfo = decodePayload(req.cookies.AccessToken)
+    const userid = userinfo.userid
     // 1. cgArr로 카테고리 인덱스 조회 : 쿼리문 하나로 통합해서 쓸 수도 있을 것 같은데 방법을 잘 모르겠음..
     // sql1 : 모든 카테고리 조회시. cgArr.length=0
-    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
+    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
-                left join likes on board.idx = likes.bid
+                left outer join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
                 where board.board_name = 'main' and active = 1
                 group by board.idx
                 order by board.idx desc`
 
     // sql2 : 메인 카테고리로 조회시. cgArr.length = 1
-    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
+    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
@@ -32,7 +33,7 @@ const listApi = async (req, res) => {
                 order by board.idx desc`
 
     // sql3 : 서브카테고리로 조회시. cgArr.length = 2
-    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
+    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
@@ -45,7 +46,8 @@ const listApi = async (req, res) => {
 
     const sqlImg = `select img from img where bid=idx limit 1,1`
     let response = {
-        errno: 1
+        errno: 1,
+        userid: userid
     }
     try {
         await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
@@ -141,7 +143,6 @@ const checkLikeApi = async (req, res) => {
 
 // 이미 좋아요 누른 사용자인지 확인 후 아니라면 like 테이블에 추가하고 board 테이블의 like 필드의 레코드 값 +1
 const likeApi = async (req, res) => {
-    console.log('like')
     let { idx, likeFlag } = req.body
     likeFlag = parseInt(likeFlag)
     const token = req.cookies.AccessToken
@@ -153,7 +154,6 @@ const likeApi = async (req, res) => {
     let response = {
         errno: 1
     }
-    console.log(likeFlag)
     try {
         if (likeFlag === 1) {
             await promisePool.execute(sql2)

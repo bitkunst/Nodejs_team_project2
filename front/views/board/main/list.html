@@ -54,10 +54,9 @@
                 <span class="num">{num}</span>
                 <p><a class="title" href="/board/main/view/{idx}">{title}</a>
                     <form class="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
-                        <input type="hidden" class="likeFlag">
-                        <input type="hidden" class="idx" value="{idx}">
-                        <input type="hidden" name="l_userid" value="{{userInfo.userid}}">
-                        <input class="likeBtn" class="btn" type="submit">
+                        <input type="hidden" class="likeFlag" name="likeFlag" value="{likeFlag}">
+                        <input type="hidden" class="idx" name="idx" value={idx}>
+                        <input class="likeBtn" class="btn" type="submit" value="{likeEmoji}">
                     </form> 
                 </p>
                 <span class="date">{date} &nbsp;·&nbsp; {nickname}</span>
