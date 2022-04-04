@@ -283,6 +283,7 @@ exports.profileUpdate = async (req, res) => {
 
 exports.quit = async (req, res) => {
     const { userid } = req.body
+    console.log(userid)
     const sql = `DELETE FROM user WHERE userid=?`
     const prepare = [userid]
     let [result] = await promisePool.execute(sql, prepare)
