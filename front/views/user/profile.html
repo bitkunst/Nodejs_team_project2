@@ -82,7 +82,6 @@
 <script>
     const quit = document.querySelector('#quit_btn')
     quit.addEventListener('click', async (e) => {
-        console.log('gd')
 
         e.preventDefault()
         const option = {
@@ -93,7 +92,7 @@
         const data = {
             userid
         }
-        const response = await axios.post('http://localhost:4001/api/user/quit', data, option) //라우터, 데이터 객체로 넘겨, 옵션 
+        const response = await axios.post('http://localhost:4001/api/user/quit', data, option) //라우터, 데이터 객체로 넘겨, 옵션
 
         alert('회원탈퇴 되었습니다.')
         location.href = "/"

@@ -272,7 +272,6 @@ exports.profileUpdate = async (req, res) => {
         const sql = `UPDATE user SET userpw=?, nickname=?, address=?, mobile=?, phone=?, email=?, bio=? WHERE userid=?`
         const prepare = [userpw, nickname, address, mobile, phone, email, bio, userid]
         const [result] = await promisePool.execute(sql, prepare)
-
         res.send(alertmove('http://localhost:3001/user/profile', '수정이 완료되었습니다.'))
     } catch (err) {
         if (err.errno == 1062) {
