@@ -116,7 +116,8 @@ const deleteApi = async (req, res) => {
 const checkLikeApi = async (req, res) => {
     const { idx } = req.body
     //const { userid } = req.userInfo
-    const userid = 'admin'
+    const token = req.cookies.AccessToken
+    const userid = decodePayload(token).userid
     const sql1 = `SELECT * FROM likes where bid=${idx} and l_userid='${userid}'`
     let response = {
         errno: 1
