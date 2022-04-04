@@ -146,18 +146,28 @@ exports.myboard = async (req, res) => {
 };
 
 exports.mycomment = async (req, res) => {
-    console.log(req.body)
     const userid = req.body.userid
     let response = {
         errno: 1
     }
     try {
-        const sql = `SELECT * FROM comment
+        const sql = `SELECT cid,
+                            comment,
+                            DATE_FORMAT(c_date, '%Y-%m-%d') AS date,
+                            nickname,
+                            idx
+                    FROM comment
                     LEFT JOIN user ON
                     comment.c_userid = user.userid
+                    LEFT JOIN board ON
+                    comment.bid = board.idx
                     WHERE user.userid = '${userid}'
+                    ORDER BY cid DESC
         `
-        const sql2 = `SELECT count(cid) AS total_record FROM comment`
+        const sql2 = `SELECT count(cid) AS total_record 
+                      FROM comment
+                      WHERE c_userid = '${userid}' 
+                      `
 
         const [result] = await promisePool.execute(sql);
         const [[{ total_record }]] = await promisePool.execute(sql2)
