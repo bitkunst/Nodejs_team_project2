@@ -1,4 +1,5 @@
 const express = require('express')
+const { loginAuth } = require('../middleware/loginAuth.js')
 const userRouter = require('./user/userRouter.js')
 const boardRouter = require('./board')
 const chatRouter = require('./chat')
@@ -7,8 +8,12 @@ const adminRouter = require('./admin')
 const router = express.Router()
 const { auth } = require('../middleware/auth.js')
 
-router.get('/', (req, res) => {
-    res.render('index.html')
+
+router.get('/', loginAuth, (req, res) => {
+    const userInfo = req.userInfo
+    res.render('index.html', {
+        userInfo
+    })
 })
 
 router.use('/user', userRouter)

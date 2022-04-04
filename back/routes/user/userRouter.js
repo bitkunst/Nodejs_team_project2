@@ -6,17 +6,21 @@ router.post('/login', userController.login);
 
 router.post('/join', userController.join);
 
-
-// router.get('/logout', userController.logout);
-
-// router.get('/join', userController.join);
-
-// router.get('/profile', userController.profile);
+router.post('/quit', userController.quit);
 
 router.post('/profile', userController.profile);
 
+router.post('/profile/update', userController.profileUpdate);
+
+router.post('/profile/myboard', userController.myboard)
+
+router.post('/profile/mycomment', userController.mycomment)
+
+router.post('/profile/myscrap', userController.myscrap)
+
 router.post('/idchk', userController.idchk);
 
-// router.get('/welcome', userController.welcome);
+router.post('/nickchk', userController.nickchk);
+
 
 module.exports = router;
