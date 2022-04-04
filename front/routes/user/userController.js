@@ -157,7 +157,6 @@ exports.nickchk = async (req, res) => {
 
 
 exports.myboard = (req, res) => {
-    console.log(req.userInfo)
     const { userid } = req.userInfo
     res.render('user/myboard.html', {
         userid
@@ -165,7 +164,6 @@ exports.myboard = (req, res) => {
 };
 
 exports.mycomment = (req, res) => {
-    console.log(req.userInfo)
     const { userid } = req.userInfo
     res.render('user/mycomment.html', {
         userid
@@ -173,7 +171,6 @@ exports.mycomment = (req, res) => {
 };
 
 exports.myscrap = (req, res) => {
-    console.log(req.userInfo)
     const { userid } = req.userInfo
     res.render('user/myscrap.html', {
         userid

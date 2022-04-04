@@ -5,10 +5,9 @@
     <thead>
         <tr>
             <th>번호</th>
-            <th class="subject">제목</th>
+            <th class="subject">댓글 내용</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>조회수</th>
         </tr>
     </thead>
     <tbody>
@@ -16,23 +15,19 @@
     </tbody>
 </table>
 <div id="paging">
-    <a id="prevBlock">
-        << </a>
-            <ul>
-
-            </ul>
-            <a id="nextBlock"> >> </a>
+    <a id="prevBlock"> << </a>
+    <ul>
+    </ul>
+    <a id="nextBlock"> >> </a>
 </div>
 <template id="board_row">
     <tr>
-        <td>{idx}</td>
-        <td>{subject}</td>
+        <td>{num}</td>
+        <td><a href="/board/main/view/{idx}">{comment}</a></td>
         <td>{nickname}</td>
         <td>{date}</td>
     </tr>
 </template>
-
-
 
 <script type="text/javascript" src="/js/user/mycomment.js"></script>
 {% endblock %}

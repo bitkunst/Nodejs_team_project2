@@ -1,0 +1,56 @@
+#board {
+    width: 90%;
+    margin-top: 30px;
+    background-color: #DDC6B6;
+    color: #262223;
+}
+
+#board > tbody td {
+    padding: 7px 14px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+#board > thead th {
+    padding: 7px 14px;
+    font-weight: bold;
+    background: #eee;
+    border-bottom: 2px solid #333;
+}
+
+#board .subject {
+    width: 45%;
+}
+
+#paging {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#paging > a {
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+li {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin-left: 18px;
+    cursor: pointer;
+}
+
+.on {
+    background-color: yellow;
+}
+
+#paging > ul {
+    display: inline-block;
+    padding: 0;
+    width: 200px;
+}
