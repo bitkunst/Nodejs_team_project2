@@ -135,6 +135,8 @@ const showList = async (viewArticle, blockArticle) => {
     const data = dataObj.data
     const userid = dataObj.userid
 
+    console.log(data)
+
     let currentBlock = 1
     let currentPage = 1
 

@@ -10,7 +10,7 @@ const listApi = async (req, res) => {
     const userid = userinfo.userid
     // 1. cgArr로 카테고리 인덱스 조회 : 쿼리문 하나로 통합해서 쓸 수도 있을 것 같은데 방법을 잘 모르겠음..
     // sql1 : 모든 카테고리 조회시. cgArr.length=0
-    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
+    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag 
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
@@ -21,7 +21,7 @@ const listApi = async (req, res) => {
                 order by board.idx desc`
 
     // sql2 : 메인 카테고리로 조회시. cgArr.length = 1
-    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
+    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag  
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
@@ -33,7 +33,7 @@ const listApi = async (req, res) => {
                 order by board.idx desc`
 
     // sql3 : 서브카테고리로 조회시. cgArr.length = 2
-    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
+    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag  
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
