@@ -2,11 +2,11 @@
     background: #262223;
 }
 
-#main > h3 {
+#main>h3 {
     margin: 50px;
 }
 
-#main > h3 > a {
+#main>h3>a {
     font-size: 30px;
     font-family: 'Song Myung', serif;
     color: #DDC6B6;
@@ -60,7 +60,7 @@
     padding: 10px;
 }
 
-#writeBtnDiv > a {
+#writeBtnDiv>a {
     padding: 7px 14px;
     height: fit-content;
     background: #DDC6B6;
@@ -74,14 +74,15 @@
     display: flex;
     justify-content: space-around;
 }
+
 .pBtn {
-    all : unset;
+    all: unset;
     display: block;
     width: 26px;
     height: 26px;
     text-align: center;
     border-radius: 13px;
-    background:  rgba(38, 34, 35, 0.5);
+    background: rgba(38, 34, 35, 0.5);
     font-size: 15px;
     color: #ffffff;
     margin: 0 5px;
@@ -108,22 +109,43 @@
     overflow: hidden;
 }
 
-.listImg > img {
+.listImg>img {
     width: 300px;
     height: 300px;
     object-fit: cover;
+}
+
+.li {
+    display: flex;
+    justify-content: space-between;
 }
 
 .liInfo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
+    justify-content: flex-start;
+    padding: 10px;
+    width: 270px;
 }
+
+
 
 .num {
     font-size: 12px;
     font-family: 'Song Myung', serif;
+    display: flex;
+}
+
+.titleDiv {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+}
+
+.likeFrm {
+    display: flex;
 }
 
 .title {
@@ -135,36 +157,46 @@
 .nickname {
     font-size: 12px;
     font-family: 'Song Myung', serif;
+    padding: 3px;
 }
 
 .date {
     font-size: 12px;
     font-family: 'Song Myung', serif;
+    padding: 3px;
 }
 
 .info {
     font-size: 12px;
     font-family: 'Song Myung', serif;
+    padding: 3px;
 }
 
 .hstg {
     font-size: 12px;
     font-family: 'Song Myung', serif;
+    padding: 3px;
 }
 
 .likeBtn {
     all: unset;
+    width: 30px;
+    height: 30px;
+    text-align: center;
     margin: 5px;
     margin-left: 15px;
     cursor: pointer;
     padding: 3px;
-    background: rgba(38, 34, 35, 0.5);
+    /* background: rgba(38, 34, 35, 0.5); */
     /* border: 1px solid #262223; */
     border-radius: 3px;
     position: relative;
     bottom: 3px;
+    font-size: 20px;
 }
 
 .likeBtn:hover {
-    background: rgba(38, 34, 35, 0.9);
+    /* background: rgba(38, 34, 35, 0.9); */
+    color: red;
+
 }
