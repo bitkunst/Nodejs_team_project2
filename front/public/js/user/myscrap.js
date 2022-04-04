@@ -116,7 +116,7 @@ const changeBtn = (data, currentBlock, viewArticle, blockArticle) => {
 // 위의 함수를 가져와서 원하는 페이지당 게시글 수(viewArticle), 버튼 블록의 버튼 수(blockArticle)를 지정 후 화면 렌더링
 // 순서는 버튼 블록 -> 버튼 -> 리스트 순서로 연결되어 있음
 const showList = async (viewArticle, blockArticle) => {
-    const router = 'http://localhost:4001/api/user/profile/myscarp'
+    const router = 'http://localhost:4001/api/user/profile/myscrap'
     const data = await getData(router)
 
     let currentBlock = 1

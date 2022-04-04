@@ -129,7 +129,6 @@ exports.myboard = async (req, res) => {
         await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
 
         const [result] = await promisePool.execute(sql0);
-        console.log(result)
         response = {
             ...response,
             errno: 0,
@@ -155,8 +154,7 @@ exports.mycomment = async (req, res) => {
         const sql = `SELECT * FROM comment
                     LEFT JOIN user ON
                     comment.c_userid = user.userid
-                    WHERE user.userid = '${userid}'
-        `
+                    WHERE user.userid = '${userid}'`
         const sql2 = `SELECT count(cid) AS total_record FROM comment`
 
         const [result] = await promisePool.execute(sql);
@@ -178,22 +176,24 @@ exports.mycomment = async (req, res) => {
 
 exports.myscrap = async (req, res) => {
     const userid = req.body.userid
-    console.log(req.body)
     let response = {
         errno: 1
-    }
-    try {
-        const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
-                from board 
-                left join user on board.b_userid = user.userid 
-                left join img on img.bid = board.idx and img.seq = 1
-                left join likes on board.idx = likes.bid
-                left join hashtag on board.idx = hashtag.bid
-                where board.board_name = 'main' and active = 1 and b_userid = '${userid}'
-                group by board.idx
-                order by board.idx desc
-                `
+    }                                                     //갑자기 count?                    갑자기 nickname? img?                 이건뭐지?
+    try { // 보드에서 idx,title data format as date, view, count(조회된 데이터 갯수) as likes, nickname, img(유저,보드 다없는데..), group_concat as hashtag를 board에서 가져와
+        // join문을 써서 user                                                                                                                       오름차순
+        const sql0 = `SELECT board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
+        FROM board 
+        LEFT JOIN user ON board.b_userid = user.userid 
+        LEFT JOIN img ON img.bid = board.idx and img.seq = 1
+        LEFT JOIN likes ON board.idx = likes.bid
+        LEFT JOIN hashtag ON board.idx = hashtag.bid
+        LEFT JOIN scrap ON board.idx = scrap.bid
+        WHERE board.board_name = 'main' and active = 1 and s_userid = '${userid}'
+        GROUP BY board.idx
+        ORDER BY board.idx desc`
+
         await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
+
 
         const [result] = await promisePool.execute(sql0);
         console.log(result)
@@ -224,7 +224,6 @@ exports.idchk = async (req, res) => {
     } else {
         res.send({ err: 2 })
     }
-
 };
 
 exports.nickchk = async (req, res) => {
