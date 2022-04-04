@@ -1,23 +1,23 @@
-#main > h3 {
+#main>h3 {
     margin: 50px;
 }
 
-#main > h3 > a {
+#main>h3>a {
     font-size: 30px;
     font-family: 'Song Myung', serif;
 }
 
-#main > table {
+#main>table {
     width: 80%;
-    border-collapse : collapse;
+    border-collapse: collapse;
     font-family: 'Song Myung', serif;
 }
 
-#main > table > thead {
+#main>table>thead {
     margin-bottom: 100px;
 }
 
-#main > table > thead > tr > td {
+#main>table>thead>tr>td {
     background-color: rgba(38, 34, 35, 0.5);
     text-align: center;
     height: 30px;
@@ -45,7 +45,7 @@
     width: 80px;
 }
 
-#main > table > tbody > tr > td {
+#main>table>tbody>tr>td {
     border-bottom: 0.5px solid rgba(38, 34, 35, 0.2);
     text-align: center;
     height: 30px;
@@ -53,7 +53,7 @@
     font-size: 12px;
 }
 
-#main > table > tbody > tr > .title {
+#main>table>tbody>tr>.title {
     text-align: left;
     padding-left: 30px;
 }
@@ -73,7 +73,7 @@
     padding: 10px;
 }
 
-#writeBtnDiv > a {
+#writeBtnDiv>a {
     padding: 7px 14px;
     height: fit-content;
     background: #262223;
@@ -87,14 +87,15 @@
     display: flex;
     justify-content: space-around;
 }
+
 .pBtn {
-    all : unset;
+    all: unset;
     display: block;
     width: 26px;
     height: 26px;
     text-align: center;
     border-radius: 13px;
-    background:  rgba(38, 34, 35, 0.5);
+    background: rgba(38, 34, 35, 0.5);
     font-size: 15px;
     color: #ffffff;
     margin: 0 5px;
@@ -113,4 +114,12 @@
     margin: 0 15px;
     line-height: 26px;
     cursor: pointer;
+}
+
+.answer {
+    padding: 3px 5px;
+    background: rgba(38, 34, 35, 0.5);
+    color: #ffffff;
+    border-radius: 5px;
+    margin: 0 10px;
 }

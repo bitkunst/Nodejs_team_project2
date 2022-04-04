@@ -47,19 +47,22 @@ const writePost = async (req, res) => {
         // 첨부된 이미지가 있으면 img db에 추가
         if (files.length !== 0) {
             let sql2 = 'INSERT INTO img(bid, img, seq) values'
-            files.forEach((v, i) => sql2 += `(${result.insertId}, '${v}', ${i + 1}),`)
+            files.forEach((v, i) => { sql2 += `(${result.insertId}, '${v}', ${i + 1}),` })
             sql2 = sql2.replace(/,$/, '');
+            console.log(sql2)
             const [result2] = await promisePool.execute(sql2)
         }
         // 해시태그가 있으면 해시태그 db에 추가
-        if (hstg != undefined) {
-            const hstgArr = JSON.parse(hstg)
+        const hstgArr = JSON.parse(hstg)
+        if (hstgArr[0] != undefined) {
             let hstgSql = `INSERT INTO hashtag(bid, hstg) values`
             hstgArr.forEach(v => {
                 hstgSql += `(${result.insertId}, '${v}'),`
             })
             hstgSql = hstgSql.replace(/,$/, '');
-            await promisePool.execute(hstgSql)
+            console.log(hstgSql)
+            const [result3] = await promisePool.execute(hstgSql)
+            console.log(result3)
         }
 
         res.redirect(`http://localhost:3001/board/${board_name}/list`)
@@ -71,12 +74,13 @@ const writePost = async (req, res) => {
 // ajax로 프론트서버로 데이터 뿌려줌
 const getArticleApi = async (req, res) => {
     const { idx } = req.body
-    const sql = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, nickname, board.b_userid, board_name, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
-                from board 
-                left join user on board.b_userid = user.userid 
-                left join likes on board.idx = likes.bid
-                left join hashtag on board.idx = hashtag.bid
-                where board.idx = ${idx};`
+    const sql = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, board.b_userid, nickname, board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
+    from board 
+    left join user on board.b_userid = user.userid 
+    left join likes on board.idx = likes.bid
+    left join hashtag on board.idx = hashtag.bid
+    left join img on board.idx = img.bid
+    where board.idx = ${idx};`
     let response = {
         errno: 1
     }
@@ -114,14 +118,44 @@ const deleteApi = async (req, res) => {
 }
 
 const updateApi = async (req, res) => {
-    const { idx, board_name, cg_idx, title, parent, upload, content } = req.body
+    const { idx, board_name, cg_idx, title, parent, content, hstg } = req.body
+    console.log(hstg)
+    const files = []
+    req.files.forEach(v => {
+        files.push(v.filename)
+    })
+    console.log(files)
     //const { userid } = req.user // 나중에 로그인 기능 되면 cookie-parsing해서 유저정보 담아놓고 사용
     const userid = 'admin'
     // qna에서 parent 설정해주는 sql은 따로 작성
-    let sql = `
+    const delSql1 = `delete from img where bid = ${idx};`
+    const delSql2 = `delete from hashtag where bid = ${idx};`
+    const updSql = `
         UPDATE board SET title = '${title}',content='${content}', cg_idx='${cg_idx}', board_name='${board_name}' WHERE idx = ${idx};`
     try {
-        const [result] = await promisePool.execute(sql)
+        await promisePool.execute(delSql1)
+        await promisePool.execute(delSql2)
+        const [result] = await promisePool.execute(updSql)
+
+        // 첨부된 이미지가 있으면 img db에 추가
+        if (files.length !== 0) {
+            let sql2 = 'INSERT INTO img(bid, img, seq) values'
+            files.forEach((v, i) => { sql2 += `(${idx}, '${v}', ${i + 1}),` })
+            sql2 = sql2.replace(/,$/, '');
+            const [result2] = await promisePool.execute(sql2)
+        }
+        // 해시태그가 있으면 해시태그 db에 추가
+        const hstgArr = JSON.parse(hstg)
+        if (hstgArr[0] != undefined) {
+            let hstgSql = `INSERT INTO hashtag(bid, hstg) values`
+            hstgArr.forEach(v => {
+                hstgSql += `(${idx}, '${v}'),`
+            })
+            hstgSql = hstgSql.replace(/,$/, '');
+            const [result3] = await promisePool.execute(hstgSql)
+
+        }
+
         res.redirect(`http://localhost:3001/board/${board_name}/list`)
     } catch (e) {
         console.log(e)
@@ -131,11 +165,12 @@ const updateApi = async (req, res) => {
 const viewApi = async (req, res, next) => {
     const { idx } = req.body
     const sql1 = `UPDATE board SET view=view+1 WHERE idx=${idx}; `
-    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, board.b_userid, nickname, board_name, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag
+    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, board.b_userid, nickname, board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
+                left join img on board.idx = img.bid
                 where board.idx = ${idx};`
     let response = {
         errno: 1

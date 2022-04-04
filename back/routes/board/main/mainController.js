@@ -1,3 +1,4 @@
+const { decode } = require('jsonwebtoken')
 const { promisePool } = require('../../../db')
 const { decodePayload } = require('../../../utils/jwt')
 
@@ -5,56 +6,59 @@ const { decodePayload } = require('../../../utils/jwt')
 // 브라우저에서 ajax로 요청하면 db에서 게시글 목록 전달
 const listApi = async (req, res) => {
     const { cgArr } = req.body
+    const userinfo = decodePayload(req.cookies.AccessToken)
+    const userid = userinfo.userid
     // 1. cgArr로 카테고리 인덱스 조회 : 쿼리문 하나로 통합해서 쓸 수도 있을 것 같은데 방법을 잘 모르겠음..
     // sql1 : 모든 카테고리 조회시. cgArr.length=0
-    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
+    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag 
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
-                left join likes on board.idx = likes.bid
+                left outer join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
                 where board.board_name = 'main' and active = 1
                 group by board.idx
                 order by board.idx desc`
 
     // sql2 : 메인 카테고리로 조회시. cgArr.length = 1
-    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
+    const sql1 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag  
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
                 left join category as cg on board.cg_idx = cg.idx
                 left join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
-                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[0]}'
+                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[1]}'
                 group by board.idx
                 order by board.idx desc`
 
     // sql3 : 서브카테고리로 조회시. cgArr.length = 2
-    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag  
+    const sql2 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag  
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
                 left join category as cg on board.cg_idx = cg.idx
                 left join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
-                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[0]}' and s_url = '${cgArr[1]}'
+                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[1]}' and s_url = '${cgArr[2]}'
                 group by board.idx
                 order by board.idx desc`
 
     const sqlImg = `select img from img where bid=idx limit 1,1`
     let response = {
-        errno: 1
+        errno: 1,
+        userid: userid
     }
     try {
         await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
         let result
-        if (cgArr.length == 0) {
+        if (cgArr.length == 1) {
             await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             [result] = await promisePool.execute(sql0)
-        } else if (cgArr.length == 1) {
+        } else if (cgArr.length == 2) {
             await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             [result] = await promisePool.execute(sql1)
-        } else if (cgArr.length == 2) {
+        } else if (cgArr.length == 3) {
             await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             [result] = await promisePool.execute(sql2)
         }
@@ -115,7 +119,6 @@ const deleteApi = async (req, res) => {
 
 const checkLikeApi = async (req, res) => {
     const { idx } = req.body
-    //const { userid } = req.userInfo
     const token = req.cookies.AccessToken
     const userid = decodePayload(token).userid
     const sql1 = `SELECT * FROM likes where bid=${idx} and l_userid='${userid}'`
@@ -151,7 +154,6 @@ const likeApi = async (req, res) => {
     let response = {
         errno: 1
     }
-    console.log(likeFlag)
     try {
         if (likeFlag === 1) {
             await promisePool.execute(sql2)

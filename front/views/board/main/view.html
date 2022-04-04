@@ -10,11 +10,18 @@
     </div>
 </div>
 <div id="mainContent">
-    <div id="content">{{item.content}}</div>
-    <div>
-        {% for item in htList %}
-        <span>#{{item.ht}}</span>
-        {% endfor %}
+    <div id="content">{{item.content}}
+        <div id="imgDiv">
+            {% for img in imgList %}
+            <img src="http://localhost:4001/uploads/{{img}}" alt="">
+            {% endfor %}
+        </div>
+        <div>
+            <span id="htTitle">TAG</span>
+            {% for ht in htList %}
+            <span class="htSpan">{{ht}}</span>
+            {% endfor %}
+        </div>
     </div>
     <div id="btnDiv">
         <a class="btn" href="/board/main/list">목록가기</a>

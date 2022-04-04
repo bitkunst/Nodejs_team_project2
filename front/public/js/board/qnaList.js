@@ -22,16 +22,29 @@ const getData = async (router) => {
 
 const createList = (data, currentPage, viewArticle) => {
     const boardElement = document.querySelector('#boardList').innerHTML
+    const boardElement2 = document.querySelector('#boardList2').innerHTML
     let str = ''
     data.slice((currentPage - 1) * viewArticle, currentPage * viewArticle).forEach((v, i) => {
-        str += boardElement
-            .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)
-            .replace('{idx}', v.idx)
-            .replace('{title}', v.title)
-            .replace('{nickname}', v.nickname)
-            .replace('{date}', v.date)
-            .replace('{view}', v.view)
-            .replace('{likes}', v.likes)
+        console.log(v.parent)
+        if (v.parent == undefined) {
+            str += boardElement
+                .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)
+                .replace('{idx}', v.idx)
+                .replace('{title}', v.title)
+                .replace('{nickname}', v.nickname)
+                .replace('{date}', v.date)
+                .replace('{view}', v.view)
+                .replace('{likes}', v.likes)
+        } else {
+            str += boardElement2
+                .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)
+                .replace('{idx}', v.idx)
+                .replace('{title}', v.title)
+                .replace('{nickname}', v.nickname)
+                .replace('{date}', v.date)
+                .replace('{view}', v.view)
+                .replace('{likes}', v.likes)
+        }
     })
     const tbody = document.querySelector('tbody')
     tbody.innerHTML = str
