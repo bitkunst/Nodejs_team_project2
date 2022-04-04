@@ -8,6 +8,14 @@ router.get('/login', userController.login);
 
 router.get('/logout', userController.logout);
 
+router.get('/welcome', userController.welcome);
+
+router.get('/profile/myboard', auth, userController.myboard);
+
+router.get('/profile/mycomment', auth, userController.mycomment);
+
+router.get('/profile/myscrap', auth, userController.myscrap);
+
 router.get('/kakao/login', userController.kakaoLogin);
 
 router.get('/oauth/kakao', userController.oauthkakao);
@@ -15,8 +23,6 @@ router.get('/oauth/kakao', userController.oauthkakao);
 router.get('/join', userController.join);
 
 router.get('/agree', userController.agree);
-
-router.get('/welcome', userController.welcome);
 
 router.get('/profile', auth, userController.profile);
 

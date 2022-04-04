@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-</head>
-
-<body>
+{% extends "./_layout.html" %}
+{% block content %}
+<div id="user_wrap">
     <form method="post" action="http://localhost:4001/api/user/profile/update" id="update_chk">
         <table>
             <tbody class="tbody">
@@ -17,7 +8,7 @@
                     <td> 아이디 : </td>
                     <td>
                         {{user.userid}}
-                        <input type="hidden" name="userid" value="{{user.userid}}">
+                        <input type="hidden" name="userid" id="user_id">
                     </td>
                 </tr>
                 <tr>
@@ -88,6 +79,7 @@
             <input type="submit" value="수정완료">
         </p>
     </form>
+</div>
 </body>
 <script type="text/javascript">
     function validate(e) {
@@ -222,8 +214,6 @@
         validate(e)
     })
 
-
-    // issue 회원가입 중복체크 안눌렀는데 회원가입 버튼 누르면 문구뜨게하고 누른사람만 회원가입버튼 누를수있는기능
     const nickElement = document.querySelector('#nickname_check_btn')
     nickElement.addEventListener('click', async (e) => {
 
@@ -253,7 +243,4 @@
     })
 </script>
 
-</script>
-</body>
-
-</html>
+{% endblock %}

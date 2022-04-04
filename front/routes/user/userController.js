@@ -70,8 +70,11 @@ exports.join = (req, res) => {
 };
 
 exports.welcome = (req, res) => {
-    res.render('user/welcome.html');
-};
+    res.render('user/welcome', {
+
+    })
+}
+
 
 exports.agree = (req, res) => {
     res.render('user/agree.html');
@@ -150,4 +153,29 @@ exports.nickchk = async (req, res) => {
     } else {
         res.send({ er: 2 })
     }
+};
+
+
+exports.myboard = (req, res) => {
+    console.log(req.userInfo)
+    const { userid } = req.userInfo
+    res.render('user/myboard.html', {
+        userid
+    });
+};
+
+exports.mycomment = (req, res) => {
+    console.log(req.userInfo)
+    const { userid } = req.userInfo
+    res.render('user/mycomment.html', {
+        userid
+    });
+};
+
+exports.myscrap = (req, res) => {
+    console.log(req.userInfo)
+    const { userid } = req.userInfo
+    res.render('user/myscrap.html', {
+        userid
+    });
 };

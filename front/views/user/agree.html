@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>회원가입 약관동의</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="</script'>http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="</script'>http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <style type="text/css">
-        #d1 {
-            width: 770px;
-            margin: 0 auto;
-        }
-    </style>
-    <!-- accordion 접히는 Script 선언 -->
-    <script>
-        $(function () {
-            $("#accordion").accordion();
-            $('#accordion input[type="checkbox"]').click(function (e) {
-                e.stopPropagation();
-            });
-        });
-    </script>
-</head>
+{% extends "./_layout.html" %}
+{% block content %}
 
 
 <body>
@@ -173,6 +149,4 @@
             this.submit();
         }; 
     </script>
-</body>
-
-</html>
+    {% endblock %}

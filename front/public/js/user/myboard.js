@@ -1,11 +1,11 @@
 
 
 // 0. 카테고리 식별
-const currentCg = document.location.href.split('?')[1]
-const cgArr = []
-if (currentCg !== undefined) {
-    currentCg.split('&').forEach((v, i) => cgArr[i] = v.split('=')[1])
-}
+// const currentCg = document.location.href.split('?')[1]
+// const cgArr = []
+// if (currentCg !== undefined) {
+//     currentCg.split('&').forEach((v, i) => cgArr[i] = v.split('=')[1])
+// }
 
 // 0.
 
@@ -16,13 +16,15 @@ const getData = async (router) => {
             'Content-type': 'application/json',
             withCredentials: true
         }
-        const dataObj = {
-            cgArr
-        }
-        const response = await axios.post(router, dataObj, option)
+        // 요청 보내는중
+        const userid = document.querySelector('#userInfo').value
+        const payload = { userid }
+        const response = await axios.post(router, payload, option)
+        console.log(response)
         const errNo = response.data.errno
         const data = response.data.result
         if (errNo === 0) {
+            console.log(data)
             return data
         } else {
             console.log('백엔드에서 에러발생')
@@ -114,7 +116,7 @@ const changeBtn = (data, currentBlock, viewArticle, blockArticle) => {
 // 위의 함수를 가져와서 원하는 페이지당 게시글 수(viewArticle), 버튼 블록의 버튼 수(blockArticle)를 지정 후 화면 렌더링
 // 순서는 버튼 블록 -> 버튼 -> 리스트 순서로 연결되어 있음
 const showList = async (viewArticle, blockArticle) => {
-    const router = 'http://localhost:4001/api/board/main/list'
+    const router = 'http://localhost:4001/api/user/profile/myboard'
     const data = await getData(router)
 
     let currentBlock = 1
