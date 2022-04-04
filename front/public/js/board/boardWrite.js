@@ -153,4 +153,5 @@ function blurHander(e) {
     })
     hashtag.innerHTML = str
     hstg.value = JSON.stringify(hstgArr)
+    console.log(hstg.value)
 }
