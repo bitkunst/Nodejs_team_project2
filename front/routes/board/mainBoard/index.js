@@ -3,7 +3,16 @@ const router = express.Router()
 const axios = require('axios')
 
 // 브라우저에서 ajax로 리스트 받아옴.
+
 router.get('/list', (req, res) => {
+    res.render('board/main/list')
+})
+
+router.get('/list/:cg', (req, res) => {
+    res.render('board/main/list')
+})
+
+router.get('/list/:cg1/:cg2', (req, res) => {
     res.render('board/main/list')
 })
 

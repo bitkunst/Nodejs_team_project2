@@ -1,11 +1,12 @@
 
 
 // 0. 카테고리 식별
-const currentCg = document.location.href.split('?')[1]
-const cgArr = []
-if (currentCg !== undefined) {
-    currentCg.split('&').forEach((v, i) => cgArr[i] = v.split('=')[1])
-}
+const currentCg = document.location.href.split('main/list')[1]
+const cgArr = currentCg.split('/')
+// if (currentCg !== undefined) {
+//     currentCg.split('/').forEach((v, i) => cgArr[i] = v.split('=')[1])
+// }
+console.log(cgArr)
 
 // 1. 리스트 데이터 가져오기
 const getData = async (router) => {

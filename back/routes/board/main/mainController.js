@@ -28,7 +28,7 @@ const listApi = async (req, res) => {
                 left join category as cg on board.cg_idx = cg.idx
                 left join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
-                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[0]}'
+                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[1]}'
                 group by board.idx
                 order by board.idx desc`
 
@@ -40,7 +40,7 @@ const listApi = async (req, res) => {
                 left join category as cg on board.cg_idx = cg.idx
                 left join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
-                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[0]}' and s_url = '${cgArr[1]}'
+                where board.board_name = 'main' and active = 1 and m_url = '${cgArr[1]}' and s_url = '${cgArr[2]}'
                 group by board.idx
                 order by board.idx desc`
 
@@ -52,13 +52,13 @@ const listApi = async (req, res) => {
     try {
         await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
         let result
-        if (cgArr.length == 0) {
+        if (cgArr.length == 1) {
             await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             [result] = await promisePool.execute(sql0)
-        } else if (cgArr.length == 1) {
+        } else if (cgArr.length == 2) {
             await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             [result] = await promisePool.execute(sql1)
-        } else if (cgArr.length == 2) {
+        } else if (cgArr.length == 3) {
             await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             [result] = await promisePool.execute(sql2)
         }
