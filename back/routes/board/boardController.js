@@ -47,8 +47,9 @@ const writePost = async (req, res) => {
         // 첨부된 이미지가 있으면 img db에 추가
         if (files.length !== 0) {
             let sql2 = 'INSERT INTO img(bid, img, seq) values'
-            files.forEach((v, i) => sql2 += `(${result.insertId}, '${v}', ${i + 1}),`)
+            files.forEach((v, i) => { sql2 += `(${result.insertId}, '${v}', ${i + 1}),` })
             sql2 = sql2.replace(/,$/, '');
+            console.log(sql2)
             const [result2] = await promisePool.execute(sql2)
         }
         // 해시태그가 있으면 해시태그 db에 추가
@@ -59,6 +60,7 @@ const writePost = async (req, res) => {
                 hstgSql += `(${result.insertId}, '${v}'),`
             })
             hstgSql = hstgSql.replace(/,$/, '');
+            console.log(hstgSql)
             const [result3] = await promisePool.execute(hstgSql)
             console.log(result3)
         }
@@ -132,11 +134,12 @@ const updateApi = async (req, res) => {
 const viewApi = async (req, res, next) => {
     const { idx } = req.body
     const sql1 = `UPDATE board SET view=view+1 WHERE idx=${idx}; `
-    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, board.b_userid, nickname, board_name, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag
+    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, board.b_userid, nickname, board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
+                left join img on board.idx = img.bid
                 where board.idx = ${idx};`
     let response = {
         errno: 1
