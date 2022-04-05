@@ -31,6 +31,15 @@ router.get('/view/:idx', async (req, res) => {
 })
 
 // ajax로 게시판/카테고리 구성하기 or  그냥 html 분리하기
+router.get('/writeA', (req, res) => {
+    const idx = req.query.q
+    console.log(idx)
+    let adminFlag = 0
+    if (req.userInfo.userid === 'admin') { adminFlag = 1 }
+    console.log(adminFlag)
+    res.render('board/qna/writeA', { adminFlag, idx })
+})
+
 router.get('/write', (req, res) => {
     let adminFlag = 0
     if (req.userInfo.userid === 'admin') { adminFlag = 1 }

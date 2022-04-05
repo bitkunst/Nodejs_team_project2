@@ -105,7 +105,7 @@ manageUser.addEventListener('submit', async (e) => {
 })
 
 // manageCg
-manageCg.addEventListener('submit', (e)=>{
+manageCg.addEventListener('submit', (e) => {
     e.preventDefault()
 
     for (let i = 0; i < adminContents.length; i++) {
@@ -253,21 +253,27 @@ manageCg.addEventListener('submit', (e)=>{
     // 3-4. 댓글 수정
     async function updateHandler(e) {
         const commentContent = e.target.parentNode.parentNode.parentNode.querySelector('.commentContent')
-        const cid = e.target.parentNode.querySelector('input').value
+        const commentContent2 = e.target.parentNode.parentNode.parentNode.querySelector('.commentContent2')
+        commentContent.style.borderBottom = 'none'
+        const idx = e.target.parentNode.querySelector('input').value
         const originalComment = commentContent.innerHTML
-        commentContent.innerHTML = `<input type="text" class="cngCom" value="${originalComment}"><button class="cngBtn">수정</button>`
-        const cngBtn = commentContent.querySelector('.cngBtn')
+        const originalComment2 = commentContent2.innerHTML
+        commentContent.innerHTML = `<input type="text" class="cngCom" value="${originalComment}">`
+        commentContent2.innerHTML = `<input type="text" class="cngCom2" value="${originalComment2}"><button class="cngBtn">수정</button>`
+        const cngBtn = commentContent2.querySelector('.cngBtn')
         cngBtn.addEventListener('click', updateAxios)
 
         async function updateAxios() {
             try {
                 let cngCom = commentContent.querySelector('.cngCom').value
+                let cngCom2 = commentContent2.querySelector('.cngCom2').value
                 const router = 'http://localhost:4001/api/admin/manage/category/update'
                 const option = {
                     'Content-type': 'application/json',
                     withCredentials: true
                 }
-                const data = { cid, cngCom }
+                const data = { idx, cngCom, cngCom2 }
+
 
                 const response = await axios.post(router, data, option)
 

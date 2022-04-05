@@ -34,7 +34,6 @@
                         {% else %}
                         <td>집전화: </td>
                         <td> 없음</td>
-
                         {% endif %}
                     </tr>
                     <tr>
@@ -61,13 +60,13 @@
         <div id="profile_right">
             <div>
                 <div>
-                    <h5><a href="/board/main/list">작성한 글 보기</a></h5>
+                    <h5><a href="/user/profile/myboard">작성한 글 보기</a></h5>
                 </div>
                 <div>
-                    <h5><a href="/board/main/list">작성 댓글 보기</a></h5>
+                    <h5><a href="/user/profile/mycomment">작성 댓글 보기</a></h5>
                 </div>
                 <div>
-                    <h5><a href="/board/main/list">스크랩 보기</a></h5>
+                    <h5><a href="/user/profile/myscrap">스크랩 보기</a></h5>
                 </div>
             </div>
         </div>
@@ -78,7 +77,6 @@
 <script>
     const quit = document.querySelector('#quit_btn')
     quit.addEventListener('click', async (e) => {
-
         e.preventDefault()
         const option = {
             'Content-type': 'application/json',
@@ -92,7 +90,6 @@
 
         alert('회원탈퇴 되었습니다.')
         location.href = "/"
-
 
     })
 </script>

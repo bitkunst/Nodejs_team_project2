@@ -14,9 +14,10 @@
 </table>
 <div id="contentView">{{item.content}}</div>
 <div id="btnDiv">
-    <a class="btn" href="/board/notice/list">목록가기</a>
+    <a class="btn" href="/board/qna/list">목록가기</a>
+    <a class="btn" href="/board/qna/writeA?q={{item.idx}}">답변하기</a>
     {% if userCheck %}
-    <a class="btn" href="/board/notice/update/{{item.idx}}">수정</a>
+    <a class="btn" href="/board/qna/update/{{item.idx}}">수정</a>
     <form action="http://localhost:4001/api/board/delete" method="post">
         <input type="hidden" name="idx" value="{{item.idx}}">
         <input type="hidden" name="board_name" value="{{item.board_name}}">
