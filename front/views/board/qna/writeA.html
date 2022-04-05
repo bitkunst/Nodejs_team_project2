@@ -1,0 +1,35 @@
+{% extends "../_layout.html" %}
+{% block content %}
+<span>글쓰기</span>
+<form action="http://localhost:4001/api/board/qna/writeA" method="post" id="writeForm">
+    <div>답변작성</div>
+    <div>
+        <select name="board_name" id="boardSelect">
+            {% if adminFlag %}
+            <option class="boardMenu" value="notice">공지사항</option>
+            <option class="boardMenu" value="qna" selected>Q&A</option>
+            <option class="boardMenu" value="main">게시판</option>
+            {% else %}
+            <option class="boardMenu" value="qna">Q&A</option>
+            <option class="boardMenu" value="main">게시판</option>
+            {% endif %}
+        </select>
+        <!-- board db에서 가져오기? -->
+        <!-- board/notice/write면 notice에 selected가 가도록 자동 변경하는 식으로 모든 게시판의 글작성 페이지 하나로 통일 -->
+        <select name="cg_idx" id="cgSelect">
+            <option value="201001" selected>답변</option>
+        </select>
+    </div>
+    <input type="text" name="title" id="title" placeholder="제목을 입력하세요">
+    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+    <input type="hidden" id="parent" name="parent" value={{idx}}>
+    <input id="submitBtn" type="submit" value="등록">
+</form>
+
+<template id="cgOption">
+    <option value="{idx}">{cgName}</option>
+</template>
+
+
+<!-- <script type="text/javascript" src="../../js/board/boardWrite.js"></script> -->
+{% endblock %}

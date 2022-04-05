@@ -59,16 +59,21 @@ const writeApi = async (req, res) => {
 // 1. 해당 idx의 항목에서 이름과 url 받아와서 업데이트
 // 2. 메인/서브 구분해서 처리하는 로직 필요
 const updateApi = async (req, res) => {
-    const { cid, cngCom } = req.body
+    const { idx, cngCom, cngCom2 } = req.body
+    console.log(idx, cngCom, cngCom2)
     const token = req.cookies.AccessToken
     const userinfo = decodePayload(token)
     let response = {
         errno: 1
     }
     try {
-        console.log('업데이트실행')
-        let sql1 = `UPDATE comment SET comment='${cngCom}' where cid=${cid};`
-        const [result] = await promisePool.execute(sql1)
+        if (idx.length === 3) {
+            let sql1 = `UPDATE category SET main='${cngCom}', m_url='${cngCom2}' where idx=${idx};`
+            const [result] = await promisePool.execute(sql1)
+        } else {
+            let sql1 = `UPDATE category SET sub='${cngCom}', s_url='${cngCom2}' where idx=${idx};`
+            const [result] = await promisePool.execute(sql1)
+        }
         response = {
             ...response,
             errno: 0,
