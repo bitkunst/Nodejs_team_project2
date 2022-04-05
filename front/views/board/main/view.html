@@ -2,7 +2,7 @@
 {% block content %}
 <div id="background">
     <div id="info">
-        <span id="cg">{{item.cg_idx}}</span>
+        <span id="cg">{{item.main}} {{item.sub}} </span>
         <h1 id="title">{{item.title}}</h1>
         <span id="date">{{item.date}}</span>
         <span id="nickname">by {{item.nickname}}</span>
@@ -10,7 +10,8 @@
     </div>
 </div>
 <div id="mainContent">
-    <div id="content">{{item.content}}
+    <div id="content">
+        {{item.content}}
         <div id="imgDiv">
             {% for img in imgList %}
             <img src="http://localhost:4001/uploads/{{img}}" alt="">
