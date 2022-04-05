@@ -97,3 +97,6 @@ INSERT INTO comment (comment, bid, c_userid) VALUES ('테스트 댓글', 1, 'bit
 INSERT INTO category (idx, main, m_url, m_key) VALUES ('001001', '공지사항', 'notice', '001');
 
 
+
+-- 220405 추가 : 이거 db에서 한번씩 실행해줘
+ALTER TABLE board ADD seq INT NULL

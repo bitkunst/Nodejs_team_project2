@@ -23,6 +23,7 @@ router.get('/view/:idx', async (req, res) => {
         // 글 작성자 본인 확인
         let userCheck = 0
         if (req.userInfo.nickname === item.nickname) { userCheck = 1 }
+        console.log(req.userInfo.nickname, item.nickname, userCheck)
         res.render('board/notice/view', { item, userCheck })
     } catch (error) {
         console.log(error)
