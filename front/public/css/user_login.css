@@ -1,0 +1,115 @@
+/* user_login */
+#login {
+    width: 400px;
+    height: 700px;
+}
+
+.login_wrap {
+    background-color: #262223;
+    padding: 50px;
+}
+
+.login_header {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+.login_logo {
+    width: 100%;
+    color: white;
+    width: 100%;
+    height: auto;
+    font-size: 25px;
+    margin-bottom: 50px;
+    /* margin-top: 108px;
+    vertical-align: top;
+    background-position: 0 -51px;
+    background-repeat: no-repeat;
+    width: 155px;
+    height: 30px; */
+}
+
+.id_pw_box {
+    position: relative;
+    margin: 10px 0;
+}
+
+.id_pw_box>#user_id {
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px #ccc;
+    padding: 20px 0px 5px 0px;
+    font-size: 14pt;
+    width: 100%;
+    color: white;
+}
+
+.id_pw_box>#user_pw {
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px #ccc;
+    padding: 20px 0px 5px 0px;
+    font-size: 14pt;
+    width: 100%;
+    color: white;
+}
+
+#user_id::placeholder {
+    color: transparent;
+}
+
+#user_pw::placeholder {
+    color: transparent;
+}
+
+#user_id:placeholder-shown+label {
+    color: #aaa;
+    font-size: 14pt;
+    top: 15px;
+}
+
+#user_pw:placeholder-shown+label {
+    color: #aaa;
+    font-size: 14pt;
+    top: 15px;
+}
+
+#user_id:focus+.id,
+.id {
+    color: #8aa1a1;
+    font-size: 10pt;
+    pointer-events: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
+
+#user_pw:focus+.pw,
+.pw {
+    color: #8aa1a1;
+    font-size: 10pt;
+    pointer-events: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
+
+
+
+.login_wrap>ul>li>a {
+    color: white;
+}
+
+/* ---------------------------------------------- */
