@@ -13,7 +13,7 @@ const postSearchData = async (req, res)=>{
                             email,
                             bio,
                             img,
-                            seq AS img_seq,
+                            i.seq AS img_seq,
                             main,
                             sub,
                             m_url
