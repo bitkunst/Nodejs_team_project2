@@ -16,10 +16,6 @@ router.get('/profile/mycomment', auth, userController.mycomment);
 
 router.get('/profile/myscrap', auth, userController.myscrap);
 
-router.get('/kakao/login', userController.kakaoLogin);
-
-router.get('/oauth/kakao', userController.oauthkakao);
-
 router.get('/join', userController.join);
 
 router.get('/agree', userController.agree);

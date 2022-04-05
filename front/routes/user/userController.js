@@ -1,9 +1,3 @@
-const { decodePayload } = require('../../utils/jwt.js')
-const client_id = '50b75fc17d47bf2ba9978434d0a940cf'
-const redirect_uri = 'http://localhost:3001/oauth/kakao'
-const client_secret = 'CFOkTpjElWk2vT1I4g4nb7xrCjhHyu3K'
-const host = 'https://kauth.kakao.com'
-const qs = require('qs')
 const { default: axios } = require('axios')
 const { alertmove } = require('../../utils/alertmove.js');
 
@@ -19,51 +13,6 @@ exports.logout = (req, res) => {
     res.send(alertmove('http://localhost:3001', '로그아웃 되었습니다.'));
 }
 
-exports.kakaoLogin = (req, res) => {
-    const redirectURI = host + `/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code`
-    res.redirect(redirectURI)
-};
-
-exports.oauthkakao = async (req, res) => {
-    const { query: { code } } = req
-    const token_url = host + '/oauth/token'
-    const headers = {
-        'Content-type': 'application/x-www-form-urlencoded'
-    }
-
-    const body = qs.stringify({
-        grant_type: 'authorization_code',
-        client_id: '50b75fc17d47bf2ba9978434d0a940cf',
-        redirect_uri: 'http://localhost:3001/oauth/kakao',
-        code: code,
-        client_secret,
-    })
-
-
-
-    // 2. 토큰받기
-
-    const response = await axios.post(token_url, body, headers)
-    response.data.access_token
-
-    // 3. 토큰을 활용하여 사용자 정보 가져오기
-    try {
-        const { access_token: ACCESS_TOKEN } = response.data
-        const url = 'https://kapi.kakao.com/v2/user/me'
-        const userinfo = await axios.post(url, null, {
-            headers: {
-                'Authorization': `Bearer ${ACCESS_TOKEN}`
-            }
-        })
-        console.log(userinfo.data.kakao_account.profile.profile_image_url)
-        console.log(userinfo.data.kakao_account.profile.nickname)
-
-
-    } catch (e) {
-        console.log(e)
-    }
-    res.send('로그인성공')
-}
 
 exports.join = (req, res) => {
     res.render('user/join.html');

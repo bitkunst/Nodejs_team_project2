@@ -70,7 +70,13 @@ manageUser.addEventListener('submit', async (e) => {
                         .replace('{email}', v.email)
                         .replace(/{point}/g, v.point)
 
-                    str2 += userImgTemp.innerHTML.replace('{bio}', v.bio)
+                    if (v.uImg) {
+                        str2 += userImgTemp.innerHTML.replace('{bio}', v.bio)
+                        .replace('{uImg}', v.uImg)
+                    } else {
+                        str2 += userImgTemp.innerHTML.replace('{bio}', v.bio)
+                        .replace('{uImg}', 'http://localhost:4001/user_img/default_profileImg.jpg')
+                    }
                 }
 
             })

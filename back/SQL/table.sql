@@ -2,7 +2,7 @@ CREATE TABLE user (
     userid VARCHAR(50) NOT NULL PRIMARY KEY,
     userpw VARCHAR(50) NOT NULL,
     name VARCHAR(50) NOT NULL,
-    nickname VARCHAR(50) NOT NULL UNIQUE,
+    nickname VARCHAR(50) NOT NULL,
     address VARCHAR(100) NULL,
     gender CHAR(1) NOT NULL,
     mobile VARCHAR(20) NOT NULL,

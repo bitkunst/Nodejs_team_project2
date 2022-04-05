@@ -22,7 +22,8 @@ exports.login = async (req, res) => {
                 path: '/',
                 httpOnly: true,
                 secure: true,
-                domain: 'localhost'
+                domain: 'localhost',
+                maxAge: 60*60*1000
             })
 
             res.redirect('http://localhost:3001')
@@ -35,50 +36,158 @@ exports.login = async (req, res) => {
     }
 };
 
-exports.kakaoLogin = (req, res) => {
-    const redirectURI = host + `/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code`
-    res.redirect(redirectURI)
+exports.kakaoLogin = async (req, res) => {
+    const properties = req.user._json.properties
+    const account = req.user._json.kakao_account
+    if (account.gender == 'male') { 
+        account.gender = 'M'
+    } else {
+        account.gender = 'F'
+    }
+    const userInfo = {
+        nickname: properties.nickname,
+        profileImg: properties.profile_image,
+        email: account.email,
+        gender: account.gender
+    }
+    try {
+        const sql = 'SELECT userid FROM user WHERE userid=?'
+        const prepare = [userInfo.email]
+        const [rows1,] = await promisePool.query(sql, prepare)
+        if (rows1[0] != undefined) {
+            const payload = {
+                userid: userInfo.email,
+                nickname: userInfo.nickname
+            }
+            const jwt_token = createToken(payload)
+            res.cookie('AccessToken', jwt_token, {
+                path: '/',
+                httpOnly: true,
+                secure: true,
+                domain: 'localhost',
+                maxAge: 60*60*1000
+            })
+            res.redirect('http://localhost:3001')
+        } else {
+            const sql2 = 'INSERT INTO user (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point, uImg) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
+            const prepare2 = [userInfo.email, '0000', userInfo.nickname, userInfo.nickname, '대한민국', userInfo.gender, '010-0000-0000', '전화번호 없음', userInfo.email, '안녕하세요', 0, userInfo.profileImg]
+            await promisePool.query(sql2, prepare2)
+
+            const payload = {
+                userid: userInfo.email,
+                nickname: userInfo.nickname
+            }
+            const jwt_token = createToken(payload)
+            res.cookie('AccessToken', jwt_token, {
+                path: '/',
+                httpOnly: true,
+                secure: true,
+                domain: 'localhost',
+                maxAge: 60*60*1000
+            })
+            res.redirect('http://localhost:3001')
+        }
+    } catch(err) {
+        console.log(err)
+    }
 };
 
-exports.oauthkakao = async (req, res) => {
-    const { query: { code } } = req
-    const token_url = host + '/oauth/token'
-    const headers = {
-        'Content-type': 'application/x-www-form-urlencoded'
+exports.googleLogin = async (req, res) => {
+    const {name, picture, email} = req.user._json
+    const userInfo = {
+        name,
+        email,
+        profileImg: picture
     }
-
-    const body = qs.stringify({
-        grant_type: 'authorization_code',
-        client_id: '50b75fc17d47bf2ba9978434d0a940cf',
-        redirect_uri: 'http://localhost:3001/oauth/kakao',
-        code: code,
-        client_secret,
-    })
-
-
-
-    // 2. 토큰받기
-
-    const response = await axios.post(token_url, body, headers)
-    response.data.access_token
-
-    // 3. 토큰을 활용하여 사용자 정보 가져오기
     try {
-        const { access_token: ACCESS_TOKEN } = response.data
-        const url = 'https://kapi.kakao.com/v2/user/me'
-        const userinfo = await axios.post(url, null, {
-            headers: {
-                'Authorization': `Bearer ${ACCESS_TOKEN}`
+        const sql = 'SELECT userid FROM user WHERE userid=?'
+        const prepare = [userInfo.email]
+        const [rows1,] = await promisePool.query(sql, prepare)
+        if (rows1[0] != undefined) {
+            const payload = {
+                userid: userInfo.email,
+                nickname: userInfo.name
             }
-        })
-        console.log(userinfo.data.kakao_account.profile.profile_image_url)
-        console.log(userinfo.data.kakao_account.profile.nickname)
+            const jwt_token = createToken(payload)
+            res.cookie('AccessToken', jwt_token, {
+                path: '/',
+                httpOnly: true,
+                secure: true,
+                domain: 'localhost',
+                maxAge: 60*60*1000
+            })
+            res.redirect('http://localhost:3001')
+        } else {
+            const sql2 = 'INSERT INTO user (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point, uImg) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
+            const prepare2 = [userInfo.email, '0000', userInfo.name, userInfo.name, '대한민국', 'N', '010-0000-0000', '전화번호 없음', userInfo.email, '안녕하세요', 0, userInfo.profileImg]
+            await promisePool.query(sql2, prepare2)
 
-
-    } catch (e) {
-        console.log(e)
+            const payload = {
+                userid: userInfo.email,
+                nickname: userInfo.name
+            }
+            const jwt_token = createToken(payload)
+            res.cookie('AccessToken', jwt_token, {
+                path: '/',
+                httpOnly: true,
+                secure: true,
+                domain: 'localhost',
+                maxAge: 60*60*1000
+            })
+            res.redirect('http://localhost:3001')
+        }
+    } catch(err) {
+        console.log(err)
     }
-    res.send('로그인성공')
+}
+
+exports.naverLogin = async (req, res) => {
+    const {nickname, email, profile_img} = req.user._json
+    const userInfo = {
+        nickname,
+        email,
+        profileImg: profile_img
+    }
+    try {
+        const sql = 'SELECT userid FROM user WHERE userid=?'
+        const prepare = [userInfo.email]
+        const [rows1,] = await promisePool.query(sql, prepare)
+        if (rows1[0] != undefined) {
+            const payload = {
+                userid: userInfo.email,
+                nickname: userInfo.nickname
+            }
+            const jwt_token = createToken(payload)
+            res.cookie('AccessToken', jwt_token, {
+                path: '/',
+                httpOnly: true,
+                secure: true,
+                domain: 'localhost',
+                maxAge: 60*60*1000
+            })
+            res.redirect('http://localhost:3001')
+        } else {
+            const sql2 = 'INSERT INTO user (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point, uImg) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
+            const prepare2 = [userInfo.email, '0000', userInfo.nickname, userInfo.nickname, '대한민국', 'N', '010-0000-0000', '전화번호 없음', userInfo.email, '안녕하세요', 0, userInfo.profileImg]
+            await promisePool.query(sql2, prepare2)
+
+            const payload = {
+                userid: userInfo.email,
+                nickname: userInfo.name
+            }
+            const jwt_token = createToken(payload)
+            res.cookie('AccessToken', jwt_token, {
+                path: '/',
+                httpOnly: true,
+                secure: true,
+                domain: 'localhost',
+                maxAge: 60*60*1000
+            })
+            res.redirect('http://localhost:3001')
+        }
+    } catch(err) {
+        console.log(err)
+    }
 }
 
 exports.join = async (req, res) => {
