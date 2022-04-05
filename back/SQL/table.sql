@@ -9,7 +9,8 @@ CREATE TABLE user (
     phone VARCHAR(20) NULL DEFAULT '전화번호 없음',
     email VARCHAR(50) NOT NULL,
     bio TEXT NULL,
-    point INT NOT NULL DEFAULT 0
+    point INT NOT NULL DEFAULT 0,
+    uImg TEXT NULL
 );
 
 CREATE TABLE category (
@@ -100,4 +101,6 @@ INSERT INTO category (idx, main, m_url, m_key) VALUES ('001001', '공지사항',
 
 
 -- 220405 추가 : 이거 db에서 한번씩 실행해줘
-ALTER TABLE board ADD seq INT NULL
+ALTER TABLE board ADD seq INT NULL;
+-- user table 수정 --
+ALTER TABLE user ADD uImg TEXT NULL;
