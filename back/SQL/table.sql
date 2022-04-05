@@ -35,7 +35,8 @@ CREATE TABLE board (
     parent INT NULL,
     active CHAR(1) NOT NULL DEFAULT 1,
     cg_idx VARCHAR(6) NOT NULL,
-    board_name VARCHAR(50) NOT NULL
+    board_name VARCHAR(50) NOT NULL,
+    seq INT NULL
 );
 
 CREATE TABLE hashtag (
