@@ -10,7 +10,7 @@ const listApi = async (req, res) => {
     const userid = userinfo.userid
     // 1. cgArr로 카테고리 인덱스 조회 : 쿼리문 하나로 통합해서 쓸 수도 있을 것 같은데 방법을 잘 모르겠음..
     // sql1 : 모든 카테고리 조회시. cgArr.length=0
-    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag 
+    const sql0 = `select board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(DISTINCT lid) as likes, GROUP_CONCAT(DISTINCT l_userid order by l_userid asc SEPARATOR '-') as l_userid, nickname, img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag 
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join img on img.bid = board.idx and img.seq = 1
