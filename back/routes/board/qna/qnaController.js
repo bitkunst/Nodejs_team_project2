@@ -1,4 +1,5 @@
 const { promisePool } = require('../../../db')
+const { decodePayload } = require('../../../utils/jwt')
 
 
 // 브라우저에서 ajax로 요청하면 db에서 게시글 목록 전달
@@ -46,25 +47,31 @@ const viewApi = async (req, res) => {
     } finally { conn.release() }
 }
 
-// write 페이지에서 입력한 내용 db에 저장 + 해시태그, 이미지 처리
+// qna/answer 작성
 const writeApi = async (req, res) => {
-    const sql = ``
-    let response = {
-        errno: 1
-    }
-    const conn = await pool.getConnection()
+    console.log(req.body)
+    const { title, content, parent, cg_idx, board_name } = req.body
+    const token = req.cookies.AccessToken
+    const userinfo = decodePayload(token)
+
     try {
-        const [result] = await conn.execute(sql)
-        response = {
-            ...response,
-            errno: 0,
-            result: result,
-        }
-        res.json(response)
+        // 작성한 글 board db에 추가
+        const [result0] = await promisePool.execute(`select count(idx) as seq from board where parent=${parent}`)
+        console.log(result0[0].seq)
+        let sql1 = `INSERT INTO board(title,content,date, view, likes, b_userid, parent, active, cg_idx, board_name, seq) 
+                    values('${title}','${content}',now(), 0, 0, '${userinfo.userid}', ${parent}, 1, '${cg_idx}','${board_name}', seq+1) ;`
+        const [result] = await promisePool.execute(sql1)
+
+        // 글 작성시 포인트 +10
+        let pointSql = `UPDATE user SET point=point+10 WHERE userid = '${userinfo.userid}'`
+        await promisePool.execute(pointSql)
+
+
+        res.redirect(`http://localhost:3001/board/qna/list`)
     } catch (e) {
         console.log(e)
-        res.json(response)
-    } finally { conn.release() }
+    }
+
 }
 
 // update 페이지에서 수정한 내용 db에 저장

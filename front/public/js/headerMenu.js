@@ -1,4 +1,4 @@
-const getCg = async () => {
+const getCgMenu = async () => {
     try {
         const option = {
             'Content-type': 'application/json',
@@ -22,11 +22,11 @@ const getCg = async () => {
     }
 }
 
-const createCg = async () => {
+const createCgMenu = async () => {
     const navimenu = document.querySelector('#navimenu')
 
-    const data = await getCg()
-    console.log(data)
+    const data = await getCgMenu()
+
     let str = ''
     let sub = ''
     data.forEach((v, i) => {
@@ -50,8 +50,7 @@ const createCg = async () => {
         }
     })
     const cgStr = str + '<ul>' + sub + '</ul></li>'
-    console.log(cgStr)
     navimenu.innerHTML += cgStr
 }
 
-createCg()
+createCgMenu()
