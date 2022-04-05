@@ -106,6 +106,10 @@
     padding: 7px 14px;
 }
 
+#adminWrap > #adminContent > #userInfo > div > #userImgUl {
+    display: flex;
+    flex-direction: column;
+}
 
 
 /* adminContent3 */

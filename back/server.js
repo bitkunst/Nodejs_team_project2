@@ -4,6 +4,7 @@ const SocketIO = require('socket.io')
 const socket = require('./socket.js')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const passport = require('passport')
 const router = require('./routes/index.js')
 const app = express()
 
@@ -24,7 +25,7 @@ app.use(cors({
     origin: "http://localhost:3001",
     credentials: true
 }))
-
+app.use(passport.initialize())
 
 app.use(router)
 
