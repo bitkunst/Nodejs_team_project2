@@ -17,7 +17,7 @@ router.get('/', loginAuth, (req, res) => {
 })
 
 router.use('/user', userRouter)
-router.use('/board', auth, boardRouter)
+router.use('/board', boardRouter)
 router.use('/chat', chatRouter)
 router.use('/search', searchRouter)
 router.use('/admin', adminRouter)

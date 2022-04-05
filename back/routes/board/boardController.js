@@ -37,7 +37,7 @@ const writePost = async (req, res) => {
     try {
         // 작성한 글 board db에 추가
         let sql1 = `INSERT INTO board(title,content,date, view, likes, b_userid, parent, active, cg_idx, board_name, seq) 
-                    values('${title}','${content}',now(), 0, 0, '${userinfo.userid}', ${parent}, 1, '${cg_idx}','${board_name}, 1') ;`
+                    values('${title}','${content}',now(), 0, 0, '${userinfo.userid}', ${parent}, 1, '${cg_idx}','${board_name}', 1) ;`
         const [result] = await promisePool.execute(sql1)
 
         // 글 작성시 포인트 +10
