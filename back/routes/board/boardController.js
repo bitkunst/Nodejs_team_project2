@@ -165,12 +165,13 @@ const updateApi = async (req, res) => {
 const viewApi = async (req, res, next) => {
     const { idx } = req.body
     const sql1 = `UPDATE board SET view=view+1 WHERE idx=${idx}; `
-    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, cg_idx, board.b_userid, nickname, board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
+    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, category.main, category.sub, board.b_userid, nickname, board.board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join likes on board.idx = likes.bid
                 left join hashtag on board.idx = hashtag.bid
                 left join img on board.idx = img.bid
+                left join category on board.cg_idx = category.idx
                 where board.idx = ${idx};`
     let response = {
         errno: 1
