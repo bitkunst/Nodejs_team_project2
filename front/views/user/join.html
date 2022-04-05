@@ -3,85 +3,90 @@
 
 <body>
     <div id="user_wrap">
-        <form action="http://localhost:4001/api/user/join" method="post" id="join_form">
-            <fieldset>
+        <div id="profile_form">
+
+            <form action="http://localhost:4001/api/user/join" method="post" id="join_form">
+                <div class="login_header">
+                    <h3 class="login_logo">회원가입</h3>
+                </div>
+
                 <legend>❤️필수 입력 사항❤️</legend>
                 <ul>
-                    <li>
-                        <label for="user_id">아이디 :</label>
-                        <input type="text" name="userid" id="user_id" maxlength="16" />
-                        <button type="button" id="id_check_btn"> 중복확인</button>
-                    </li>
-                    <li>
-                        <label for="user_pw">비밀번호 :</label>
-                        <input type="password" name="userpw" id="user_pw" maxlength="16" />
-                    </li>
-                    <li>
-                        <label for="user_pwchk">비밀번호 확인 :</label>
-                        <input type="password" name="userpw_pwchk" id="user_pwchk" maxlength="16" />
-                    </li>
-                    <li>
-                        <strong>사진</strong>
-                        <input type="file" name="image" id="user_image">
-                    </li>
-                    <li>
-                        <label for="user_name">이름 :</label>
-                        <input type="text" name="name" id="user_name" maxlength="16" />
-                    </li>
-                    <li>
-                        <label for="user_nickname">닉네임 :</label>
-                        <input type="text" name="nickname" id="user_nickname" maxlength="16" />
-                        <button type="button" id="nickname_check_btn"> 중복확인</button>
-                    </li>
-                    <li>
-                        <label for="user_address">주소 :</label>
-                        <input type="text" name="address" id="user_address" maxlength="32" />
-                    </li><br>
-                    <li>
-                        <label>성별 :</label>
-                        <label for="user_male">남성</label>
+                    <li> <label for="user_id">아이디 :</label> </li>
+                    <li> <input type="text" name="userid" id="user_id" maxlength="16" /><button type="button"
+                            id="id_check_btn"> 중복확인</button> </li>
+
+                </ul>
+                <ul>
+                    <li> <label for="user_pw">비밀번호 :</label> </li>
+                    <li> <input type="password" name="userpw" id="user_pw" maxlength="16" /> </li>
+                </ul>
+                <ul>
+                    <li> <label for="user_pwchk">비밀번호 확인 :</label> </li>
+                    <li> <input type="password" name="userpw_pwchk" id="user_pwchk" maxlength="16" /></li>
+                </ul>
+                <ul>
+                    <li> <strong>사진</strong></li>
+                    <li> <input type="file" name="image" id="user_image"></li>
+                </ul>
+                <ul>
+                    <li> <label for="user_name">이름 :</label> </li>
+                    <li> <input type="text" name="name" id="user_name" maxlength="16" /> </li>
+                </ul>
+                <ul>
+                    <li> <label for="user_nickname">닉네임 :</label> </li>
+                    <li> <input type="text" name="nickname" id="user_nickname" maxlength="16" /><button type="button"
+                            id="nickname_check_btn"> 중복확인</button> </li>
+                </ul>
+                <ul>
+                    <li> <label for="user_address">주소 :</label></li>
+                    <li> <input type="text" name="address" id="user_address" maxlength="32" /></li>
+                </ul>
+                <ul>
+                    <li> <label>성별 :</label> </li>
+                    <li> <label for="user_male">남성</label>
                         <input id="user_male" type="radio" value="M" name="gender">
                         <label for="user_female">여성<input id="user_female" type="radio" value="F" name="gender"></label>
-                    </li><br>
-                    <li>
-                        <label for="user_mobile1">핸드폰 번호 :</label>
-
-                        <input type="text" name="mobile1" id="user_mobile1" maxlength="3" placeholder="010"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="mobile2" id="user_mobile2" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="mobile3" id="user_mobile3" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                    </li>
-                    <li>
-                        <label for="user_phone1">전화번호(선택) :</label>
-
-                        <input type="text" name="phone1" id="user_phone1" maxlength="3"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="phone2" id="user_phone2" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="phone3" id="user_phone3" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                    </li>
-                    <li>
-                        <label for="user_email">이메일 : </label>
-                        <input type="email" id="user_email" name="email">
-                    </li>
-                    <li>
-                        <label for="user_bio">자기소개 : </label>
-                        <input type="text" id="user_bio" name="bio">
-                    </li>
-                    <li>
-                        <!-- <label for="user_point">포인트</label> -->
-                        <input type="hidden" id="user_point" name="point">
                     </li>
                 </ul>
-            </fieldset>
-            <p>
-                <input type="submit" value="회원가입">
-                <input type="reset" value="재작성">
-            </p>
-        </form>
+                <ul>
+                    <li> <label for="user_mobile1">핸드폰 번호 :</label></li>
+
+                    <li><input type="text" name="mobile1" id="user_mobile1" maxlength="3" />
+                        <input type="text" name="mobile2" id="user_mobile2" maxlength="4" />
+                        <input type="text" name="mobile3" id="user_mobile3" maxlength="4" />
+                    </li>
+                </ul>
+                <ul>
+                    <li> <label for="user_phone1">전화번호(선택) :</label> </li>
+
+                    <li><input type="text" name="phone1" id="user_phone1" maxlength="3" />
+                        <input type="text" name="phone2" id="user_phone2" maxlength="4" />
+                        <input type="text" name="phone3" id="user_phone3" maxlength="4" />
+                        <!-- style="width:50px;height:20px;font-size:7px;" -->
+                    </li>
+                </ul>
+                <ul>
+                    <li> <label for="user_email">이메일 : </label> </li>
+                    <li> <input type="email" id="user_email" name="email"> </li>
+                </ul>
+                <ul>
+                    <li> <label for="user_bio">자기소개 : </label></li>
+                    <li> <input type="text" id="user_bio" name="bio"></li>
+                </ul>
+                <ul>
+                    <li>
+                        <!-- <label for="user_point">포인트</label> -->
+                    </li>
+                    <li> <input type="hidden" id="user_point" name="point"> </li>
+
+                </ul>
+                <p>
+                    <input type="submit" value="회원가입">
+                    <input type="reset" value="재작성">
+                </p>
+            </form>
+        </div>
     </div>
 </body>
 <script type="text/javascript">
