@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
+const { auth } = require('../../../middleware/auth.js')
 
 // 브라우저에서 ajax로 리스트 받아옴.
 
-router.get('/list', (req, res) => {
+router.get('/list', auth, (req, res) => {
     res.render('board/main/list')
 })
 
@@ -17,7 +18,7 @@ router.get('/list/:cg1/:cg2', (req, res) => {
 })
 
 // nunjucks로 {item} 넣어주기, back서버와 통신 필요
-router.get('/view/:idx', async (req, res) => {
+router.get('/view/:idx', auth, async (req, res) => {
     try {
         const idx = req.params.idx
         const router = 'http://localhost:4001/api/board/view'
@@ -57,14 +58,14 @@ router.get('/view/:idx', async (req, res) => {
 })
 
 // ajax로 게시판/카테고리 구성하기 or  그냥 html 분리하기
-router.get('/write', (req, res) => {
+router.get('/write', auth, (req, res) => {
     let adminFlag = 0
     if (req.userInfo.userid === 'admin') { adminFlag = 1 }
     res.render('board/write', { adminFlag })
 })
 
 // ajax로 게시판/카테고리 구성하기 or  그냥 html 분리하기, nunjucks로 {item} 넣어주기, back서버와 통신 필요
-router.get('/update/:idx', async (req, res) => {
+router.get('/update/:idx', auth, async (req, res) => {
     try {
         const idx = req.params.idx
         const router = 'http://localhost:4001/api/board/getArticle'
