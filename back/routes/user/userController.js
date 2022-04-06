@@ -184,7 +184,12 @@ exports.naverLogin = async (req, res) => {
 
 exports.join = async (req, res) => {
     const { userid, userpw, name, nickname, address, gender, mobile1, mobile2, mobile3, phone1, phone2, phone3, email, bio } = req.body
-    const uImg = 'http://localhost:4001/profile_img/' + req.uImg
+    let uImg
+    if (req.uImg != undefined) {
+        uImg = 'http://localhost:4001/profile_img/' + req.uImg
+    } else {
+        uImg = 'http://localhost:4001/profile_img/default_profileImg.jpg'
+    }
     try {
         const sql = `INSERT INTO user
                   (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point, uImg)
