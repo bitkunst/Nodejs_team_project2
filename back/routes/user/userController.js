@@ -2,8 +2,6 @@ require('dotenv').config()
 const { promisePool } = require('../../db')
 const { alertmove } = require('../../utils/alertmove.js');
 const { createToken } = require('../../utils/jwt.js')
-const { decodePayload } = require('../../utils/jwt.js')
-const jwt = require('jsonwebtoken');
 
 exports.login = async (req, res) => {
     try {
@@ -192,19 +190,20 @@ exports.naverLogin = async (req, res) => {
 
 exports.join = async (req, res) => {
     const { userid, userpw, name, nickname, address, gender, mobile1, mobile2, mobile3, phone1, phone2, phone3, email, bio } = req.body
+    const uImg = 'http://localhost:4001/profile_img/' + req.uImg
     try {
         const sql = `INSERT INTO user
-                  (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point)
+                  (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point, uImg)
                   values
-                  ("${userid}", "${userpw}", "${name}", "${nickname}", "${address}","${gender}","${mobile1}-${mobile2}-${mobile3}",
-                  "${phone1}-${phone2}-${phone3}","${email}","${bio}",0)`;
+                  ("${userid}", "${userpw}", "${name}", "${nickname}", "${address}", "${gender}", "${mobile1}-${mobile2}-${mobile3}", 
+                  "${phone1}-${phone2}-${phone3}", "${email}", "${bio}", 0, "${uImg}")`;
         const sql2 = `INSERT INTO user
-                  (userid, userpw, name, nickname, address, gender, mobile, email, bio, point)
+                  (userid, userpw, name, nickname, address, gender, mobile, email, bio, point, uImg)
                   values
-                  ("${userid}", "${userpw}", "${name}", "${nickname}", "${address}","${gender}","${mobile1}-${mobile2}-${mobile3}",
-                  "${email}","${bio}",0)`;
+                  ("${userid}", "${userpw}", "${name}", "${nickname}", "${address}", "${gender}", "${mobile1}-${mobile2}-${mobile3}", 
+                  "${email}", "${bio}", 0, "${uImg}")`;
         if (phone1 == '' || phone2 == '' || phone3 == '') {
-            const [result] = await promisePool.execute(sql2);
+            await promisePool.execute(sql2);
         } else {
             await promisePool.query(sql);
         }
@@ -215,6 +214,7 @@ exports.join = async (req, res) => {
             )
         );
     } catch (error) {
+        console.log(error)
         res.send(alertmove('http://localhost:3001/user/join', '사용중인 아이디 혹은 닉네임입니다.'))
     }
 };
