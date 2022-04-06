@@ -29,7 +29,6 @@ router.get('/view/:idx', auth, async (req, res) => {
         const data = { idx }
         const response = await axios.post(router, data, option)
         const item = response.data.result[0]
-        console.log(item)
         if (item.active != 1) { res.render('board/canNotAccess') }
         else {
             // 글 작성자 본인 확인
@@ -48,7 +47,6 @@ router.get('/view/:idx', auth, async (req, res) => {
             if (item.img != undefined) {
                 imgList = item.img.split('&-&')
             }
-            console.log(imgList)
             res.render('board/main/view', { item, htList, imgList, userCheck, user })
         }
     } catch (error) {

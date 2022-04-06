@@ -24,7 +24,7 @@
 }
 
 #background>#info>#cg {
-    border-bottom: 3px solid orange;
+    border-bottom: 3px solid #831814;
 }
 
 #background>#info>#title {
@@ -50,8 +50,8 @@
     color: #bebebe;
     font-size: 24px;
     font-family: 'Song Myung', serif;
-    border-top: 3px solid orange;
-    border-bottom: 3px solid orange;
+    border-top: 3px solid #831814;
+    border-bottom: 3px solid #831814;
     padding: 50px 0;
     display: flex;
     flex-direction: column;
@@ -89,12 +89,12 @@
     flex-direction: column;
     align-items: center;
     padding: 15px;
-    border-bottom: 3px solid orange;
+    border-bottom: 3px solid #831814;
 }
 
 #commentCount {
     width: 100%;
-    color: orange;
+    color: #ffffff;
     font-family: 'Song Myung', serif;
     margin-top: 20px;
 }
@@ -187,7 +187,7 @@
     font-family: 'Song Myung', serif;
     font-size: 20px;
     color: #bebebe;
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid #831814;
 }
 
 #commentUl>.commentLi>div>.c_date {
@@ -252,7 +252,7 @@ img {
 #htTitle {
     margin-right: 20px;
     padding: 7px 14px;
-    color: orange;
+    color: #bebebe;
     position: relative;
     top: 5px;
 }

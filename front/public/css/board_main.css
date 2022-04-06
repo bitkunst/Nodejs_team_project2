@@ -1,5 +1,5 @@
 #main {
-    background: #262223;
+    background: #000000;
 }
 
 #main>h3 {
@@ -9,7 +9,7 @@
 #main>h3>a {
     font-size: 30px;
     font-family: 'Song Myung', serif;
-    color: #DDC6B6;
+    color: #ffffff;
 }
 
 
@@ -24,14 +24,15 @@
     width: 300px;
     height: 450px;
     margin: 50px 20px;
-    background: #DDC6B6;
+    background: transparent;
     /* float: left; */
     border-radius: 10px;
     align-self: baseline;
     justify-self: flex-start;
     overflow: hidden;
     cursor: pointer;
-    color: #262223;
+    color: #ffffff;
+    border: 2px solid #ffffff;
 }
 
 .boardLi:hover {
@@ -63,8 +64,8 @@
 #writeBtnDiv>a {
     padding: 7px 14px;
     height: fit-content;
-    background: #DDC6B6;
-    color: #000000;
+    background: #831814;
+    color: #ffffff;
     font-family: 'Song Myung', serif;
     font-size: 12px;
     border-radius: 5px;
@@ -151,7 +152,7 @@
 .title {
     font-size: 24px;
     font-family: 'Song Myung', serif;
-    color: #262223;
+    color: #ffffff;
 }
 
 .nickname {

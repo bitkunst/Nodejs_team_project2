@@ -1,18 +1,183 @@
-{% extends "./_layout.html" %}
+{% extends "./_layoutHome.html" %}
 {% block content %}
+<div id="div1" class="homediv">
+    <!-- <img src="/img/movie2.png" alt=""> -->
+    <div id="div1text" class="fix">
+        <a id="nav1" href="/board/main/list">B
+            <div>BOARD</div>
+        </a>
+        <a id="nav2" href="/user/profile">N
+            <div>USER</div>
+        </a>
+        <a id="nav3" href="javascript:openWindowPop('/chat/list', 'popup')" id="chat">W
+            <div>CHAT</div>
+        </a>
+        {% if userInfo %}
+        <a href="/user/logout">.
+            <div>LOGOUT</div>
+        </a>
+        {% else %}
+        <a href="/user/login">.
+            <div>LOGIN</div>
+        </a>
+        {% endif %}
+        {% if userInfo.userid == 'admin' %}
+        <a href="/admin">.
+            <div>ADMIN</div>
+        </a>
+        {% endif %}
+    </div>
+</div>
+<div id="div2" class="homediv">
+    <div id="latest">
+        <h2><a href="/board/main/list">최신글</a></h2>
+        <ul id="latestUl">
+            <!-- template : latest Article-->
+        </ul>
+    </div>
+    <div id="popular">
+        <h2><a href="/board/main/list">인기글</a></h2>
+        <ul id="popularUl">
+            <!-- template : latest Article-->
+        </ul>
+    </div>
+</div>
+<div id="div3" class="homediv">
+    <div id="userRank">
+        <h2><a href="#">유저랭킹</a></h2>
+        <table id="userRankTable">
+            <thead>
+                <tr>
+                    <td>순위</td>
+                    <td>유저 닉네임</td>
+                    <td>작성글 수</td>
+                    <td>댓글 수</td>
+                    <td>포인트</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- template : userRank -->
+            </tbody>
+        </table>
+    </div>
+    <div id="userMainInfo">
+        <h2><a href="/user/profile">유저정보</a></h2>
+        {% if userInfo %}
+        <div>
+            <img src="http://localhost:4001/img/{userInfo.profile}" alt="">
+            <div>
+                <span> 닉네임</span>
+                <span>{{userInfo.nickname}}</span>
+                <input type="hidden" id="userid" value="{{userInfo.userid}}">
+            </div>
+            <div>
+                <a href="javascript:openWindowPop('/chat/list', 'popup')" id="chat" style="color: white;">채팅하기</a>
+            </div>
+        </div>
+        {% else %}
+        <input type="hidden" id="userid" value="guest">
+        <div id="loginPlease">
+            <div style="display:flex;">
+                <a href="/user/login">로그인</a>
+                <a href="/user/joiin">회원가입</a>
+            </div>
+            로그인 후 이용해주세요!
+        </div>
+        {% endif %}
+    </div>
+</div>
 
-<h1>메인페이지</h1>
+<template id="latestContent">
+    <li class="boardLi">
+        <a href="/board/main/view/{idx}">
+            <div class="listImg"><img src="http://localhost:4001/uploads/{imageName}" alt="">
+                
+            </div>
+            <!-- axios로 img 가져오기 -->
+            <div class="li">
+                <div class="liInfo">
+                    <!-- <span class="num">{num} </span> -->
+                    <p class="titleDiv">
+                        <a class="title" href="/board/main/view/{idx}">{title}</a>
+                    </p>
+                    <span class="date">{date} &nbsp;·&nbsp; {nickname}</span>
+                    <span class="info">✔️ &nbsp; {view} &nbsp;·&nbsp;❤️  &nbsp; &nbsp;{likes}</span>
+                    <div>
+                        <span class="hstg">{hstg1}</span>
+                        <span class="hstg">{hstg2}</span>
+                        <span class="hstg">{hstg3}</span>
+                        <span class="hstg">{hstg4}</span>
+                        <span class="hstg">{hstg5}</span>
+                    </div>
+                </div>
+                <form class="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
+                    <input type="hidden" class="likeFlag" name="likeFlag" value="{likeFlag}">
+                    <input type="hidden" class="idx" name="idx" value={idx}>
+                    <input class="likeBtn" class="btn" type="submit" value="{likeEmoji}">
+                </form> 
+            </div>
+        </a>
+    </li>
+</template>
 
-{% if userInfo %}
-<a href="/user/logout"><button>로그아웃</button></a>
-{% else %}
-<a href="/user/login"><button>로그인</button></a>
-{% endif %}
-<a href="/user/profile"><button>마이프로필</button></a>
-<a href="/kakao/login"><button>카카오 로그인</button></a>
-<a href="/user/agree"><button>회원가입</button></a>
-<p></p>
-<a href="javascript:openWindowPop('/chat/list', 'popup')" id="chat" style="color: white;">채팅하기</a>
-<a href="/admin" style="color: white;">관리자 페이지</a>
+<template id="popularContent">
+    <li class="boardLi">
+        <a href="/board/main/view/{idx}">
+            <div class="listImg"><img src="http://localhost:4001/uploads/{imageName}" alt="">
+                
+            </div>
+            <!-- axios로 img 가져오기 -->
+            <div class="li">
+                <div class="liInfo">
+                    <!-- <span class="num">{num} </span> -->
+                    <p class="titleDiv">
+                        <a class="title" href="/board/main/view/{idx}">{title}</a>
+                    </p>
+                    <span class="date">{date} &nbsp;·&nbsp; {nickname}</span>
+                    <span class="info">✔️ &nbsp; {view} &nbsp;·&nbsp;❤️  &nbsp; &nbsp;{likes}</span>
+                    <div>
+                        <span class="hstg">{hstg1}</span>
+                        <span class="hstg">{hstg2}</span>
+                        <span class="hstg">{hstg3}</span>
+                        <span class="hstg">{hstg4}</span>
+                        <span class="hstg">{hstg5}</span>
+                    </div>
+                </div>
+                <form class="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
+                    <input type="hidden" class="likeFlag" name="likeFlag" value="{likeFlag}">
+                    <input type="hidden" class="idx" name="idx" value={idx}>
+                    <input class="likeBtn" class="btn" type="submit" value="{likeEmoji}">
+                </form> 
+            </div>
+        </a>
+    </li>
+</template>
 
+<template id="topRankUser">
+    <tr>
+        <td>{rank}</td>
+        <td>{nickname}</td>
+        <td>{boardCount}</td>
+        <td>{commentCount}</td>
+        <td>{point}</td>
+    </tr>
+</template>
+
+<script type="text/javascript">
+    //헤더 스크롤 시 배경색 넣기
+    const header = document.querySelector("#header");
+    const div1text = document.querySelector("#div1text");
+    const headerHeight = header.getBoundingClientRect().height;
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > headerHeight / 2) {
+            div1text.setAttribute("class", "");
+        } else {
+
+            div1text.setAttribute("class", "fix");
+        }
+    });
+</script>
+
+<script type="text/javascript" src="/js/homepage.js"></script>
 {% endblock %}

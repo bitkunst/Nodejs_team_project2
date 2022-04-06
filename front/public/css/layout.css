@@ -27,7 +27,7 @@ a {
     /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
-    background: #262223;
+    background: #000000;
     position: fixed;
     padding: 0 20px;
     z-index: 5;
@@ -36,7 +36,7 @@ a {
 /* 헤더메뉴 */
 
 #header>h1>a {
-    color: #DDC6B6;
+    color: #831824;
     font-family: 'Black Han Sans', sans-serif;
 }
 
@@ -62,7 +62,7 @@ a {
 .hamburger .line {
     width: 30px;
     height: 4px;
-    background-color: #DDC6B6;
+    background-color: #831814;
     display: block;
     margin: 4px auto;
     -webkit-transition: all 0.3s ease-in-out;
@@ -82,7 +82,7 @@ a {
 }
 
 #navi-flag:checked+#hamburger>#hbgdiv {
-    background: #DDC6B6;
+    background: #831814;
     z-index: 2;
 }
 
@@ -91,7 +91,7 @@ a {
     position: fixed;
     left: -25vw;
     top: 70px;
-    background: #262223;
+    background: transparent;
     width: 25vw;
     height: 100vh;
     transition: all 1s;
@@ -99,7 +99,7 @@ a {
 }
 
 #navi-flag:checked+#hamburger+#navimenu {
-    background: #262223;
+    background: transparent;
     transform: translateX(25vw);
     display: flex;
     flex-direction: column;
@@ -173,5 +173,5 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #DDC6B6;
+    background: #000000;
 }

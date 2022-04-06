@@ -12,5 +12,4 @@ router.post('/like', mainCon.likeApi) // 이미 좋아요 누른 사용자인지
 router.post('/scrap', mainCon.scrapApi) // 이미 스크랩한 사용자인지 확인 후 아니라면 스크랩 테이블에 추가
 
 
-
 module.exports = router;
