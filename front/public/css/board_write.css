@@ -1,11 +1,13 @@
 #main {
     padding: 70px 0;
+    background-color: #262223;
 }
 
-#main > span {
+#main>span {
     margin: 50px;
     font-size: 30px;
     font-family: 'Song Myung', serif;
+    color: #ffffff;
 
 }
 
@@ -47,27 +49,43 @@ textarea:focus {
     padding: 3px 14px;
     height: 40px;
     border: none;
-    background: #DDC6B6;
-    border-bottom: 2px solid rgba(38, 34, 35, 0.5);
+    background: #262223;
+    border-bottom: 2px solid rgba(131, 24, 20, 0.7);
+    color: #ffffff;
+}
+
+#title::placeholder {
+    color: #ffffff;
+}
+
+#fileInput {
+    color: #ffffff;
 }
 
 #content {
     all: unset;
+    margin-top: 20px;
     height: 50vh;
-    font-size: 15px;
+    font-size: 18px;
     font-family: 'Song Myung', serif;
     padding: 7px 14px;
-    background: #DDC6B6;
-    border: 2px solid rgba(38, 34, 35, 0.5);
+    background: #262223;
+    border-bottom: 2px solid rgba(131, 24, 20, 0.7);
+    color: #ffffff;
+}
+
+#content::placeholder {
+    font-size: 18px;
+    color: #ffffff;
 }
 
 #submitBtn {
-    all : unset;
+    all: unset;
     margin-top: 20px;
     padding: 7px 14px;
     width: 50px;
     height: fit-content;
-    background: #262223;
+    background: #831814;
     color: #ffffff;
     font-family: 'Song Myung', serif;
     font-size: 12px;
@@ -81,8 +99,9 @@ textarea:focus {
     font-size: 15px;
     font-family: 'Song Myung', serif;
     padding: 7px 14px;
-    background: #DDC6B6;
-    border: 2px solid rgba(38, 34, 35, 0.5);
+    background: #000000;
+    border-bottom: 2px solid rgba(131, 24, 20, 0.7);
+    color: #ffffff;
 }
 
 #btnDiv {
@@ -94,7 +113,7 @@ textarea:focus {
     all: unset;
     padding: 7px 14px;
     height: fit-content;
-    background: #262223;
+    background: #831814;
     color: #ffffff;
     font-family: 'Song Myung', serif;
     font-size: 12px;
@@ -106,13 +125,16 @@ textarea:focus {
 #hashtag {
     margin-top: 30px;
     width: 100%;
-    border: 2px solid #262223;
+    /* border: 2px solid #831814; */
     padding: 10px;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
 }
 
 .ht {
-    margin: 10px;
-    background-color: rgba(38, 34, 35, 0.3);
+    margin: 0 10px;
+    background-color: rgba(131, 24, 20, 0.7);
     color: #ffffff;
     padding: 7px 10px;
     border-radius: 5px;

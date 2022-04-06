@@ -206,12 +206,11 @@ const scrapApi = async (req, res) => {
 }
 
 
-
 module.exports = {
     listApi,
     checkLikeApi,
     viewApi,
     deleteApi,
     likeApi,
-    scrapApi
+    scrapApi,
 }

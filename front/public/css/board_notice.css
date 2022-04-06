@@ -5,6 +5,7 @@
 #main>h3>a {
     font-size: 30px;
     font-family: 'Song Myung', serif;
+    color: #ffffff;
 }
 
 #main>table {
@@ -18,11 +19,12 @@
 }
 
 #main>table>thead>tr>td {
-    background-color: rgba(38, 34, 35, 0.5);
+    background-color: rgba(131, 24, 20, 0.7);
     text-align: center;
     height: 30px;
     padding: 14px 14px;
     font-size: 14px;
+    color: #ffffff;
 }
 
 .idx {
@@ -46,16 +48,21 @@
 }
 
 #main>table>tbody>tr>td {
-    border-bottom: 0.5px solid rgba(38, 34, 35, 0.2);
+    border-bottom: 0.5px solid rgba(200, 200, 200, 0.5);
     text-align: center;
     height: 30px;
     padding: 7px 14px;
     font-size: 12px;
+    color: #ffffff;
 }
 
 #main>table>tbody>tr>.title {
     text-align: left;
     padding-left: 30px;
+}
+
+#main>table>tbody>tr>.title>a {
+    color: #ffffff;
 }
 
 #pagination {
@@ -76,7 +83,7 @@
 #writeBtnDiv>a {
     padding: 7px 14px;
     height: fit-content;
-    background: #262223;
+    background: #831814;
     color: #ffffff;
     font-family: 'Song Myung', serif;
     font-size: 12px;
@@ -118,7 +125,7 @@
 
 .answer {
     padding: 3px 5px;
-    background: rgba(38, 34, 35, 0.5);
+    background: rgba(131, 24, 20, 0.7);
     color: #ffffff;
     border-radius: 5px;
     margin: 0 10px;

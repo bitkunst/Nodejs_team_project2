@@ -157,6 +157,7 @@ async function likeHandeler(currentPage, viewArticle) {
             e.preventDefault()
             const idx = parseInt(e.target.querySelector('.idx').value)
             const likeFlag = parseInt(e.target.querySelector('.likeFlag').value)
+            console.log(likeFlag)
             try {
                 const option = {
                     'Content-type': 'application/json',

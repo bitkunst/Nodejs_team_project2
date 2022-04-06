@@ -27,7 +27,7 @@ a {
     /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
-    background: #DDC6B6;
+    background: #000000;
     position: fixed;
     padding: 0 20px;
     z-index: 5;
@@ -36,7 +36,7 @@ a {
 /* 헤더메뉴 */
 
 #header>h1>a {
-    color: #262223;
+    color: #831814;
     font-family: 'Black Han Sans', sans-serif;
 }
 
@@ -62,7 +62,7 @@ a {
 .hamburger .line {
     width: 30px;
     height: 4px;
-    background-color: #262223;
+    background-color: #831814;
     display: block;
     margin: 4px auto;
     -webkit-transition: all 0.3s ease-in-out;
@@ -97,7 +97,7 @@ a {
     position: fixed;
     left: -25vw;
     top: 70px;
-    background: #262223;
+    background: transparent;
     width: 25vw;
     height: 100vh;
     transition: all 1s;
@@ -105,7 +105,7 @@ a {
 }
 
 #navi-flag:checked+#hamburger+#navimenu {
-    background: #DDC6B6;
+    background: transparent;
     transform: translateX(25vw);
     display: flex;
     flex-direction: column;
@@ -132,7 +132,7 @@ a {
     font-family: 'Black Han Sans', sans-serif;
     font-size: 28px;
     font-weight: 100;
-    color: #262223;
+    color: #ffffff;
     margin-bottom: 20px;
     border-bottom: 4px solid rgba(0, 0, 0, 0);
     width: fit-content;
