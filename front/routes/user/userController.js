@@ -69,12 +69,9 @@ exports.join = (req, res) => {
     res.render('user/join.html');
 };
 
-exports.welcome = (req, res) => {
-    res.render('user/welcome', {
-
-    })
+exports.welcome = async (req, res) => {
+    res.render('user/welcome.html')
 }
-
 
 exports.agree = (req, res) => {
     res.render('user/agree.html');
@@ -86,7 +83,7 @@ exports.profile = async (req, res) => {
         'Content-type': 'application/json',
         withCredentials: true,
     }
-    const data = { // 백으로 보내는 용도
+    const data = {
         userid: req.userInfo.userid
     }
     const response = await axios.post('http://localhost:4001/api/user/profile', data, option)
@@ -100,7 +97,7 @@ exports.profileEdit = async (req, res) => {
         'Content-type': 'application/json',
         withCredentials: true,
     }
-    const data = { // 백으로 보내는 용도
+    const data = {
         userid: req.userInfo.userid
     }
     const response = await axios.post('http://localhost:4001/api/user/profile', data, option)
@@ -136,7 +133,7 @@ exports.profileEdit = async (req, res) => {
 
 
     res.render('user/profileUpdate.html', {
-        user: result //넌적스
+        user: result
     });
 };
 

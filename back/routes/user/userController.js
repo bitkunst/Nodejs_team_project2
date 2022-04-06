@@ -189,9 +189,8 @@ exports.myscrap = async (req, res) => {
     const userid = req.body.userid
     let response = {
         errno: 1
-    }                                                     //갑자기 count?                    갑자기 nickname? img?                 이건뭐지?
-    try { // 보드에서 idx,title data format as date, view, count(조회된 데이터 갯수) as likes, nickname, img(유저,보드 다없는데..), group_concat as hashtag를 board에서 가져와
-        // join문을 써서 user                                                                                                                       오름차순
+    }
+    try {
         const sql0 = `SELECT board.idx, title, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, nickname, img, GROUP_CONCAT(hstg order by hstg asc SEPARATOR '-') as hashtag 
         FROM board 
         LEFT JOIN user ON board.b_userid = user.userid 
@@ -258,7 +257,7 @@ exports.profile = async (req, res) => {
     const prepare = [userid]
     let [[result]] = await promisePool.execute(sql, prepare)
 
-    res.json(result) // result값을 브라우저 profile로
+    res.json(result)
 }
 
 exports.profileUpdate = async (req, res) => {

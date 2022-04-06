@@ -1,0 +1,29 @@
+#profile {
+    width: 400px;
+    height: 700px;
+    background-color: rgba(38, 34, 35, 0.5);
+    /* background: url('https://eskipaper.com/images/background-wallpapers-28.jpg'); */
+}
+
+.profile_wrap {
+    color: white;
+    text-align: center;
+}
+
+.profile_header {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+.profile_logo {
+    width: 100%;
+    color: white;
+    width: 100%;
+    height: auto;
+    font-size: 25px;
+    margin-bottom: 50px;
+}
