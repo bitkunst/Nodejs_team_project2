@@ -37,16 +37,10 @@ exports.login = async (req, res) => {
 exports.kakaoLogin = async (req, res) => {
     const properties = req.user._json.properties
     const account = req.user._json.kakao_account
-    if (account.gender == 'male') { 
-        account.gender = 'M'
-    } else {
-        account.gender = 'F'
-    }
     const userInfo = {
         nickname: properties.nickname,
         profileImg: properties.profile_image,
-        email: account.email,
-        gender: account.gender
+        email: account.email
     }
     try {
         const sql = 'SELECT userid FROM user WHERE userid=?'
@@ -68,7 +62,7 @@ exports.kakaoLogin = async (req, res) => {
             res.redirect('http://localhost:3001')
         } else {
             const sql2 = 'INSERT INTO user (userid, userpw, name, nickname, address, gender, mobile, phone, email, bio, point, uImg) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
-            const prepare2 = [userInfo.email, '0000', userInfo.nickname, userInfo.nickname, '대한민국', userInfo.gender, '010-0000-0000', '전화번호 없음', userInfo.email, '안녕하세요', 0, userInfo.profileImg]
+            const prepare2 = [userInfo.email, '0000', userInfo.nickname, userInfo.nickname, '대한민국', 'N', '010-0000-0000', '전화번호 없음', userInfo.email, '안녕하세요', 0, userInfo.profileImg]
             await promisePool.query(sql2, prepare2)
 
             const payload = {
