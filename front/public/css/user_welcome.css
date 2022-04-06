@@ -1,0 +1,66 @@
+body {
+    background-image: url('/img/bg/gradation_bg_real.jpg');
+    background-size: 100vw 100vh;
+    position: relative;
+    height: 100vh;
+}
+
+#header {
+    background-color: transparent;
+}
+
+#content {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 450px;
+    margin: 0 auto;
+    background-color: #DDC6B6;
+    border-radius: 10px;
+    box-shadow: 2px 3px 15px -3px #000000;
+}
+
+#side_img>img {
+    width: 310px;
+    height: 450px;
+    border-radius: 10px 0 0 10px;
+}
+
+#welcome_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 590px;
+}
+
+#welcome_section>p {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+#welcome_section>#welcome_btn_contanier {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#welcome_btn_contanier>a {
+    width: 140px;
+    height: 40px;
+    background-color: #262223;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 10px;
+}
+
+#welcome_btn_contanier>a:hover {
+    background-color: white;
+    color: #262223;
+    box-sizing: border-box;
+    border: 2px solid #262223;
+}

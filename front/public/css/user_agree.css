@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#agree {
+    width: 500px;
+    height: 500px;
+    border: 0px;
+    color: #DDC6B6;
+}
+
+#accordion>h3>a {
+    color: #DDC6B6;
+    margin: 0px;
+    font-size: 12px
+}
+
+#accordion2>h3>a {
+    color: #DDC6B6;
+    margin: 0px;
+    font-size: 12px
+}
+
+#accordion3>h3>a {
+    color: #DDC6B6;
+    margin: 0px;
+    font-size: 12px
+}
+
+#accordion>.textarea {
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: solid 2px #DDC6B6;
+    border-radius: 5px;
+    resize: both;
+}
+
+#accordion2>.textarea {
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: solid 2px #DDC6B6;
+    border-radius: 5px;
+    resize: both;
+}
+
+#accordion3>.textarea {
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: solid 2px #DDC6B6;
+    border-radius: 5px;
+    resize: both;
+}
+
+#btn {
+    text-align: center;
+
+}
+
+#agree_btn {
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+#disagree_btn {
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}

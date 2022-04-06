@@ -1,106 +1,98 @@
 {% extends "./_layout.html" %}
 {% block content %}
 
-    <div id="user_wrap">
-        <h3>My Profile</h3>
-        <div>
-            <div id="profile_left">
-                <table>
-                    <tbody class="tbody">
-                        <tr>
-                            <td> 아이디 : </td>
-                            <td id="user_id">{{user.userid}}</td>
-                        </tr>
+<div id="profile">
+    <div class="profile_wrap">
+        <div class="profile_header">
+            <h3 class="profile_logo">My Profile</h3>
+        </div>
+        <div class="profile_form">
+            <table class="profile_table">
+                <tr>
+                    <td> 아이디 : </td>
+                    <td id="user_id">{{user.userid}}</td>
+                </tr>
+                <tr>
+                    <td> 이름 : </td>
+                    <td> {{user.name}}</td>
+                </tr>
 
-                        <tr>
-                            <td> 별명 : </td>
-                            <td> {{user.nickname}}</td>
-                        </tr>
-                        <tr>
-                            <td> 주소 : </td>
-                            <td> {{user.address}} </td>
-                        </tr>
-                        <tr>
-                            <td> 성별 : </td>
-                            <td> {{user.gender}} </td>
-                        </tr>
-                        <tr>
-                            <td> 핸드폰 :</td>
-                            <td> {{user.mobile}}</td>
-                        </tr>
-                        <tr>
-                            {% if user.phone %}
-                            <td> phone :</td>
-                            <td> {{user.phone}}</td>
-                            {% else %}
-                            <td>집전화: </td>
-                            <td> 없음</td>
-
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <td> email :</td>
-                            <td> {{user.email}}</td>
-                        </tr>
-                        <tr>
-                            <td> 자기소개 :</td>
-                            <td> {{user.bio}}</td>
-                        </tr>
-                        <tr>
-                            <td> 포인트 :</td>
-                            <td> {{user.point}} </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="button">
-                    <button><a href="/">home</a></button>
-                    <button><a href="/board/main/list">Board</a></button>
-                    <button><a href="/user/profile/update">Edit</a></button>
-                    <form method="post" action="/user/profile">
-                        <input type="hidden" name="userid" value="{{user.userid}}">
-                        <button class="delete" type="submit">탈퇴하기</button>
-                    </form>
-                </div>
-            </div>
-            <div id="profile_right">
-                <div>
-                    <div>
-                        <h5><a href="/user/profile/myboard">작성한 글 보기</a></h5>
-                    </div>
-                    <div>
-                        <h5><a href="/user/profile/mycomment">작성 댓글 보기</a></h5>
-                    </div>
-                    <div>
-                        <h5><a href="/user/profile/myscrap">스크랩 보기</a></h5>
-                    </div>
-                </div>
+                <tr>
+                    <td> 닉네임 : </td>
+                    <td> {{user.nickname}}</td>
+                </tr>
+                <tr>
+                    <td> 주소 : </td>
+                    <td> {{user.address}} </td>
+                </tr>
+                <tr>
+                    <td> 성별 : </td>
+                    <td> {{user.gender}} </td>
+                </tr>
+                <tr>
+                    <td> 핸드폰 :</td>
+                    <td> {{user.mobile}}</td>
+                </tr>
+                <tr>
+                    {% if user.phone %}
+                    <td> phone :</td>
+                    <td> {{user.phone}}</td>
+                    {% else %}
+                    <td>집전화 : </td>
+                    <td> 없음</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td> email :</td>
+                    <td> {{user.email}}</td>
+                </tr>
+                <tr>
+                    <td> 자기소개 :</td>
+                    <td> {{user.bio}}</td>
+                </tr>
+                <tr>
+                    <td> 포인트 :</td>
+                    <td> {{user.point}} </td>
+                </tr>
+            </table>
+            <div class="button">
+                <button><a href="/">home</a></button>
+                <button><a href="/board/main/list">Board</a></button>
+                <button><a href="/user/profile/update">Edit</a></button>
+                <a href="/user/logout"><button>로그아웃</button></a>
             </div>
         </div>
     </div>
-    <button href="/" id="quit_btn">회원 탈퇴하기</button>
+    <div class="profile_wrap">
+        <div>
+            <h5><a href="/user/profile/myboard">작성한 글 보기</a></h5>
+        </div>
+        <div>
+            <h5><a href="/user/profile/mycomment">작성 댓글 보기</a></h5>
+        </div>
+        <div>
+            <h5><a href="/user/profile/myscrap">스크랩 보기</a></h5>
+        </div>
+    </div>
+</div>
+<button href="/" id="quit_btn">회원 탈퇴하기</button>
 
-    <script>
-        const quit = document.querySelector('#quit_btn')
-        quit.addEventListener('click', async (e) => {
-            console.log('gd')
+<script>
+    const quit = document.querySelector('#quit_btn')
+    quit.addEventListener('click', async (e) => {
+        e.preventDefault()
+        const option = {
+            'Content-type': 'application/json',
+            withCredentials: true,
+        }
+        const userid = document.getElementById('user_id').innerHTML
+        const data = {
+            userid
+        }
+        const response = await axios.post('http://localhost:4001/api/user/quit', data, option) //라우터, 데이터 객체로 넘겨, 옵션 
 
-            e.preventDefault()
-            const option = {
-                'Content-type': 'application/json',
-                withCredentials: true,
-            }
-            const userid = document.getElementById('user_id').innerHTML
-            console.log(userid)
-            const data = {
-                userid
-            }
-            const response = await axios.post('http://localhost:4001/api/user/quit', data, option) //라우터, 데이터 객체로 넘겨, 옵션 
-
-            alert('회원탈퇴 되었습니다.')
-            location.href = "/"
-
-
-        })
-    </script>
+        alert('회원탈퇴 되었습니다.')
+        location.href = "/"
+    })
+</script>
 {% endblock %}
-
