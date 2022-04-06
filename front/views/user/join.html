@@ -3,7 +3,7 @@
 
 <body>
     <div id="user_wrap">
-        <form action="http://localhost:4001/api/user/join" method="post" id="join_form">
+        <form action="http://localhost:4001/api/user/join" method="post" id="join_form" enctype="multipart/form-data">
             <fieldset>
                 <legend>❤️필수 입력 사항❤️</legend>
                 <ul>
@@ -21,8 +21,8 @@
                         <input type="password" name="userpw_pwchk" id="user_pwchk" maxlength="16" />
                     </li>
                     <li>
-                        <strong>사진</strong>
-                        <input type="file" name="image" id="user_image">
+                        <strong>프로필 이미지</strong>
+                        <input type="file" name="upload" id="user_image">
                     </li>
                     <li>
                         <label for="user_name">이름 :</label>
@@ -40,7 +40,7 @@
                     <li>
                         <label>성별 :</label>
                         <label for="user_male">남성</label>
-                        <input id="user_male" type="radio" value="M" name="gender">
+                        <input id="user_male" type="radio" value="M" name="gender" checked>
                         <label for="user_female">여성<input id="user_female" type="radio" value="F" name="gender"></label>
                     </li><br>
                     <li>
@@ -69,7 +69,7 @@
                     </li>
                     <li>
                         <label for="user_bio">자기소개 : </label>
-                        <input type="text" id="user_bio" name="bio">
+                        <textarea id="user_bio" name="bio"></textarea>
                     </li>
                     <li>
                         <!-- <label for="user_point">포인트</label> -->
@@ -137,13 +137,6 @@
             user_pwchk.focus();
             isLogin = false;
         }
-
-        if (image.value == "") {
-            Alertmsg += '사진을 넣어주세요\n'
-            image.focus();
-            isLogin = false;
-        }
-
 
         if (name.value == "") {
             Alertmsg += '이름을 입력해 주세요\n'

@@ -4,6 +4,7 @@ const passport = require('passport')
 const KakaoStrategy = require('passport-kakao').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const NaverStrategy = require('passport-naver').Strategy
+const { upload } = require('../../utils/profileMulter')
 const router = express.Router();
 const userController = require('./userController.js');
 
@@ -36,7 +37,7 @@ passport.use(new NaverStrategy({
 
 router.post('/login', userController.login);
 
-router.post('/join', userController.join);
+router.post('/join', upload.single('upload'), userController.join);
 
 router.post('/quit', userController.quit);
 
