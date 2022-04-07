@@ -101,6 +101,9 @@ function makeList(data) {
         if (v.sub == null) {
             v.sub = '' 
         }
+        if (v.img == null) {
+            v.img = 'no_image.jpg'
+        }
         str += searchTemplate.innerHTML.replace('{idx}', v.idx)
                                        .replace('{category}', (v.main + '/' + v.sub))
                                        .replace('{title}', v.title)
