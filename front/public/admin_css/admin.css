@@ -1,15 +1,70 @@
+* {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+    width: 0;
+}
+
 #adminWrap {
     padding: 70px 0;
     width: 100%;
     min-height: 100vh;
-    background: #262223;
-    color: white;
+    max-height: 100vh;
+    background: #000000;
+    color: #ffffff;
+    background-image: url('../img/admin_bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: 100% 100%; */
+    overflow: hidden;
+    /* overflow-y: auto; */
 }
 
 #adminWrap > ul {
     display: flex;
     justify-content: space-evenly;
     color: white;
+    margin-top: 20px;
+}
+
+.adminBtn {
+    font-size: 20px;
+}
+
+.w-btn-outline {
+    position: relative;
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-outline:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn-outline:active {
+    transform: scale(1.5);
+}
+
+.w-btn-red-outline {
+    border: 3px solid #831814;
+    color: #bebebe;
+}
+
+.w-btn-red-outline:hover {
+    background-color: #831814;
+    color: #ffffff;
 }
 
 .on {
@@ -33,9 +88,25 @@
     margin-top: 30px;
     margin-left: 30px;
     border-radius: 15px;
-    background-color: #DDC6B6;
-    color: #262223;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
     display: inline-block;
+    visibility: hidden;
+}
+
+#adminWrap > #adminContent > #userList.visible {
+    width: 20vw;
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 15px;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    display: inline-block;
+    visibility: visible;
 }
 
 #adminWrap > #adminContent > #userList > ul {
@@ -63,10 +134,15 @@
     flex-direction: row-reverse;
     justify-content: space-evenly;
     border-radius: 15px;
-    background-color: #DDC6B6;
-    color: #262223;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
 }
 
+#adminWrap > #adminContent > #userInfo > div > ul {
+    /* top: 10%; */
+    height: 100%;
+}
 
 #adminWrap > #adminContent > #userInfo > div > ul > li {
     margin-top: 20px;
@@ -102,8 +178,10 @@
     margin-top: 10px;
     border: 1px solid;
     height: 15vh;
-    width: 400px;
+    width: 350px;
     padding: 7px 14px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #adminWrap > #adminContent > #userInfo > div > #userImgUl {
@@ -111,39 +189,47 @@
     flex-direction: column;
 }
 
+#adminWrap > #adminContent > #userInfo > div > #userImgUl > li:first-child > div {
+    height: 300px;
+    width: 300px;
+}
+
+#adminWrap > #adminContent > #userInfo > div > #userImgUl > li > div > img {
+    border-radius: 175px;
+    margin: 0 auto;
+}
+
 
 /* adminContent3 */
 #adminContent3 {
     display: flex;
     justify-content: space-evenly;
-    background-color: #DDC6B6;
-    color: #262223;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    border-radius: 15px;
+    color: #ffffff;
     border-radius: 15px;
     width: 90vw;
-    height: 100%;
     margin: 0 auto;
     margin-top: 30px;
     padding: 20px 40px;
+    max-height: 75vh;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 #adminContent3 > #boardList {
     border-right: 1px solid #262223;
     width: 30vw;
-    /* display: flex;
-    justify-content: center; */
 }
 
 #adminContent3 > #likesList {
     border-right: 1px solid #262223;
     width: 30vw;
-    /* display: flex;
-    justify-content: center; */
 }
 
 #adminContent3 > #viewList {
     width: 30vw;
-    /* display: flex;
-    justify-content: center; */
 }
 
 
@@ -205,4 +291,8 @@
 #adminContent3 > #viewList > table > tbody > tr > td {
     border-top: 1px solid #999;
     padding: 10px 0px;
+}
+
+#footer {
+    background-color: #000000;
 }

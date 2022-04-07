@@ -4,6 +4,7 @@ const manageUser = document.querySelector('#manageUser')
 const manageCg = document.querySelector('#manageCg')
 const manageBoard = document.querySelector('#manageBoard')
 
+const userListParent = document.querySelector('#userList')
 const userList = document.querySelector('#userList > ul')
 const userInfoUl = document.querySelector('#userInfo > div > #userInfoUl')
 const userImgUl = document.querySelector('#userInfo > div > #userImgUl')
@@ -30,6 +31,8 @@ manageUser.addEventListener('submit', async (e) => {
             adminContents[i].setAttribute('class', 'off')
         }
     }
+
+    userListParent.setAttribute('class', 'visible')
 
     const response = await axios.get('http://localhost:4001/api/admin/manage/user', {
         withCredentials: true
