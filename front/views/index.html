@@ -28,38 +28,7 @@
         {% endif %}
     </div>
 </div>
-<div id="div2" class="homediv">
-    <div id="latest">
-        <h2><a href="/board/main/list">최신글</a></h2>
-        <ul id="latestUl">
-            <!-- template : latest Article-->
-        </ul>
-    </div>
-    <div id="popular">
-        <h2><a href="/board/main/list">인기글</a></h2>
-        <ul id="popularUl">
-            <!-- template : latest Article-->
-        </ul>
-    </div>
-</div>
 <div id="div3" class="homediv">
-    <div id="userRank">
-        <h2><a href="#">유저랭킹</a></h2>
-        <table id="userRankTable">
-            <thead>
-                <tr>
-                    <td>순위</td>
-                    <td>유저 닉네임</td>
-                    <td>작성글 수</td>
-                    <td>댓글 수</td>
-                    <td>포인트</td>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- template : userRank -->
-            </tbody>
-        </table>
-    </div>
     <div id="userMainInfo">
         <h2><a href="/user/profile">유저정보</a></h2>
         {% if userInfo %}
@@ -79,13 +48,44 @@
         <div id="loginPlease">
             <div style="display:flex;">
                 <a href="/user/login">로그인</a>
-                <a href="/user/joiin">회원가입</a>
+                <a href="/user/join">회원가입</a>
             </div>
-            로그인 후 이용해주세요!
         </div>
         {% endif %}
     </div>
+    <fieldset id="userRank">
+        <legend>유저 랭킹</legend>
+        <table id="userRankTable">
+            <thead>
+                <tr>
+                    <td>순위</td>
+                    <td>유저 닉네임</td>
+                    <!-- <td>작성글 수</td> -->
+                    <!-- <td>댓글 수</td> -->
+                    <td>포인트</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- template : userRank -->
+            </tbody>
+        </table>
+    </fieldset>>
 </div>
+<div id="div2" class="homediv">
+    <div id="latest">
+        <h2><a href="/board/main/list">최신글</a></h2>
+        <ul id="latestUl">
+            <!-- template : latest Article-->
+        </ul>
+    </div>
+    <div id="popular">
+        <h2><a href="/board/main/list">인기글</a></h2>
+        <ul id="popularUl">
+            <!-- template : latest Article-->
+        </ul>
+    </div>
+</div>
+
 
 <template id="latestContent">
     <li class="boardLi">
@@ -113,7 +113,7 @@
                 <form class="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
                     <input type="hidden" class="likeFlag" name="likeFlag" value="{likeFlag}">
                     <input type="hidden" class="idx" name="idx" value={idx}>
-                    <input class="likeBtn" class="btn" type="submit" value="{likeEmoji}">
+                    <span id="likeEmoji">{likeEmoji}</span>
                 </form> 
             </div>
         </a>
@@ -146,7 +146,7 @@
                 <form class="likeFrm" method="post" action="http://localhost:4001/api/board/main/like">
                     <input type="hidden" class="likeFlag" name="likeFlag" value="{likeFlag}">
                     <input type="hidden" class="idx" name="idx" value={idx}>
-                    <input class="likeBtn" class="btn" type="submit" value="{likeEmoji}">
+                    <span id="likeEmoji">{likeEmoji}</span>
                 </form> 
             </div>
         </a>
@@ -157,8 +157,8 @@
     <tr>
         <td>{rank}</td>
         <td>{nickname}</td>
-        <td>{boardCount}</td>
-        <td>{commentCount}</td>
+        <!-- <td>{boardCount}</td> -->
+        <!-- <td>{commentCount}</td> -->
         <td>{point}</td>
     </tr>
 </template>

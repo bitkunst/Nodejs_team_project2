@@ -99,10 +99,17 @@ a {
     top: 70px;
     background: transparent;
     width: 25vw;
-    height: 100vh;
+    height: 95vh;
     transition: all 1s;
     padding: 20px;
+    padding-bottom: 50px;
+    overflow-y: auto;
 }
+
+#navi-flag+#hamburger+#navimenu::-webkit-scrollbar {
+    display: none;
+}
+
 
 #navi-flag:checked+#hamburger+#navimenu {
     background: transparent;

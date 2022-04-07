@@ -16,7 +16,7 @@
 
 
 #background>#info {
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@
 }
 
 #background>#info>#title {
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 6em;
     color: #bebebe;
 }
@@ -37,7 +37,7 @@
     width: 100%;
     padding: 100px 0;
     min-height: 100vh;
-    background: #232226;
+    background: #000000;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,7 +49,7 @@
     min-height: 50vh;
     color: #bebebe;
     font-size: 24px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     border-top: 3px solid #831814;
     border-bottom: 3px solid #831814;
     padding: 50px 0;
@@ -73,7 +73,7 @@
     height: fit-content;
     background: #bebebe;
     color: #000000;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
     margin: 3px 10px;
@@ -95,7 +95,7 @@
 #commentCount {
     width: 100%;
     color: #ffffff;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     margin-top: 20px;
 }
 
@@ -119,7 +119,7 @@
     margin: 10px 0;
     border-bottom: 2px solid #bebebe;
     color: #bebebe;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
 
 }
 
@@ -135,7 +135,7 @@
     padding: 7px 14px;
     height: fit-content;
     color: #bebebe;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
     margin: 0 10px;
@@ -152,7 +152,7 @@
     padding: 7px 14px;
     height: fit-content;
     color: #bebebe;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
     margin: 0 10px;
@@ -184,14 +184,14 @@
 
 #commentUl>.commentLi>div>.c_nickname {
     padding: 2px 5px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 20px;
     color: #bebebe;
     border-bottom: 2px solid #831814;
 }
 
 #commentUl>.commentLi>div>.c_date {
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 16px;
     color: #bebebe;
 }
@@ -199,7 +199,7 @@
 #commentUl>.commentLi>div>.commentContent {
     margin-top: 10px;
     padding: 7px 14px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 16px;
     color: #bebebe;
 }
@@ -217,7 +217,7 @@
     height: fit-content;
     background: #bebebe;
     color: #000000;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
     margin: 3px 10px;
@@ -252,7 +252,7 @@ img {
 #htTitle {
     margin-right: 20px;
     padding: 7px 14px;
-    color: #bebebe;
+    color: #831814;
     position: relative;
     top: 5px;
 }

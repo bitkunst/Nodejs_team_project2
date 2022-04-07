@@ -6,7 +6,7 @@
 #main>span {
     margin: 50px;
     font-size: 30px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     color: #ffffff;
 
 }
@@ -14,7 +14,7 @@
 #writeForm {
     display: flex;
     flex-direction: column;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     width: 80%;
 }
 
@@ -29,7 +29,7 @@ textarea:focus {
 #boardSelect {
     width: 120px;
     font-size: 15px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 3px 7px;
     margin: 10px 0;
 }
@@ -37,7 +37,7 @@ textarea:focus {
 #cgSelect {
     width: 120px;
     font-size: 15px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 3px 7px;
     margin: 10px;
 }
@@ -45,7 +45,7 @@ textarea:focus {
 #title {
     margin: 14px 0;
     font-size: 20px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 3px 14px;
     height: 40px;
     border: none;
@@ -67,7 +67,7 @@ textarea:focus {
     margin-top: 20px;
     height: 50vh;
     font-size: 18px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 7px 14px;
     background: #262223;
     border-bottom: 2px solid rgba(131, 24, 20, 0.7);
@@ -87,7 +87,7 @@ textarea:focus {
     height: fit-content;
     background: #831814;
     color: #ffffff;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
     text-align: center;
@@ -97,7 +97,7 @@ textarea:focus {
     width: 80%;
     min-height: 50vh;
     font-size: 15px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 7px 14px;
     background: #000000;
     border-bottom: 2px solid rgba(131, 24, 20, 0.7);
@@ -115,7 +115,7 @@ textarea:focus {
     height: fit-content;
     background: #831814;
     color: #ffffff;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
     margin: 10px 5px;

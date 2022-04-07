@@ -96,6 +96,12 @@ a {
     height: 100vh;
     transition: all 1s;
     padding: 20px;
+    padding-bottom: 50px;
+    overflow-y: auto;
+}
+
+#navi-flag+#hamburger+#navimenu::-webkit-scrollbar {
+    display: none;
 }
 
 #navi-flag:checked+#hamburger+#navimenu {
