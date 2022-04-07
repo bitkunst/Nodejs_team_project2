@@ -1,89 +1,91 @@
 {% extends "./_layout.html" %}
 {% block content %}
 
-<body>
-    <div id="user_wrap">
-        <form action="http://localhost:4001/api/user/join" method="post" id="join_form" enctype="multipart/form-data">
-            <fieldset>
-                <legend>❤️필수 입력 사항❤️</legend>
-                <ul>
-                    <li>
-                        <label for="user_id">아이디 :</label>
-                        <input type="text" name="userid" id="user_id" maxlength="16" />
-                        <button type="button" id="id_check_btn"> 중복확인</button>
-                    </li>
-                    <li>
-                        <label for="user_pw">비밀번호 :</label>
-                        <input type="password" name="userpw" id="user_pw" maxlength="16" />
-                    </li>
-                    <li>
-                        <label for="user_pwchk">비밀번호 확인 :</label>
-                        <input type="password" name="userpw_pwchk" id="user_pwchk" maxlength="16" />
-                    </li>
-                    <li>
-                        <strong>프로필 이미지</strong>
-                        <input type="file" name="upload" id="user_image">
-                    </li>
-                    <li>
-                        <label for="user_name">이름 :</label>
-                        <input type="text" name="name" id="user_name" maxlength="16" />
-                    </li>
-                    <li>
-                        <label for="user_nickname">닉네임 :</label>
-                        <input type="text" name="nickname" id="user_nickname" maxlength="16" />
-                        <button type="button" id="nickname_check_btn"> 중복확인</button>
-                    </li>
-                    <li>
-                        <label for="user_address">주소 :</label>
-                        <input type="text" name="address" id="user_address" maxlength="32" />
-                    </li><br>
-                    <li>
-                        <label>성별 :</label>
-                        <label for="user_male">남성</label>
-                        <input id="user_male" type="radio" value="M" name="gender" checked>
-                        <label for="user_female">여성<input id="user_female" type="radio" value="F" name="gender"></label>
-                    </li><br>
-                    <li>
-                        <label for="user_mobile1">핸드폰 번호 :</label>
-
-                        <input type="text" name="mobile1" id="user_mobile1" maxlength="3" placeholder="010"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="mobile2" id="user_mobile2" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="mobile3" id="user_mobile3" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                    </li>
-                    <li>
-                        <label for="user_phone1">전화번호(선택) :</label>
-
-                        <input type="text" name="phone1" id="user_phone1" maxlength="3"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="phone2" id="user_phone2" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                        <input type="text" name="phone3" id="user_phone3" maxlength="4"
-                            style="width:50px;height:20px;font-size:7px;" />
-                    </li>
-                    <li>
-                        <label for="user_email">이메일 : </label>
-                        <input type="email" id="user_email" name="email">
-                    </li>
-                    <li>
-                        <label for="user_bio">자기소개 : </label>
-                        <textarea id="user_bio" name="bio"></textarea>
-                    </li>
-                    <li>
-                        <!-- <label for="user_point">포인트</label> -->
-                        <input type="hidden" id="user_point" name="point">
-                    </li>
-                </ul>
-            </fieldset>
-            <p>
-                <input type="submit" value="회원가입">
-                <input type="reset" value="재작성">
-            </p>
-        </form>
-    </div>
-</body>
+<div id="join">
+    <form action="http://localhost:4001/api/user/join" method="post" id="join_form" enctype="multipart/form-data">
+        <ul id="join_list">
+            <li>
+                <label for="user_id">아이디</label>
+                <div>
+                    <input type="text" name="userid" id="user_id" maxlength="16" />
+                    <button type="button" id="id_check_btn" class="join_btn">
+                        중복확인
+                    </button>
+                    <!-- <span id="id_span"></span> 빨간글씨쓸때-->
+                </div>
+            </li>
+            <li>
+                <label for="user_pw">비밀번호</label>
+                <input type="password" name="userpw" id="user_pw" maxlength="16" />
+                <span id="pw_chk_span"></span>
+            </li>
+            <li>
+                <label for="user_pwchk">비밀번호 확인</label>
+                <input type="password" name="userpw_pwchk" id="user_pwchk" maxlength="16" />
+            </li>
+            <li>
+                <label for="user_name">이름</label>
+                <input type="text" name="name" id="user_name" maxlength="16" />
+            </li>
+            <li>
+                <label for="user_nickname">닉네임</label>
+                <div>
+                    <input type="text" name="nickname" id="user_nickname" maxlength="16" />
+                    <button type="button" id="nickname_check_btn" class="nickname_btn">
+                        중복확인
+                    </button>
+                </div>
+            </li>
+            <li>
+                <label for="user_address">주소</label>
+                <input type="text" name="address" id="user_address" maxlength="32" />
+            </li>
+            <li>
+                <label for="user_gender">성별</label>
+                <select name="gender" id="user_gender">
+                    <option value="M">남자</option>
+                    <option value="F">여자</option>
+                </select>
+            </li>
+            <li>
+                <label for="user_mobile1">핸드폰 번호</label>
+                <div>
+                    <input type="text" name="mobile1" id="user_mobile1" maxlength="3" class="mobile_input" />
+                    <input type="text" name="mobile2" id="user_mobile2" maxlength="4" class="mobile_input" />
+                    <input type="text" name="mobile3" id="user_mobile3" maxlength="4" class="mobile_input" />
+                </div>
+            </li>
+            <li>
+                <label for="user_phone1">전화번호(선택)</label>
+                <div>
+                    <input type="text" name="phone1" id="user_phone1" maxlength="3" class="phone_input" />
+                    <input type="text" name="phone2" id="user_phone2" maxlength="4" class="phone_input" />
+                    <input type="text" name="phone3" id="user_phone3" maxlength="4" class="phone_input" />
+                </div>
+            </li>
+            <li>
+                <label for="user_email">이메일</label>
+                <input type="email" id="user_email" name="email">
+            </li>
+            <li>
+                <label for="user_bio">자기소개</label>
+                <textarea id="user_bio" name="bio" class="textarea"></textarea>
+            </li>
+            <li>
+                <!-- <label for="user_point">포인트</label> -->
+                <input type="hidden" id="user_point" name="point">
+            </li>
+            <li>
+                <label> 프로필 이미지(선택)</label>
+                <input id="profile_img" type="file" name="upload" id="user_image">
+            </li>
+        </ul>
+        <p>
+            <input type="submit" value="회원가입">
+            <input type="reset" value="재작성">
+        </p>
+    </form>
+</div>
 <script type="text/javascript">
     function validate(e) {
 
@@ -235,7 +237,7 @@
 
 
         if (response.data.err == 0) {
-            alert('id를 입력하세요')
+            alert('ID를 입력하세요')
         }
 
         if (response.data.err == 1) {

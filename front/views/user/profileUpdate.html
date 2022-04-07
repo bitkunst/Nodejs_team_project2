@@ -1,83 +1,81 @@
 {% extends "./_layout.html" %}
 {% block content %}
-<div id="user_wrap">
+<div id="update">
     <form method="post" action="http://localhost:4001/api/user/profile/update" id="update_chk">
-        <table>
-            <tbody class="tbody">
-                <tr>
-                    <td> 아이디 : </td>
-                    <td>
-                        {{user.userid}}
-                        <input type="hidden" name="userid" id="user_id" value="{{user.userid}}">
-                    </td>
-                </tr>
-                <tr>
-                    <td> 비밀번호 : </td>
-                    <td> <input type="password" name="userpw" id="user_pw"> </td>
-                </tr>
-                <tr>
-                    <td> 비밀번호 확인 : </td>
-                    <td> <input type="password" id="user_pwchk"> </td>
-                </tr>
-                <tr>
-                    <td> 이름 : </td>
-                    <td> {{user.name}} </td>
-                </tr>
-                <tr>
-                    <td> 닉네임 : </td>
-                    <td> <input type="text" name="nickname" value="{{user.nickname}}" id="user_nickname"> </td>
-                    <td><button type="button" id="nickname_check_btn">
-                            중복확인
-                        </button></td>
-                </tr>
-                <tr>
-                    <td> 주소 : </td>
-                    <td> <input type="text" name="address" value="{{user.address}}" id="user_address"> </td>
-                </tr>
-                <tr>
-                    <td> 성별 : </td>
-                    <td> {{user.gender}} </td>
-                </tr>
-                <tr>
-                    <td> 핸드폰 :</td>
-                    <td>
-                        <!-- <input type="text" name="mobile" value="{{user.mobile}}" id="user_mobile">  -->
-                        <input type="text" name="mobile1" id="user_mobile1" maxlength="3" value="{{user.mobile1}}" />
-                        <input type="text" name="mobile2" id="user_mobile2" maxlength="4" value="{{user.mobile2}}" />
-                        <input type="text" name="mobile3" id="user_mobile3" maxlength="4" value="{{user.mobile3}}" />
-                    </td>
-                </tr>
-                <tr>
-                    <td> 집전화 :</td>
-                    <td>
-                        {% if user.phone %}
-                        <input type="text" name="phone1" id="user_phone1" maxlength="3" value="{{user.phone1}}" />
-                        <input type="text" name="phone2" id="user_phone2" maxlength="4" value="{{user.phone2}}" />
-                        <input type="text" name="phone3" id="user_phone3" maxlength="4" value="{{user.phone3}}" />
-                        {% else %}
-                        <input type="text" name="phone1" id="user_phone1" maxlength="3" />
-                        <input type="text" name="phone2" id="user_phone2" maxlength="4" />
-                        <input type="text" name="phone3" id="user_phone3" maxlength="4" />
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <td> email :</td>
-                    <td> <input type="text" name="email" value="{{user.email}}" id="user_email"> </td>
-                </tr>
-                <tr>
-                    <td> 자기소개 :</td>
-                    <td> <input type="text" name="bio" value="{{user.bio}}" id="user_bio"> </td>
-                </tr>
-                <tr>
-                    <td> 포인트 :</td>
-                    <td> {{user.point}} </td>
-                </tr>
+        <ul id="update_list">
+            <li>
+                <td> 아이디 : </td>
+                <td>{{user.userid}}
+                    <input type="hidden" name="userid" id="user_id" value="{{user.userid}}">
+                </td>
+            </li>>
+            <tr>
+                <td> 비밀번호 : </td>
+                <td> <input type="password" name="userpw" id="user_pw"> </td>
+            </tr>
+            <tr>
+                <td> 비밀번호 확인 : </td>
+                <td> <input type="password" id="user_pwchk"> </td>
+            </tr>
+            <tr>
+                <td> 이름 : </td>
+                <td> {{user.name}} </td>
+            </tr>
+            <tr>
+                <td> 닉네임 : </td>
+                <td> <input type="text" name="nickname" value="{{user.nickname}}" id="user_nickname"> </td>
+                <td><button type="button" id="nickname_check_btn">
+                        중복확인
+                    </button></td>
+            </tr>
+            <tr>
+                <td> 주소 : </td>
+                <td> <input type="text" name="address" value="{{user.address}}" id="user_address"> </td>
+            </tr>
+            <tr>
+                <td> 성별 : </td>
+                <td> {{user.gender}} </td>
+            </tr>
+            <tr>
+                <td> 핸드폰 :</td>
+                <td>
+                    <!-- <input type="text" name="mobile" value="{{user.mobile}}" id="user_mobile">  -->
+                    <input type="text" name="mobile1" id="user_mobile1" maxlength="3" value="{{user.mobile1}}" />
+                    <input type="text" name="mobile2" id="user_mobile2" maxlength="4" value="{{user.mobile2}}" />
+                    <input type="text" name="mobile3" id="user_mobile3" maxlength="4" value="{{user.mobile3}}" />
+                </td>
+            </tr>
+            <tr>
+                <td> 집전화 :</td>
+                <td>
+                    {% if user.phone %}
+                    <input type="text" name="phone1" id="user_phone1" maxlength="3" value="{{user.phone1}}" />
+                    <input type="text" name="phone2" id="user_phone2" maxlength="4" value="{{user.phone2}}" />
+                    <input type="text" name="phone3" id="user_phone3" maxlength="4" value="{{user.phone3}}" />
+                    {% else %}
+                    <input type="text" name="phone1" id="user_phone1" maxlength="3" />
+                    <input type="text" name="phone2" id="user_phone2" maxlength="4" />
+                    <input type="text" name="phone3" id="user_phone3" maxlength="4" />
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td> email :</td>
+                <td> <input type="text" name="email" value="{{user.email}}" id="user_email"> </td>
+            </tr>
+            <tr>
+                <td> 자기소개 :</td>
+                <td> <input type="text" name="bio" value="{{user.bio}}" id="user_bio"> </td>
+            </tr>
+            <tr>
+                <td> 포인트 :</td>
+                <td> {{user.point}} </td>
+            </tr>
             </tbody>
-        </table>
-        <p>
-            <input type="submit" value="수정완료">
-        </p>
+            </table>
+            <p>
+                <input type="submit" value="수정완료">
+            </p>
     </form>
 </div>
 </body>

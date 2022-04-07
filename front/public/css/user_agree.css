@@ -35,6 +35,7 @@
     border: solid 2px #DDC6B6;
     border-radius: 5px;
     resize: both;
+    font-size: 15px;
 }
 
 #accordion2>.textarea {
@@ -43,6 +44,7 @@
     border: solid 2px #DDC6B6;
     border-radius: 5px;
     resize: both;
+    font-size: 15px;
 }
 
 #accordion3>.textarea {
@@ -51,6 +53,7 @@
     border: solid 2px #DDC6B6;
     border-radius: 5px;
     resize: both;
+    font-size: 15px;
 }
 
 #btn {
