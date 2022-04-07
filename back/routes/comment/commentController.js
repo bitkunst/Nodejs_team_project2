@@ -7,6 +7,7 @@ const viewApi = async (req, res) => {
     const { bid } = req.body
     const token = req.cookies.AccessToken
     const userinfo = decodePayload(token)
+    const currentUserid = userinfo.userid
     let response = {
         errno: 1
     }
@@ -18,7 +19,8 @@ const viewApi = async (req, res) => {
         response = {
             ...response,
             errno: 0,
-            result
+            result,
+            currentUserid
         }
         res.json(response)
     } catch (e) {

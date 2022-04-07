@@ -331,7 +331,7 @@ const getUserData = async () => {
 
 const createUser = (data) => {
     const userinfoBox = document.querySelector('#userinfoBox')
-    if (data.uImg == undefined) { data.uImg = 'default_profileImg.jpg' }
+    if (data.uImg == undefined) { data.uImg = 'http://localhost:4001/profile_img/default_profileImg.jpg' }
     const str = userinfoBox.innerHTML
         .replace('{nickname}', data.nickname)
         .replace('{profilePic}', data.uImg)

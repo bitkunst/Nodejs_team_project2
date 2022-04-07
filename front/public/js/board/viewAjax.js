@@ -171,7 +171,8 @@ async function viewComment() {
         const response = await axios.post(router, data, option)
         if (response.data.errno === 0) {
             const commentArr = response.data.result
-            renderComment(commentArr)
+            const currentUser = response.data.currentUserid
+            renderComment(commentArr, currentUser)
         }
         else {
             alert('db에러발생')
@@ -184,7 +185,7 @@ async function viewComment() {
 }
 
 // 3-3-1. 댓글 리스트 화면에 랜더링 해주는 함수 : view 서브함수
-function renderComment(Arr) {
+function renderComment(Arr, currentUser) {
     const commentUl = document.querySelector('#commentUl')
     const c_template = document.querySelector('#commentTemplate').innerHTML
     const c_template2 = document.querySelector('#commentTemplate2').innerHTML
@@ -209,6 +210,7 @@ function renderComment(Arr) {
     })
     commentUl.innerHTML = str
     commentCount.innerHTML = `댓글 ${Arr.length}개`
+
     // 댓글삭제 addEvent
     const commentLi = document.querySelectorAll('.commentLi')
     commentLi.forEach(v => {
@@ -216,6 +218,10 @@ function renderComment(Arr) {
         v.querySelector('.comDelBtn').addEventListener('click', deleteHandler)
         if (v.querySelector('.reComBtn')) {
             v.querySelector('.reComBtn').addEventListener('click', replyHandler)
+        }
+        if (currentUser != v.querySelector('.c_userid').value) {
+            v.querySelector('.c_btnDiv').childNodes[1].style.display = 'none'
+            v.querySelector('.c_btnDiv').childNodes[3].style.display = 'none'
         }
     })
 }
@@ -336,3 +342,39 @@ async function replyHandler(e) {
     }
 
 }
+
+// 백그라운드 이미지 1번 사진으로 넣기
+async function GetBg() {
+    try {
+        const router = 'http://localhost:4001/api/board/view'
+        const option = {
+            'Content-type': 'application/json',
+            withCredentials: true
+        }
+        const data = {
+            idx
+        }
+        const response = await axios.post(router, data, option)
+        const errNo = response.data.errno
+        if (errNo === 0) {
+            const data = response.data.result[0]
+            if (data.img != undefined) {
+                const thumbnailImg = data.img.split('&-&')[0]
+                const main = document.querySelector('#main')
+                main.style.backgroundImage = `url('http://localhost:4001/uploads/${thumbnailImg}')`
+            } else {
+                console.log('no image')
+            }
+            viewComment()
+        } else {
+            alert(response.data.errMsg)
+        }
+    }
+    catch (e) {
+        console.log(`axios 통신 중 에러발생 : ${e.message}`)
+        alert('axios 통신 중 문제가 발생했습니다')
+    }
+}
+
+GetBg()
+

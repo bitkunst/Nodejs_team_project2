@@ -53,7 +53,7 @@
         <!-- 댓글입력 -->
         <div id="commentForm">
             <div id="inputDiv">
-                <span>{{user.nickname}}</span>
+                <span class="nick WriteNickname">{{user.nickname}}</span>
                 <input type="text" name="commentInput" id="commentInput" placeholder="댓글을 입력해주세요.">
                 <input type="hidden" id="b_userid" value="{{user.userid}}">
                 <input type="hidden" name="parent" value="null">
@@ -76,7 +76,7 @@
 <template id="commentTemplate">
     <li class="commentLi">
         <div>
-            <span class="c_nickname">{nickname}</span>
+            <span class="c_nickname nick">{nickname}</span>
             <span class="c_date">&nbsp;&nbsp;&nbsp;&nbsp;{c_date}</span>
             <p class="commentContent">{comment}</p>
         </div>
@@ -99,7 +99,7 @@
     <li class="reComDiv">
         <div id="commentForm">
             <div id="inputDiv">
-                <span>{{user.nickname}}</span>
+                <span class="nick WriteNickname">{{user.nickname}}</span>
                 <input type="text" name="commentInput" id="replyInput" placeholder="댓글을 입력해주세요.">
                 <input type="hidden" name="parent" value="null">
             </div>
@@ -115,7 +115,7 @@
     <li class="commentLi">
         <div> &nbsp; </div>
         <div class="commentDiv2">
-            <span class="c_nickname">{nickname}</span>
+            <span class="c_nickname nick">{nickname}</span>
             <span class="c_date">&nbsp;&nbsp;&nbsp;&nbsp;{c_date}</span>
             <p class="commentContent">{comment}</p>
         </div>
@@ -129,6 +129,7 @@
                 <input type="hidden" name="cid" value="{cid}" class="cid">
                 <button class="comUdtBtn btn2">수정</button>
             </div>
+            <input type="hidden" name="c_userid" value="{c_userid}" class="c_userid">
         </div>
     </li>
 </template>
