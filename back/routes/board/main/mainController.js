@@ -1,4 +1,3 @@
-const { decode } = require('jsonwebtoken')
 const { promisePool } = require('../../../db')
 const { decodePayload } = require('../../../utils/jwt')
 

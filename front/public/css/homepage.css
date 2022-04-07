@@ -26,6 +26,18 @@
     background-color: #000000;
 }
 
+#div1>video {
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    object-fit: cover;
+}
+
+#div1>video>source {
+    width: 100vw;
+    height: 100vh;
+}
+
 #div1>img {
     width: 100%;
     object-fit: cover;
@@ -35,27 +47,21 @@
     width: 100vw;
     height: 100vh;
     position: absolute;
-    /* top: -70px; */
+    top: 70px;
     left: 0;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: center;
-    font-size: 20vw;
+    align-items: flex-start;
+    /* margin-top: 20px; */
+    font-size: 13vw;
     font-family: 'Black Han Sans', sans-serif;
     /* background-color: red; */
-    background: url('http://localhost:3001/img/movie2.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 2;
+    z-index: 4;
     /* transition: all 2s ease; */
 }
 
-#div1>#div1text.fix {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: all 2s ease;
-}
+#div1>#div1text.fix {}
 
 #div1text>a {
     cursor: pointer;
@@ -63,33 +69,45 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: transparent;
 }
 
 #div1text>a:hover {
-    -webkit-text-fill-color: #000000;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: #ffffff;
     position: relative;
     bottom: 40px;
     transition: all 1s ease;
 }
 
 #div1text.fix>a:hover {
-    -webkit-text-fill-color: #831814;
+    /* -webkit-text-fill-color: #831814; */
     position: relative;
     bottom: 40px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: #ffffff;
+}
+
+#div1text>a.d_none:hover>div {
+    display: none;
 }
 
 #div1text>a>div {
     display: none;
-    font-size: 2vw;
-    color: #831814;
+    font-size: 1vw;
+    color: #ffffff;
     text-align: center;
-    padding: 20px;
+    padding: 5px 10px;
     width: fit-content;
-    border: 3px solid #000000;
-    border-radius: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
     position: relative;
-    bottom: 10vh;
-    -webkit-text-fill-color: #000000;
+    bottom: 50px;
+    -webkit-text-fill-color: #ffffff;
 }
 
 #div1text>a:hover>div {
@@ -99,15 +117,15 @@
 #div1text.fix>a>div {
     display: none;
     font-size: 2vw;
-    color: #831814;
+    color: #ffffff;
     text-align: center;
-    padding: 20px;
+    padding: 5px 10px;
     width: fit-content;
-    border: 3px solid #831814;
-    border-radius: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
     position: relative;
-    bottom: 10vh;
-    -webkit-text-fill-color: #831814;
+    bottom: 50px;
+    -webkit-text-fill-color: #ffffff;
 }
 
 #div1text>a:hover>div {
@@ -149,6 +167,8 @@
     align-items: center;
     margin-top: 10vh;
 }
+
+
 
 h2>a {
     font-family: 'Black Han Sans', sans-serif;
@@ -205,25 +225,26 @@ h2>a {
 }
 
 #div3 {
+    margin-top: 20vh;
     padding: 10vh 10vw;
     /* flex-direction: column; */
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     background-color: #000000;
     height: fit-content;
 }
 
 #div3>#userRank {
     width: 25vw;
-    height: fit-content;
+    height: 50vh;
     /* border: 2px solid #831814; */
     border-radius: 16px;
     color: #ffffff;
     padding: 40px;
-    padding-top: 100px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     background-color: #262223;
     border: none;
@@ -241,7 +262,6 @@ h2>a {
 #div3>#userRank>#userRankTable {
     width: 15vw;
     border-collapse: collapse;
-    margin-top: 10vh;
 }
 
 #div3>#userRank>#userRankTable>thead>tr>td {
@@ -264,47 +284,180 @@ h2>a {
 
 #div3>#userMainInfo {
     width: 40vw;
-    height: fit-content;
+    height: 50vh;
     /* border: 2px solid #831814; */
     border-radius: 16px;
     color: #ffffff;
-    padding: 40px;
-    padding-top: 100px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 20vh;
+    border: none;
+    background-color: #262223;
+    overflow: hidden;
+
 }
 
-#div3>#userMainInfo>div {
+#div3>#userMainInfo>legend {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 3vw;
+    color: #bebebe;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+#div3>#userMainInfo>legend>a {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 3vw;
+    color: #bebebe;
+}
+
+#userinfoBox {
     width: 40vw;
-    height: 40vh;
+    height: 100%;
     /* border: 2px solid #831814; */
+    position: relative;
 }
 
+#userDiv1 {
+    width: 40vw;
+    height: 75%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#userDiv1>a>img {
+    margin-right: 80px;
+}
+
+/* #userDiv1>a:last-child {
+    width: 160px;
+    height: 60px;
+    border: 3px solid #831814;
+    font-size: 2vw;
+    font-family: 'Do Hyeon', sans-serif;
+    text-align: center;
+    line-height: 60px;
+    color: #831814;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+} */
+
+#userDiv2 {
+    width: 40vw;
+    height: 25%;
+    background-color: rgba(131, 24, 20, 0.7);
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 25px;
+}
+
+#userImg {
+    width: 30vh;
+    height: 30vh;
+    position: absolute;
+    top: 3vh;
+    left: 3vw;
+    border-radius: 15vh;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#userImg>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30vh;
+    height: 30vh;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 3;
+    cursor: pointer;
+    border-radius: 15vh;
+}
+
+#userImg:hover>img {
+    border: 5px solid #831814;
+}
+
+
+#userImg>#userLink {
+    opacity: 0;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30vh;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(38, 34, 35, 0.5);
+
+}
+
+#userImg:hover>#userLink {
+    opacity: 1;
+
+}
+
+#userImg>#userLink>a {
+    width: 150px;
+    height: 40px;
+    background-color: rgba(131, 24, 20, 0.4);
+    border-radius: 10px;
+    margin: 10px 0;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+}
+
+#userImg>#userLink>a:hover {
+    color: #831814;
+}
+
+
+#userImg>img:hover {
+    border: 5px solid #831814;
+}
 
 #loginPlease {
     width: 100%;
     text-align: center;
     font-family: 'Black Han Sans', sans-serif;
-    font-size: 3vw;
+    font-size: 2vw;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
 }
 
+#loginPlease>div {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+
+}
+
 #loginPlease>div>a {
-    width: 20vw;
-    height: 10vh;
+    width: 16vw;
+    height: 8vh;
     background-color: #831814;
     color: #ffffff;
     font-family: 'Black Han Sans', sans-serif;
     font-size: 3vw;
-    line-height: 10vh;
-    border-radius: 2vw;
-    margin: 3vw;
+    line-height: 9vh;
+    border-radius: 4vw;
+    margin: 2vw;
 }
 
 #loginPlease>div>a:hover {
