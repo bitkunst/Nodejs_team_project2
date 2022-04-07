@@ -1,4 +1,6 @@
+
 let userid = document.querySelector('#userid').value
+
 
 // 1. 리스트 데이터 가져오기
 const getData = async (cgArr) => {
@@ -278,12 +280,12 @@ const nav2go = document.querySelector('#div3')
 const nav3go = document.querySelector('#userMainInfo')
 
 // //이동할 div의 절대좌표구하기
-// const absoluteTop1 = window.pageYOffset + nav1go.getBoundingClientRect().top;
-const absoluteTop2 = window.pageYOffset + nav2go.getBoundingClientRect().top + parseInt(window.innerHeight / 2);
+const absoluteTop1 = window.pageYOffset + nav1go.getBoundingClientRect().top;
+const absoluteTop2 = window.pageYOffset + nav2go.getBoundingClientRect().top;
 // const absoluteTop3 = window.pageYOffset + nav3go.getBoundingClientRect().top + parseInt(window.innerHeight / 2);
 
 //이동할 div의 절대좌표구하기
-const absoluteTop1 = 1.2 * window.innerHeight
+// const absoluteTop1 = 1.2 * window.innerHeight
 // const absoluteTop2 = 3.3 * window.innerHeight
 const absoluteTop3 = 6 * window.innerHeight
 
@@ -304,3 +306,43 @@ nav3Btn.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: absoluteTop3, behavior: "smooth" })
 })
+
+
+// 유저정보 가져오기 ajax
+const getUserData = async () => {
+    console.log('실행')
+    try {
+        const router = 'http://localhost:4001/api/user/profile'
+        const option = {
+            'Content-type': 'application/json',
+            withCredentials: true
+        }
+        const dataObj = {
+            userid
+        }
+        const response = await axios.post(router, dataObj, option)
+        return response.data
+    }
+    catch (e) {
+        console.log(`axios 통신 중 에러발생 : ${e.message}`)
+        alert('문제가 발생했습니다')
+    }
+}
+
+const createUser = (data) => {
+    const userinfoBox = document.querySelector('#userinfoBox')
+    if (data.uImg == undefined) { data.uImg = 'default_profileImg.jpg' }
+    const str = userinfoBox.innerHTML
+        .replace('{nickname}', data.nickname)
+        .replace('{profilePic}', data.uImg)
+        .replace('{point}', data.point)
+    userinfoBox.innerHTML = str
+}
+
+const showUser = async () => {
+    const data = await getUserData()
+    console.log(data)
+    createUser(data)
+}
+
+showUser()

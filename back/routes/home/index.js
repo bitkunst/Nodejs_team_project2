@@ -69,7 +69,7 @@ router.post('/rank', async (req, res) => {
                     left join comment on comment.c_userid = user.userid 
                     group by user.userid 
                     order by point desc
-                    limit 0,10;`
+                    limit 0,5;`
     let response = {
         errno: 1
     }

@@ -2,6 +2,9 @@
 {% block content %}
 <div id="div1" class="homediv">
     <!-- <img src="/img/movie2.png" alt=""> -->
+    <video muted autoplay loop style="width: 100vw; height: 100vh;">
+        <source src="img/BNW.mp4" type="video/mp4">
+    </video>
     <div id="div1text" class="fix">
         <a id="nav1" href="/board/main/list">B
             <div>BOARD</div>
@@ -13,34 +16,40 @@
             <div>CHAT</div>
         </a>
         {% if userInfo %}
-        <a href="/user/logout">.
+        <a class="d_none" href="/">.
             <div>LOGOUT</div>
         </a>
         {% else %}
-        <a href="/user/login">.
-            <div>LOGIN</div>
-        </a>
-        {% endif %}
-        {% if userInfo.userid == 'admin' %}
-        <a href="/admin">.
-            <div>ADMIN</div>
+        <a class="d_none" href="/">.
+            <div>-</div>
         </a>
         {% endif %}
     </div>
 </div>
 <div id="div3" class="homediv">
-    <div id="userMainInfo">
-        <h2><a href="/user/profile">유저정보</a></h2>
+    <fieldset id="userMainInfo">
+        <legend><a href="/user/profile">유저 정보</a></legend>
         {% if userInfo %}
-        <div>
-            <img src="http://localhost:4001/img/{userInfo.profile}" alt="">
-            <div>
-                <span> 닉네임</span>
-                <span>{{userInfo.nickname}}</span>
-                <input type="hidden" id="userid" value="{{userInfo.userid}}">
+        <input type="hidden" id="userid" value="{{userInfo.userid}}">
+        <div id="userinfoBox">
+            <div id="userDiv1">
+                <a href="javascript:openWindowPop('/chat/list', 'popup')" id="chat">
+                    <img src="/img/chatIcon.png" alt="" width="100px" height="100px">
+                </a>
             </div>
-            <div>
-                <a href="javascript:openWindowPop('/chat/list', 'popup')" id="chat" style="color: white;">채팅하기</a>
+            <div id="userDiv2">
+                <span>{nickname} 님 환영합니다!</span>
+            </div>
+            <div id="userImg">
+                <div>앱솔루트</div>
+                <img src="http://localhost:4001/profile_img/{profilePic}" alt="">
+                <div id="userLink">
+                    {% if userInfo.userid == 'admin' %}
+                    <a href="/admin">관리자 페이지</a>
+                    {% endif %}
+                    <a href="/user/logout">로그아웃</a>
+                    <a href="/user/profile">내 정보 보기</a>
+                </div>
             </div>
         </div>
         {% else %}
@@ -52,7 +61,7 @@
             </div>
         </div>
         {% endif %}
-    </div>
+    </fieldset>
     <fieldset id="userRank">
         <legend>유저 랭킹</legend>
         <table id="userRankTable">
