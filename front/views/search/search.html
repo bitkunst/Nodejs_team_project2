@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/search_css/search.css">
     <script type="text/javascript" src="/js/search/search.js" defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -38,28 +39,36 @@
 
     <template id="userTemplate">
         <div class="userBox">
-            <h2>닉네임 : {nickname}</h2>
-            <h2>이메일 : {email}</h2>
-            <h2>자기소개</h2>
-            <p>{bio}</p>
+            <div>
+                <h3>닉네임 : {nickname}</h3>
+                <h3>이메일 : {email}</h3>
+                <h3>자기소개</h3>
+                <p>{bio}</p>
+            </div>
+            <div>
+                <img src="{uImg}" style="width: 250px; height: 250px">
+            </div>
         </div>
     </template>
 
 
     <template id="searchTemplate">
         <div class="item" style="cursor: pointer;" onclick="location.href='http://localhost:3001/{url}'">
-            <a href="#"><img src="http://localhost:4001/uploads/{img}" id="img"></a>
+            <img src="http://localhost:4001/uploads/{img}" id="img">
             <div class="description">
                 <div class="category">
                     <span>no.{idx}</span>
-                    <a href="#">{category}</a>
+                    <span>{category}</span>
                 </div>
                 <h2 class="title">
-                    <a href="#">{title}</a>
+                    <span>{title}</span>
                 </h2>
                 <div class="info">
                     <span>{nickname}</span>
                     <span>{date}</span>
+                </div>
+                <div class="hstg">
+                    <span>{hstg}</span>
                 </div>
                 <p class="summary">
                     {summary}

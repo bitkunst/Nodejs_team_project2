@@ -67,9 +67,13 @@ function getUser(data) {
     userInfo.innerHTML = ''
     let str = ''
     if(data[0].nickname == searchInput.value) {
+        if (data[0].uImg == null) {
+            data[0].uImg = 'http://localhost:4001/profile_img/default_profileImg.jpg'
+        }
         str += userTemplate.innerHTML.replace('{nickname}', data[0].nickname)
         .replace('{email}', data[0].email)
         .replace('{bio}', data[0].bio)
+        .replace('{uImg}', data[0].uImg)
     } else {
         str = ''
     }
@@ -104,6 +108,9 @@ function makeList(data) {
         if (v.img == null) {
             v.img = 'no_image.jpg'
         }
+        if (v.hstg == null) {
+            v.hstg = ''
+        }
         str += searchTemplate.innerHTML.replace('{idx}', v.idx)
                                        .replace('{category}', (v.main + '/' + v.sub))
                                        .replace('{title}', v.title)
@@ -112,6 +119,7 @@ function makeList(data) {
                                        .replace('{summary}', v.content)
                                        .replace('{img}', v.img)
                                        .replace('{url}', ('board/' + v.board_name + '/view/' + v.idx))
+                                       .replace('{hstg}', v.hstg)
     })
     content.innerHTML = str
 }
