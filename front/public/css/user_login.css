@@ -4,6 +4,11 @@
     height: 700px;
 }
 
+* {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+
 .login_wrap {
     background-color: #000000;
     padding: 50px;
@@ -112,4 +117,30 @@
     color: white;
 }
 
-/* ---------------------------------------------- */
+#login_wrap>#l_btn {
+    align-items: center;
+}
+
+#login_btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+#join>#join_b {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}

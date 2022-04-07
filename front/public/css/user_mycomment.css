@@ -1,3 +1,8 @@
+* {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+
 #board {
     width: 90%;
     margin-top: 30px;
@@ -5,13 +10,13 @@
     color: #262223;
 }
 
-#board > tbody td {
+#board>tbody td {
     padding: 7px 14px;
     border-bottom: 1px solid #eee;
     text-align: center;
 }
 
-#board > thead th {
+#board>thead th {
     padding: 7px 14px;
     font-weight: bold;
     background: #eee;
@@ -31,7 +36,7 @@
     font-size: 18px;
 }
 
-#paging > a {
+#paging>a {
     cursor: pointer;
     color: white;
     font-weight: bold;
@@ -49,7 +54,7 @@ li {
     background-color: yellow;
 }
 
-#paging > ul {
+#paging>ul {
     display: inline-block;
     padding: 0;
     width: 200px;

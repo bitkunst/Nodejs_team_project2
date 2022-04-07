@@ -1,6 +1,12 @@
+* {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+
 #main>h3 {
     margin: 50px;
 }
+
 
 #main>h3>a {
     font-size: 30px;
