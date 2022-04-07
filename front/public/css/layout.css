@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "FONT";
+    src: url(./font/AvenirNextLTPro-Bold.otf);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -89,10 +94,10 @@ a {
 #navi-flag+#hamburger+#navimenu {
     /* display: none; */
     position: fixed;
-    left: -25vw;
+    left: -15vw;
     top: 70px;
     background: transparent;
-    width: 25vw;
+    width: 15vw;
     height: 100vh;
     transition: all 1s;
     padding: 20px;
@@ -106,7 +111,7 @@ a {
 
 #navi-flag:checked+#hamburger+#navimenu {
     background: transparent;
-    transform: translateX(25vw);
+    transform: translateX(15vw);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
