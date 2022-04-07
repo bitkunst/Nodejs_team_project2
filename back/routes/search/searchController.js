@@ -12,11 +12,13 @@ const postSearchData = async (req, res)=>{
                             nickname,
                             email,
                             bio,
+                            uImg,
                             img,
                             i.seq AS img_seq,
                             main,
                             sub,
-                            m_url
+                            m_url,
+                            hstg
                      FROM board AS b
                      LEFT JOIN user AS u ON
                      b.b_userid = u.userid
@@ -24,10 +26,12 @@ const postSearchData = async (req, res)=>{
                      b.idx = i.bid
                      LEFT JOIN category AS c ON
                      b.cg_idx = c.idx
-                     WHERE ( nickname LIKE ? OR title LIKE ? OR content LIKE ? ) AND ( i.seq=1 OR i.seq IS NULL )
+                     LEFT JOIN (SELECT bid, GROUP_CONCAT(hstg SEPARATOR ' ') AS hstg FROM hashtag GROUP BY bid) AS h ON
+                     b.idx = h.bid
+                     WHERE ( nickname LIKE ? OR title LIKE ? OR content LIKE ? OR hstg LIKE ? ) AND ( i.seq=1 OR i.seq IS NULL )
                      ORDER BY idx DESC
                      `
-        const prepare = [data, data, data]
+        const prepare = [data, data, data, data]
         const [rows,] = await promisePool.query(sql, prepare)
         res.json(rows)
     } catch(err) {
