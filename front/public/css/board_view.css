@@ -1,9 +1,9 @@
 #main {
-    background-image: url('http://localhost:4001/uploads/IMG_17701648455934892.jpg');
+    background-image: url('http://localhost:4001/uploads/viewNoPic.jpeg');
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center bottom;
+    background-position: center center;
 }
 
 #background {
@@ -264,4 +264,120 @@ img {
     margin-right: 10px;
     border-radius: 10px;
     font-size: 14px;
+}
+
+
+
+#reComDiv {
+    width: 60vw;
+}
+
+#commentForm {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#commentForm>#inputDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+}
+
+#commentForm>#inputDiv>#replyInput {
+    all: unset;
+    width: 90%;
+    padding: 7px 14px;
+    margin: 10px 0;
+    border-bottom: 2px solid #bebebe;
+    color: #bebebe;
+    font-family: 'Do Hyeon', sans-serif;
+
+}
+
+#repBtnDiv {
+    display: none;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+#replyCancelBtn {
+    all: unset;
+    padding: 7px 14px;
+    height: fit-content;
+    color: #bebebe;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#replyCancelBtn:hover {
+    background: #bebebe;
+    color: #000000;
+}
+
+#replyBtn {
+    all: unset;
+    padding: 7px 14px;
+    height: fit-content;
+    color: #bebebe;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#replyBtn:hover {
+    background: #bebebe;
+    color: #000000;
+}
+
+
+.cngCom {
+    all: unset;
+    width: 90%;
+    padding: 7px 14px;
+    margin: 10px 0;
+    border-bottom: 2px solid #bebebe;
+    color: #bebebe;
+    font-family: 'Do Hyeon', sans-serif;
+
+}
+
+.cngBtn {
+    all: unset;
+    padding: 7px 14px;
+    height: fit-content;
+    color: #bebebe;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.cngBtn:hover {
+    background: #bebebe;
+    color: #000000;
+}
+
+.nick {
+    color: #ffffff;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 22px;
+    justify-self: flex-start;
+    position: relative;
+}
+
+.WriteNickname {
+
+    top: 45px;
+    left: -30vw;
+    color: #777777;
 }
