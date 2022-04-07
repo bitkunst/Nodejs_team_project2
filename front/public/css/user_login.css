@@ -144,3 +144,13 @@
     font-weight: 600;
     transition: 0.25s;
 }
+
+#l_btn {
+    margin-left: 220px;
+    width: 200px;
+}
+
+#join>#join_b {
+    width: 250px;
+
+}

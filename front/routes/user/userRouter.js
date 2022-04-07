@@ -8,7 +8,7 @@ router.get('/login', userController.login);
 
 router.get('/logout', userController.logout);
 
-router.get('/welcome', userController.welcome);
+router.get('/welcome', auth, userController.welcome);
 
 router.get('/profile/myboard', auth, userController.myboard);
 
