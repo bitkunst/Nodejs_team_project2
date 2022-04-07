@@ -2,68 +2,77 @@
 {% block content %}
 
 <div id="profile">
-    <div class="profile_wrap">
-        <div class="profile_header">
-            <h3 class="profile_logo">My Profile</h3>
-        </div>
-        <div class="profile_form">
-            <table class="profile_table">
-                <tr>
-                    <td> 아이디 : </td>
-                    <td id="user_id">{{user.userid}}</td>
-                </tr>
-                <tr>
-                    <td> 이름 : </td>
-                    <td> {{user.name}}</td>
-                </tr>
+    <div class="profile_up">
+        <ul id="profile_left">
+            <li>
+                {% if user.uImg %}
+                <span> </span>
+                <div id="user_img" class="img_box">
+                    <img src="{{user.uImg}}" class="img">
+                </div>
+                {% else %}
+                <span></span>
+                <span id="user_img"><img src="http://localhost:4001/profile_img/default_profileImg.jpg"></span>
+                {% endif %}
+            </li>
+            <li>
+                <span> 자기소개 :</span>
+                <span>{{user.bio}}</span>
+            </li>
+        </ul>
+        <ul id="profile_right">
+            <li>
+                <span> 아이디 :</span>
+                <span id="user_id">{{user.userid}}</span>
+            </li>
+            <li>
+                <span> 이름 :</span>
+                <span> {{user.name}}</span>
+            </li>
 
-                <tr>
-                    <td> 닉네임 : </td>
-                    <td> {{user.nickname}}</td>
-                </tr>
-                <tr>
-                    <td> 주소 : </td>
-                    <td> {{user.address}} </td>
-                </tr>
-                <tr>
-                    <td> 성별 : </td>
-                    <td> {{user.gender}} </td>
-                </tr>
-                <tr>
-                    <td> 핸드폰 :</td>
-                    <td> {{user.mobile}}</td>
-                </tr>
-                <tr>
-                    {% if user.phone %}
-                    <td> phone :</td>
-                    <td> {{user.phone}}</td>
-                    {% else %}
-                    <td>집전화 : </td>
-                    <td> 없음</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td> email :</td>
-                    <td> {{user.email}}</td>
-                </tr>
-                <tr>
-                    <td> 자기소개 :</td>
-                    <td> {{user.bio}}</td>
-                </tr>
-                <tr>
-                    <td> 포인트 :</td>
-                    <td> {{user.point}} </td>
-                </tr>
-            </table>
+            <li>
+                <span> 닉네임 : </span>
+                <span> {{user.nickname}}</span>
+            </li>
+            <li>
+                <span> 주소 :</span>
+                <span> {{user.address}} </span>
+            </li>
+            <li>
+                <span> 성별 :</span>
+                <span> {{user.gender}}</span>
+            </li>
+            <li>
+                <span> 핸드폰 :</span>
+                <span> {{user.mobile}}</span>
+            </li>
+            <li>
+                {% if user.phone %}
+                <span> phone :</span>
+                <span> {{user.phone}}</span>
+                {% else %}
+                <span>집전화 :</span>
+                <span> 없음</span>
+                {% endif %}
+            </li>
+            <li>
+                <span> email :</span>
+                <span> {{user.email}}</span>
+            </li>
+
+            <li>
+                <span> 포인트 :</span>
+                <span> {{user.point}}</span>
+            </li>
             <div class="button">
                 <button><a href="/">home</a></button>
                 <button><a href="/board/main/list">Board</a></button>
                 <button><a href="/user/profile/update">Edit</a></button>
                 <a href="/user/logout"><button>로그아웃</button></a>
             </div>
-        </div>
     </div>
-    <div class="profile_wrap">
+
+    <div class="profile_down">
         <div>
             <h5><a href="/user/profile/myboard">작성한 글 보기</a></h5>
         </div>
