@@ -18,9 +18,15 @@ exports.join = (req, res) => {
     res.render('user/join.html');
 };
 
-exports.welcome = async (req, res) => {
-    res.render('user/welcome.html')
-}
+exports.welcome = (req, res) => {
+    const nickname = req.userInfo.nickname
+    console.log(req.userInfo.nickname)
+    if (req.userInfo.nickname == undefined) {
+        res.send(alertmove('/', '회원가입 환영페이지 입니다.'));
+    } else {
+        res.render('user/welcome.html', { nickname });
+    }
+};
 
 exports.agree = (req, res) => {
     res.render('user/agree.html');

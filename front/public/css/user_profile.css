@@ -63,6 +63,7 @@
 #profile>.profile_up>#profile_left>#u_bio {
     width: 300px;
     height: 200px;
+    margin-left: 50px;
     color: white;
 }
 
