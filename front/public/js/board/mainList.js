@@ -42,7 +42,7 @@ const createList = (data, userid, currentPage, viewArticle) => {
     const boardElement = document.querySelector('#boardList').innerHTML
     let str = ''
     data.slice((currentPage - 1) * viewArticle, currentPage * viewArticle).forEach((v, i) => {
-        if (v.img == undefined) { v.img = 'js1648455420407.png' }
+        if (v.img == undefined) { v.img = 'no_image.jpg' }
         const hstgArr = ['', '', '', '', '']
         if (v.hashtag != undefined) { v.hashtag.split('-').slice(0, 5).forEach((v, i) => hstgArr[i] = v) }
 

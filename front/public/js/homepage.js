@@ -68,7 +68,7 @@ const createList = (data, userid) => {
     latestUl.innerHTML = str
     let currentPage = 1
     let viewArticle = 4
-    likeHandeler(currentPage, viewArticle)
+    // likeHandeler(currentPage, viewArticle)
     //const likeFrm = document.querySelectorAll('.likeFrm')
 
 }
@@ -160,7 +160,7 @@ const createList2 = (data, userid) => {
     popularUl.innerHTML = str
     let currentPage = 1
     let viewArticle = 4
-    likeHandeler(currentPage, viewArticle)
+    // likeHandeler(currentPage, viewArticle)
     //const likeFrm = document.querySelectorAll('.likeFrm')
 
 }
@@ -173,8 +173,10 @@ const showList2 = async () => {
 
 showList2()
 
-
+/*
 async function likeHandeler(currentPage, viewArticle) {
+
+    
     const likeFrm = document.querySelectorAll('.likeFrm')
     likeFrm.forEach(v => {
         v.addEventListener('submit', async (e) => {
@@ -208,9 +210,10 @@ async function likeHandeler(currentPage, viewArticle) {
             }
         })
     })
+    
 
 }
-
+*/
 
 
 

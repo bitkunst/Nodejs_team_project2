@@ -4,14 +4,14 @@
 
 #main>h3>a {
     font-size: 30px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     color: #ffffff;
 }
 
 #main>table {
     width: 80%;
     border-collapse: collapse;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
 }
 
 #main>table>thead {
@@ -85,7 +85,7 @@
     height: fit-content;
     background: #831814;
     color: #ffffff;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
 }
@@ -106,7 +106,7 @@
     font-size: 15px;
     color: #ffffff;
     margin: 0 5px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     line-height: 26px;
     cursor: pointer;
 }

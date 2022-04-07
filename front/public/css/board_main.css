@@ -8,37 +8,39 @@
 
 #main>h3>a {
     font-size: 30px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     color: #ffffff;
 }
 
 
 #boardUl {
-    width: 1020px;
+    width: 85vw;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-evenly;
 }
 
 .boardLi {
-    width: 300px;
+    width: 450px;
     height: 450px;
     margin: 50px 20px;
     background: transparent;
     /* float: left; */
     border-radius: 10px;
     align-self: baseline;
-    justify-self: flex-start;
+    justify-self: space-evenly;
     overflow: hidden;
     cursor: pointer;
     color: #ffffff;
-    border: 2px solid #ffffff;
+    background-color: #262223;
+    /* border: 2px solid #ffffff; */
+
 }
 
 .boardLi:hover {
     position: relative;
-    bottom: 5px;
-    right: 5px;
+    bottom: 8px;
     z-index: 3;
 }
 
@@ -66,7 +68,7 @@
     height: fit-content;
     background: #831814;
     color: #ffffff;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 12px;
     border-radius: 5px;
 }
@@ -87,7 +89,7 @@
     font-size: 15px;
     color: #ffffff;
     margin: 0 5px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     line-height: 26px;
     cursor: pointer;
 }
@@ -105,13 +107,13 @@
 }
 
 .listImg {
-    width: 300px;
+    width: 450px;
     height: 300px;
     overflow: hidden;
 }
 
 .listImg>img {
-    width: 300px;
+    width: 450px;
     height: 300px;
     object-fit: cover;
 }
@@ -127,14 +129,14 @@
     align-items: flex-start;
     justify-content: flex-start;
     padding: 10px;
-    width: 270px;
+    width: 370px;
 }
 
 
 
 .num {
     font-size: 12px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     display: flex;
 }
 
@@ -151,31 +153,31 @@
 
 .title {
     font-size: 24px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     color: #ffffff;
 }
 
 .nickname {
     font-size: 12px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 3px;
 }
 
 .date {
     font-size: 12px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 3px;
 }
 
 .info {
     font-size: 12px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 3px;
 }
 
 .hstg {
     font-size: 12px;
-    font-family: 'Song Myung', serif;
+    font-family: 'Do Hyeon', sans-serif;
     padding: 3px;
 }
 
