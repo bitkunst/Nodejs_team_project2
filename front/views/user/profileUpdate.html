@@ -4,96 +4,97 @@
     <form method="post" action="http://localhost:4001/api/user/profile/update" id="update_chk">
         <ul id="update_list">
             <li>
-                <td> 아이디 : </td>
-                <td>{{user.userid}}
+                <label for="user_id"> 아이디 : {{user.userid}}
                     <input type="hidden" name="userid" id="user_id" value="{{user.userid}}">
-                </td>
-            </li>>
-            <tr>
-                <td> 비밀번호 : </td>
-                <td> <input type="password" name="userpw" id="user_pw"> </td>
-            </tr>
-            <tr>
-                <td> 비밀번호 확인 : </td>
-                <td> <input type="password" id="user_pwchk"> </td>
-            </tr>
-            <tr>
-                <td> 이름 : </td>
-                <td> {{user.name}} </td>
-            </tr>
-            <tr>
-                <td> 닉네임 : </td>
-                <td> <input type="text" name="nickname" value="{{user.nickname}}" id="user_nickname"> </td>
-                <td><button type="button" id="nickname_check_btn">
+            </li>
+            <li>
+                <label for="user_pw"> 비밀번호 </label>
+                <input type="password" name="userpw" id="user_pw">
+            </li>
+            <li>
+                <label for="user_pwchk"> 비밀번호 확인 </label>
+                <input type="password" id="user_pwchk">
+            </li>
+            <li>
+                <label for="user_nickname"> 닉네임</label>
+                <div id="nick_input">
+                    <input type="text" name="nickname" value="{{user.nickname}}" id="user_nickname">
+                    <button type="button" id="nickname_check_btn">
                         중복확인
-                    </button></td>
-            </tr>
-            <tr>
-                <td> 주소 : </td>
-                <td> <input type="text" name="address" value="{{user.address}}" id="user_address"> </td>
-            </tr>
-            <tr>
-                <td> 성별 : </td>
-                <td> {{user.gender}} </td>
-            </tr>
-            <tr>
-                <td> 핸드폰 :</td>
-                <td>
-                    <!-- <input type="text" name="mobile" value="{{user.mobile}}" id="user_mobile">  -->
-                    <input type="text" name="mobile1" id="user_mobile1" maxlength="3" value="{{user.mobile1}}" />
-                    <input type="text" name="mobile2" id="user_mobile2" maxlength="4" value="{{user.mobile2}}" />
-                    <input type="text" name="mobile3" id="user_mobile3" maxlength="4" value="{{user.mobile3}}" />
-                </td>
-            </tr>
-            <tr>
-                <td> 집전화 :</td>
-                <td>
-                    {% if user.phone %}
-                    <input type="text" name="phone1" id="user_phone1" maxlength="3" value="{{user.phone1}}" />
-                    <input type="text" name="phone2" id="user_phone2" maxlength="4" value="{{user.phone2}}" />
-                    <input type="text" name="phone3" id="user_phone3" maxlength="4" value="{{user.phone3}}" />
-                    {% else %}
-                    <input type="text" name="phone1" id="user_phone1" maxlength="3" />
-                    <input type="text" name="phone2" id="user_phone2" maxlength="4" />
-                    <input type="text" name="phone3" id="user_phone3" maxlength="4" />
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <td> email :</td>
-                <td> <input type="text" name="email" value="{{user.email}}" id="user_email"> </td>
-            </tr>
-            <tr>
-                <td> 자기소개 :</td>
-                <td> <input type="text" name="bio" value="{{user.bio}}" id="user_bio"> </td>
-            </tr>
-            <tr>
-                <td> 포인트 :</td>
-                <td> {{user.point}} </td>
-            </tr>
-            </tbody>
-            </table>
-            <p>
-                <input type="submit" value="수정완료">
-            </p>
+                    </button>
+                </div>
+            </li>
+            <li>
+                <label> 주소</label>
+                <input type="text" name="address" value="{{user.address}}" id="user_address">
+            </li>
+            <li>
+                <label> 성별 : {{user.gender}}</label>
+            </li>
+            <li>
+                <label> 핸드폰 :</label>
+
+                <div>
+                    <input type="text" class="mobile_input" name="mobile1" id="user_mobile1" maxlength="3"
+                        value="{{user.mobile1}}" />
+                    <input type="text" class="mobile_input" name="mobile2" id="user_mobile2" maxlength="4"
+                        value="{{user.mobile2}}" />
+                    <input type="text" class="mobile_input" name="mobile3" id="user_mobile3" maxlength="4"
+                        value="{{user.mobile3}}" />
+                </div>
+            </li>
+            <li>
+                <label> 집전화 :</label>
+
+                {% if user.phone %}
+                <div>
+                    <input type="text" class="phone_input" name="phone1" id="user_phone1" maxlength="3"
+                        value="{{user.phone1}}" />
+                    <input type="text" class="phone_input" name="phone2" id="user_phone2" maxlength="4"
+                        value="{{user.phone2}}" />
+                    <input type="text" class="phone_input" name="phone3" id="user_phone3" maxlength="4"
+                        value="{{user.phone3}}" />
+                </div>
+                {% else %}
+                <div>
+                    <input type="text" class="phone_input" name="phone1" id="user_phone1" maxlength="3" />
+                    <input type="text" class="phone_input" name="phone2" id="user_phone2" maxlength="4" />
+                    <input type="text" class="phone_input" name="phone3" id="user_phone3" maxlength="4" />
+                </div>
+                {% endif %}
+
+            </li>
+            <li>
+                <label> email :</label>
+                <input type="text" name="email" value="{{user.email}}" id="user_email">
+            </li>
+            <li>
+                <label> 자기소개 :</label>
+                <input type="text" name="bio" value="{{user.bio}}" id="user_bio">
+            </li>
+            <li>
+                <label> 포인트 : {{user.point}}</label>
+            </li>
+
+            <div id="btn">
+                <button id="update_btn" type="submit" value="수정완료">수정</button>
+
+            </div>
     </form>
 </div>
 </body>
 <script type="text/javascript">
     function validate(e) {
 
-        const re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+        const re = /^[a-zA-Z0-9]{4,12}$/
         const re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        // 이메일이 적합한지 검사할 정규식
 
         const userpw = document.getElementById("user_pw");
         const nickname = document.getElementById("user_nickname");
         const address = document.getElementById("user_address");
-        // const mobile = document.getElementById("user_mobile")
         const mobile1 = document.getElementById("user_mobile1");
         const mobile2 = document.getElementById("user_mobile2");
         const mobile3 = document.getElementById("user_mobile3");
-        // const phone = document.getElementById("user_phone")
         const phone1 = document.getElementById("user_phone1");
         const phone2 = document.getElementById("user_phone2");
         const phone3 = document.getElementById("user_phone3");
@@ -103,7 +104,6 @@
         let Alertmsg = ""
 
 
-        // ------------ 이메일 까지 -----------
 
         function check(re, what, message) {
             if (re.test(what.value)) {
@@ -112,7 +112,6 @@
             Alertmsg += message;
             what.value = "";
             what.focus();
-            //return false;
         }
 
 
@@ -139,11 +138,6 @@
             isCheck = false;
         }
 
-        // if (mobile.value == "") {
-        //     Alertmsg += '번호를 입력해 주세요\n'
-        //     mobile.focus()
-        //     isCheck = false;
-        // }
 
         if (mobile1.value == "") {
             Alertmsg += '번호를 입력해 주세요\n'

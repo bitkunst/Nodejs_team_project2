@@ -4,24 +4,21 @@
 <div id="profile">
     <div class="profile_up">
         <ul id="profile_left">
-            <li>
+            <li id="u_photo">
                 {% if user.uImg %}
-                <span> </span>
                 <div id="user_img" class="img_box">
                     <img src="{{user.uImg}}" class="img">
                 </div>
                 {% else %}
-                <span></span>
                 <span id="user_img"><img src="http://localhost:4001/profile_img/default_profileImg.jpg"></span>
                 {% endif %}
             </li>
-            <li>
-                <span> 자기소개 :</span>
+            <li id="u_bio">
                 <span>{{user.bio}}</span>
             </li>
         </ul>
         <ul id="profile_right">
-            <li>
+            <li id="u_info">
                 <span> 아이디 :</span>
                 <span id="user_id">{{user.userid}}</span>
             </li>
@@ -29,7 +26,6 @@
                 <span> 이름 :</span>
                 <span> {{user.name}}</span>
             </li>
-
             <li>
                 <span> 닉네임 : </span>
                 <span> {{user.nickname}}</span>
@@ -64,27 +60,29 @@
                 <span> 포인트 :</span>
                 <span> {{user.point}}</span>
             </li>
-            <div class="button">
-                <button><a href="/">home</a></button>
-                <button><a href="/board/main/list">Board</a></button>
-                <button><a href="/user/profile/update">Edit</a></button>
-                <a href="/user/logout"><button>로그아웃</button></a>
+            <div>
+                <button id="link_btn"><a href="/">home</a></button>
+                <button id="link_btn"><a href="/board/main/list">Board</a></button>
+                <button id="link_btn"><a href="/user/profile/update">Edit</a></button>
             </div>
     </div>
 
     <div class="profile_down">
-        <div>
-            <h5><a href="/user/profile/myboard">작성한 글 보기</a></h5>
+        <div id="link">
+            <button type="button" id="mylink_btn" onclick="location.href='/user/profile/myboard' ">작성 글 보기</button>
+            <!-- <a href="/user/profile/myboard">작성한 글 보기</a> -->
         </div>
-        <div>
-            <h5><a href="/user/profile/mycomment">작성 댓글 보기</a></h5>
+        <div id="link">
+            <button type="button" id="mylink_btn" onclick="location.href='/user/profile/mycomment' ">작성 댓글 보기</button>
+            <!-- <a href="/user/profile/mycomment">작성 댓글 보기</a> -->
         </div>
-        <div>
-            <h5><a href="/user/profile/myscrap">스크랩 보기</a></h5>
+        <div id="link">
+            <button type="button" id="mylink_btn" onclick="location.href='/user/profile/myscrap' ">스크랩 보기</button>
+            <!-- <a href="/user/profile/myscrap">스크랩 보기</a> -->
         </div>
     </div>
 </div>
-<button href="/" id="quit_btn">회원 탈퇴하기</button>
+<!-- <button href="/" id="quit_btn">회원 탈퇴하기</button> -->
 
 <script>
     const quit = document.querySelector('#quit_btn')

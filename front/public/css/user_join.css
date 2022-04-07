@@ -1,3 +1,7 @@
+* {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
 #join {
     background-color: transparent;
     background-position: cover;
@@ -56,10 +60,6 @@
     border-radius: 8px;
 }
 
-#user_id {
-    width: 330px;
-}
-
 .join_btn {
     width: 113px;
     font-size: 17px;
@@ -78,32 +78,9 @@
 }
 
 .join_btn:hover {
-    color: #107af2;
-    background-color: #fff;
-    border-color: #107af2;
-}
-
-.nickname_btn {
-    width: 113px;
-    font-size: 17px;
     color: white;
-    background-color: gray;
-    border: 1px solid #fff;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.nickname_btn.non_btn {
-    background-color: #ececec;
-    color: black;
-    line-height: 40px;
-    text-align: center;
-}
-
-.nickname_btn:hover {
-    color: #107af2;
-    background-color: #fff;
-    border-color: #107af2;
+    background-color: #831814;
+    border-color: #831814;
 }
 
 #join_submit_btn {
@@ -132,4 +109,50 @@
     width: 450px;
     height: 100px;
     font-size: 20px;
+}
+
+#join>#btn>.join_btn {
+    width: 113px;
+    font-size: 17px;
+    color: white;
+    background-color: gray;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#join>#btn>.join_btn {
+    background-color: #ececec;
+    color: black;
+    line-height: 40px;
+    text-align: center;
+}
+
+#join>#btn>.join_btn {
+    color: white;
+    background-color: #831814;
+    border-color: #831814;
+}
+
+#nickname_check_btn {
+    width: 113px;
+    font-size: 17px;
+    color: white;
+    background-color: gray;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#nickname_check_btn.non_btn {
+    background-color: #ececec;
+    color: black;
+    line-height: 40px;
+    text-align: center;
+}
+
+#nickname_check_btn:hover {
+    color: white;
+    background-color: #831814;
+    border-color: #831814;
 }
