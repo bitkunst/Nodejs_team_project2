@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 400;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+#wrap {
+    width: 100%;
+    min-height: 100vh;
+}
+
+#header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    position: fixed;
+    padding: 0 20px;
+    z-index: 5;
+}
+
+/* 헤더메뉴 */
+
+#header>h1>a {
+    color: #831814;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+#header>#menu {
+    position: absolute;
+    top: 60px;
+}
+
+#navi-flag {
+    display: none;
+}
+
+#navi-flag+#hamburger {
+    display: block;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    z-index: 2;
+}
+
+
+.hamburger .line {
+    width: 30px;
+    height: 4px;
+    background-color: #831814;
+    display: block;
+    margin: 4px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+#navi-flag+#hamburger>#hbgdiv {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: #DDC6B6;
+}
+
+#navi-flag:checked+#hamburger>#hbgdiv {
+    background: #262223;
+    z-index: 2;
+}
+
+#navi-flag+#hamburger+#navimenu {
+    /* display: none; */
+    position: fixed;
+    left: -25vw;
+    top: 70px;
+    background: transparent;
+    width: 25vw;
+    height: 95vh;
+    transition: all 1s;
+    padding: 20px;
+    padding-bottom: 50px;
+    overflow-y: auto;
+}
+
+#navi-flag+#hamburger+#navimenu::-webkit-scrollbar {
+    display: none;
+}
+
+
+#navi-flag:checked+#hamburger+#navimenu {
+    background: transparent;
+    transform: translateX(25vw);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* text-align: center; */
+    z-index: 1;
+}
+
+#navimenu>li {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+#navimenu>li>h3>a {
+    padding: 0 7px;
+    height: 26px;
+    display: block;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 100;
+    color: #ffffff;
+    margin-bottom: 20px;
+    border-bottom: 4px solid rgba(0, 0, 0, 0);
+    width: fit-content;
+}
+
+#navimenu>li>h3>a:hover {
+    border-bottom: 4px solid orange;
+}
+
+#navimenu>li>ul {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+#navimenu>li>ul>li>a {
+    padding: 0 7px 0 7px;
+    display: block;
+    height: 22px;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 20px;
+    color: #565656;
+    /* margin-top: 20px; */
+    margin-bottom: 10px;
+    border-bottom: 4px solid rgba(0, 0, 0, 0);
+    width: fit-content;
+}
+
+#navimenu>li>ul>li>a:hover {
+    border-bottom: 4px solid orange;
+}
+
+#searchIconImg {
+    width: 30px;
+    height: 30px;
+}
+
+
+#main {
+    padding: 70px 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('http://localhost:4001/img/welcome_img.png');
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    /* background-position: center; */
+}
+
+#main>h1 {
+    margin: 50px;
+    color: #ffffff;
+}
+
+/* 메인페이지에서 추가로 필요한 CSS는 별도의 css 파일 생성 후 작업해주세요 (게시판에서도 같이 쓰는 레이아웃css라) */
