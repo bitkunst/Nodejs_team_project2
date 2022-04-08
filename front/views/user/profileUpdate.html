@@ -1,7 +1,8 @@
 {% extends "./_layout.html" %}
 {% block content %}
 <div id="update">
-    <form method="post" action="http://localhost:4001/api/user/profile/update" id="update_chk">
+    <form method="post" action="http://localhost:4001/api/user/profile/update" id="update_chk"
+        enctype="multipart/form-data">
         <ul id="update_list">
             <li>
                 <label for="user_id"> 아이디 : {{user.userid}}
@@ -32,9 +33,9 @@
                 <label> 성별 : {{user.gender}}</label>
             </li>
             <li>
-                <label> 핸드폰 :</label>
+                <label> 핸드폰</label>
 
-                <div>
+                <div id="mobile_box">
                     <input type="text" class="mobile_input" name="mobile1" id="user_mobile1" maxlength="3"
                         value="{{user.mobile1}}" />
                     <input type="text" class="mobile_input" name="mobile2" id="user_mobile2" maxlength="4"
@@ -44,7 +45,7 @@
                 </div>
             </li>
             <li>
-                <label> 집전화 :</label>
+                <label> 집전화</label>
 
                 {% if user.phone %}
                 <div>
@@ -65,12 +66,16 @@
 
             </li>
             <li>
-                <label> email :</label>
+                <label> email</label>
                 <input type="text" name="email" value="{{user.email}}" id="user_email">
             </li>
             <li>
-                <label> 자기소개 :</label>
+                <label> 자기소개</label>
                 <input type="text" name="bio" value="{{user.bio}}" id="user_bio">
+            </li>
+            <li>
+                <label> 프로필 이미지(선택)</label>
+                <input id="profile_img" type="file" name="upload" id="user_image">
             </li>
             <li>
                 <label> 포인트 : {{user.point}}</label>

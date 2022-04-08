@@ -51,7 +51,7 @@
                 <span> {{user.phone}}</span>
                 {% else %}
                 <span>집전화 :</span>
-                <span> 없음</span>
+                <span>전화번호 없음</span>
                 {% endif %}
             </li>
             <li>
@@ -63,10 +63,11 @@
                 <span> 포인트 :</span>
                 <span> {{user.point}}</span>
             </li>
+
             <div>
-                <button id="link_btn"><a href="/">home</a></button>
-                <button id="link_btn"><a href="/board/main/list">Board</a></button>
-                <button id="link_btn"><a href="/user/profile/update">Edit</a></button>
+                <button id="link_btn" onclick="location.href='/'">home</button>
+                <button id="link_btn" onclick="location.href='/board/main/list'">Board</button>
+                <button id="link_btn" onclick="location.href='/user/profile/update'">Edit</button>
             </div>
     </div>
 
