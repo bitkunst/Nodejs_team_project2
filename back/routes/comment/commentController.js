@@ -86,7 +86,7 @@ const deleteApi = async (req, res) => {
         errno: 1
     }
     try {
-        let sql1 = `DELETE FROM comment where cid = ${cid};`
+        let sql1 = `DELETE FROM comment where cid = ${cid} or parent = ${cid};`
         const [result] = await promisePool.execute(sql1)
         response = {
             ...response,

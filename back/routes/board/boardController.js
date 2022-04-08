@@ -3,6 +3,9 @@ const { decodePayload } = require('../../utils/jwt')
 
 const writeCategory = async (req, res) => {
     const { currentBoard } = req.body
+    const token = req.cookies.AccessToken
+    let userInfo = {}
+    if (token) { userInfo = decodePayload(token) }
     const sql = `select * from category where board_name = '${currentBoard}'`
     let response = {
         errno: 1
@@ -13,7 +16,9 @@ const writeCategory = async (req, res) => {
             ...response,
             errno: 0,
             result: result,
+            userInfo
         }
+        console.log(response)
         res.json(response)
     } catch (e) {
         console.log(e)
@@ -165,7 +170,7 @@ const updateApi = async (req, res) => {
 const viewApi = async (req, res, next) => {
     const { idx } = req.body
     const sql1 = `UPDATE board SET view=view+1 WHERE idx=${idx}; `
-    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(lid) as likes, category.main, category.sub, board.b_userid, nickname, board.board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
+    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(DISTINCT lid) as likes, category.main, category.sub, board.b_userid, nickname, board.board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join likes on board.idx = likes.bid
