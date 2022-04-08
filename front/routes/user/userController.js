@@ -19,11 +19,13 @@ exports.join = (req, res) => {
 };
 
 exports.welcome = (req, res) => {
-    const nickname = req.userInfo.nickname
-    if (req.userInfo.nickname == undefined) {
+    const nickname = req.cookies.cookie
+    if (nickname == undefined) {
         res.send(alertmove('/', '회원가입 환영페이지 입니다.'));
     } else {
-        res.render('user/welcome.html', { nickname });
+        res.render('user/welcome.html', {
+            nickname
+        });
     }
 };
 
@@ -41,10 +43,16 @@ exports.profile = async (req, res) => {
         userid: req.userInfo.userid
     }
     const response = await axios.post('http://localhost:4001/api/user/profile', data, option)
-    res.render('user/profile.html', {
-        user: response.data
-    });
-};
+    if (data.userid !== 'admin') {
+        res.render('user/profile.html', {
+            user: response.data
+        });
+    } else {
+        res.render('user/admin_profile.html', {
+            user: response.data
+        })
+    }
+}
 
 exports.profileEdit = async (req, res) => {
     const option = {

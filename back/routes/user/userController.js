@@ -206,12 +206,16 @@ exports.join = async (req, res) => {
         } else {
             await promisePool.query(sql);
         }
-        res.send(
-            alertmove(
-                'http://localhost:3001/user/welcome',
-                '회원가입이 완료되었습니다.'
-            )
-        );
+        res.cookie('cookie', req.body.nickname, {
+            path: '/',
+            httpOnly: true,
+            secure: true,
+            domain: 'localhost',
+            maxAge: 2000
+        })
+
+        res.redirect('http://localhost:3001/user/welcome')
+
     } catch (error) {
         console.log(error)
         res.send(alertmove('http://localhost:3001/user/join', '사용중인 아이디 혹은 닉네임입니다.'))
@@ -382,10 +386,8 @@ exports.profileUpdate = async (req, res) => {
             const sql0 = 'SELECT uImg FROM user WHERE userid=?'
             const prepare0 = [userid]
             const [result,] = await promisePool.execute(sql0, prepare0)
-            console.log(result)
             uImg = result[0].uImg
         }
-        console.log(uImg)
         const sql = `UPDATE user SET uImg=?, userpw=?, nickname=?, address=?, mobile=?, phone=?, email=?, bio=? WHERE userid=?`
         const prepare = [uImg, userpw, nickname, address, mobile, phone, email, bio, userid]
         const [result] = await promisePool.execute(sql, prepare)

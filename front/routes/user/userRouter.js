@@ -8,7 +8,7 @@ router.get('/login', userController.login);
 
 router.get('/logout', userController.logout);
 
-router.get('/welcome', auth, userController.welcome);
+router.get('/welcome', userController.welcome);
 
 router.get('/profile/myboard', auth, userController.myboard);
 
@@ -21,6 +21,8 @@ router.get('/join', userController.join);
 router.get('/agree', userController.agree);
 
 router.get('/profile', auth, userController.profile);
+
+router.get('/admin_profile', auth, userController.profile);
 
 router.get('/profile/update', auth, userController.profileEdit);
 
