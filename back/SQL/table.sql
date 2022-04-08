@@ -89,18 +89,12 @@ CREATE TABLE chat (
     date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- sample data --
-INSERT INTO user VALUES ('admin', 'admin', '관리자', '관리자', '주소없음', 'm', '01012341234', '0212341234', 'email@google.com', '안녕하세요 관리자입니다.', 0);
-
-INSERT INTO board (title, content, b_userid, cg_idx, board_name) VALUES ('test', '테스트용 입니다.', 'bitkunst', '001001', 'movie');
-
-INSERT INTO comment (comment, bid, c_userid) VALUES ('테스트 댓글', 1, 'bitkunst');
-
-INSERT INTO category (idx, main, m_url, m_key) VALUES ('001001', '공지사항', 'notice', '001');
-
-
-
--- 220405 추가 : 이거 db에서 한번씩 실행해줘
-ALTER TABLE board ADD seq INT NULL;
--- user table 수정 --
-ALTER TABLE user ADD uImg TEXT NULL;
+-- DEFAULT CATEGORY --
+INSERT INTO category (idx, board_name, main, m_url, m_key)
+VALUES (100, 'notice', '공지사항', 'notice', '100');
+INSERT INTO category (idx, board_name, main, m_url, m_key)
+VALUES (201, 'qna', '질문', 'question', '201');
+INSERT INTO category (idx, board_name, main, m_url, m_key)
+VALUES (202, 'qna', '답변', 'answer', '202');
+INSERT INTO category (idx, board_name, main, m_url, m_key)
+VALUES (301, 'main', '영화', 'movie', '301');
