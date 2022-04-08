@@ -178,9 +178,11 @@
 }
 
 .hstg {
+    display: inline-block;
     font-size: 12px;
     font-family: 'Do Hyeon', sans-serif;
     padding: 3px;
+    padding-bottom: 6px;
 }
 
 .likeBtn {

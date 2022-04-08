@@ -49,7 +49,6 @@ const viewApi = async (req, res) => {
 
 // qna/answer 작성
 const writeApi = async (req, res) => {
-    console.log(req.body)
     const { title, content, parent, cg_idx, board_name } = req.body
     const token = req.cookies.AccessToken
     const userinfo = decodePayload(token)

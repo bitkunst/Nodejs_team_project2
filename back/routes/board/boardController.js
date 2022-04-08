@@ -18,7 +18,6 @@ const writeCategory = async (req, res) => {
             result: result,
             userInfo
         }
-        console.log(response)
         res.json(response)
     } catch (e) {
         console.log(e)
@@ -54,7 +53,6 @@ const writePost = async (req, res) => {
             let sql2 = 'INSERT INTO img(bid, img, seq) values'
             files.forEach((v, i) => { sql2 += `(${result.insertId}, '${v}', ${i + 1}),` })
             sql2 = sql2.replace(/,$/, '');
-            console.log(sql2)
             const [result2] = await promisePool.execute(sql2)
         }
         // 해시태그가 있으면 해시태그 db에 추가
@@ -65,9 +63,7 @@ const writePost = async (req, res) => {
                 hstgSql += `(${result.insertId}, '${v}'),`
             })
             hstgSql = hstgSql.replace(/,$/, '');
-            console.log(hstgSql)
             const [result3] = await promisePool.execute(hstgSql)
-            console.log(result3)
         }
 
         res.redirect(`http://localhost:3001/board/${board_name}/list`)
@@ -105,7 +101,6 @@ const getArticleApi = async (req, res) => {
 
 const deleteApi = async (req, res) => {
     const { idx, board_name } = req.body
-    console.log(idx, board_name)
     const sql = `delete from a,b,c,d,e,f 
                 using board as a 
                 left join scrap as b on a.idx=b.bid 
@@ -124,12 +119,10 @@ const deleteApi = async (req, res) => {
 
 const updateApi = async (req, res) => {
     const { idx, board_name, cg_idx, title, parent, content, hstg } = req.body
-    console.log(hstg)
     const files = []
     req.files.forEach(v => {
         files.push(v.filename)
     })
-    console.log(files)
     //const { userid } = req.user // 나중에 로그인 기능 되면 cookie-parsing해서 유저정보 담아놓고 사용
     const userid = 'admin'
     // qna에서 parent 설정해주는 sql은 따로 작성
@@ -138,6 +131,7 @@ const updateApi = async (req, res) => {
     const updSql = `
         UPDATE board SET title = '${title}',content='${content}', cg_idx='${cg_idx}', board_name='${board_name}' WHERE idx = ${idx};`
     try {
+        await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
         await promisePool.execute(delSql1)
         await promisePool.execute(delSql2)
         const [result] = await promisePool.execute(updSql)
@@ -147,9 +141,11 @@ const updateApi = async (req, res) => {
             let sql2 = 'INSERT INTO img(bid, img, seq) values'
             files.forEach((v, i) => { sql2 += `(${idx}, '${v}', ${i + 1}),` })
             sql2 = sql2.replace(/,$/, '');
+            await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             const [result2] = await promisePool.execute(sql2)
         }
         // 해시태그가 있으면 해시태그 db에 추가
+
         const hstgArr = JSON.parse(hstg)
         if (hstgArr[0] != undefined) {
             let hstgSql = `INSERT INTO hashtag(bid, hstg) values`
@@ -157,7 +153,9 @@ const updateApi = async (req, res) => {
                 hstgSql += `(${idx}, '${v}'),`
             })
             hstgSql = hstgSql.replace(/,$/, '');
+            await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
             const [result3] = await promisePool.execute(hstgSql)
+            await promisePool.execute(`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'`);
 
         }
 
@@ -170,7 +168,7 @@ const updateApi = async (req, res) => {
 const viewApi = async (req, res, next) => {
     const { idx } = req.body
     const sql1 = `UPDATE board SET view=view+1 WHERE idx=${idx}; `
-    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(DISTINCT lid) as likes, category.main, category.sub, board.b_userid, nickname, board.board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag
+    const sql2 = `select board.idx, title, content, DATE_FORMAT(date,'%Y-%m-%d') as date, view, count(DISTINCT lid) as likes, category.main, category.sub, board.b_userid, nickname, board.board_name, active, GROUP_CONCAT(DISTINCT img order by img asc SEPARATOR '&-&') as img, GROUP_CONCAT(DISTINCT hstg order by hstg asc SEPARATOR '-') as hashtag, ANY_VALUE(parent)
                 from board 
                 left join user on board.b_userid = user.userid 
                 left join likes on board.idx = likes.bid

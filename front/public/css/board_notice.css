@@ -23,20 +23,20 @@
     text-align: center;
     height: 30px;
     padding: 14px 14px;
-    font-size: 14px;
+    font-size: 20px;
     color: #ffffff;
 }
 
 .idx {
-    width: 60px;
+    width: 100px;
 }
 
 .nickname {
-    width: 80px;
+    width: 150px;
 }
 
 .date {
-    width: 100px;
+    width: 150px;
 }
 
 .view {
@@ -52,7 +52,7 @@
     text-align: center;
     height: 30px;
     padding: 7px 14px;
-    font-size: 12px;
+    font-size: 16px;
     color: #ffffff;
 }
 

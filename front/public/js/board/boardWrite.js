@@ -114,7 +114,6 @@ const activeSubmit = () => {
 
 // 파일 업로드 최대 수 정해주기
 fileInput.addEventListener('change', () => {
-    console.log(fileInput.files.length)
     if (fileInput.files.length > 5) {
         alert('파일 첨부는 5개까지 가능합니다')
     }
@@ -139,7 +138,7 @@ init()
 const contentElement = document.querySelector('#content')
 const hashtag = document.querySelector('#hashtag')
 const hstg = document.querySelector('#hstg')
-contentElement.addEventListener('change', blurHander)
+contentElement.addEventListener('blur', blurHander)
 let hstgArr = []
 
 function blurHander(e) {
@@ -155,3 +154,5 @@ function blurHander(e) {
     hstg.value = JSON.stringify(hstgArr)
     console.log(hstg.value)
 }
+
+console.log(document.querySelector('#hstg').value)
