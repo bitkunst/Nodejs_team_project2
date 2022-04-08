@@ -12,7 +12,7 @@ passport.use(new KakaoStrategy({
     clientID: process.env.KAKAO_clientID,
     clientSecret: process.env.KAKAO_clientSecret,
     callbackURL: "http://localhost:4001/api/user/oauth/kakao/callback"
-}, (accessToken, refreshToken, profile, done)=>{
+}, (accessToken, refreshToken, profile, done) => {
 
     return done(null, profile)
 }))
@@ -21,7 +21,7 @@ passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_clientID,
     clientSecret: process.env.GOOGLE_clientSecret,
     callbackURL: "http://localhost:4001/api/user/oauth/google/callback"
-}, (accessToken, refreshToken, profile, done)=>{
+}, (accessToken, refreshToken, profile, done) => {
 
     return done(null, profile)
 }))
@@ -30,7 +30,7 @@ passport.use(new NaverStrategy({
     clientID: process.env.NAVER_clientID,
     clientSecret: process.env.NAVER_clientSecret,
     callbackURL: "http://localhost:4001/api/user/oauth/naver/callback"
-}, (accessToken, refreshToken, profile, done)=>{
+}, (accessToken, refreshToken, profile, done) => {
 
     return done(null, profile)
 }))
@@ -43,7 +43,7 @@ router.post('/quit', userController.quit);
 
 router.post('/profile', userController.profile);
 
-router.post('/profile/update', userController.profileUpdate);
+router.post('/profile/update', upload.single('upload'), userController.profileUpdate);
 
 router.post('/profile/myboard', userController.myboard)
 
@@ -59,15 +59,15 @@ router.post('/nickchk', userController.nickchk);
 router.get('/oauth/kakao', passport.authenticate('kakao'))
 
 router.get('/oauth/kakao/callback', passport.authenticate('kakao', {
-    failureRedirect:'http://localhost:3001/user/login',
+    failureRedirect: 'http://localhost:3001/user/login',
     session: false
 }), userController.kakaoLogin)
 
 // google login
-router.get('/oauth/google', passport.authenticate('google', {scope: ['profile', 'email']}))
+router.get('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
 router.get('/oauth/google/callback', passport.authenticate('google', {
-    failureRedirect:'http://localhost:3001/user/login',
+    failureRedirect: 'http://localhost:3001/user/login',
     session: false
 }), userController.googleLogin)
 
@@ -75,7 +75,7 @@ router.get('/oauth/google/callback', passport.authenticate('google', {
 router.get('/oauth/naver', passport.authenticate('naver'))
 
 router.get('/oauth/naver/callback', passport.authenticate('naver', {
-    failureRedirect:'http://localhost:3001/user/login',
+    failureRedirect: 'http://localhost:3001/user/login',
     session: false
 }), userController.naverLogin)
 

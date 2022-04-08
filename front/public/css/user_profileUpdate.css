@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 900px;
+    height: 1100px;
     padding-bottom: 50px;
     box-sizing: border-box;
 }
@@ -24,7 +24,6 @@
 
 
 #update_list>li>label {
-    margin-bottom: 10px;
     color: white;
 }
 
@@ -37,6 +36,36 @@
     outline-color: black;
     border-radius: 8px;
     box-sizing: border-box;
+}
+
+.mobile_input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ececec;
+    padding: 0 15px;
+    font-size: 18px;
+    outline-color: black;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.phone_input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ececec;
+    padding: 0 15px;
+    font-size: 18px;
+    outline-color: black;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.mobile_input {
+    width: 150px;
+}
+
+.phone_input {
+    width: 150px;
 }
 
 #update_list>li>#nick_input>input {
@@ -71,13 +100,7 @@
     height: 40px;
 }
 
-.mobile_input {
-    width: 150px;
-}
 
-.phone_input {
-    width: 150px;
-}
 
 #nickname_check_btn {
     width: 113px;
@@ -129,4 +152,8 @@
 
 #btn {
     align-items: center;
+}
+
+#profile_img {
+    color: white;
 }

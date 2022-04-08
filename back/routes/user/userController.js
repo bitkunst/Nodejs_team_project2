@@ -372,11 +372,22 @@ exports.profileUpdate = async (req, res) => {
         let { userpw, nickname, address, mobile1, mobile2, mobile3, phone1, phone2, phone3, email, bio, userid } = req.body
         let phone = phone1 + '-' + phone2 + '-' + phone3
         const mobile = mobile1 + '-' + mobile2 + '-' + mobile3
-        if (phone == '--') {
+        if (phone == '--' || phone == '전화번호 없음--') {
             phone = null
         }
-        const sql = `UPDATE user SET userpw=?, nickname=?, address=?, mobile=?, phone=?, email=?, bio=? WHERE userid=?`
-        const prepare = [userpw, nickname, address, mobile, phone, email, bio, userid]
+        let uImg
+        if (req.uImg != undefined) {
+            uImg = 'http://localhost:4001/profile_img/' + req.uImg
+        } else {
+            const sql0 = 'SELECT uImg FROM user WHERE userid=?'
+            const prepare0 = [userid]
+            const [result,] = await promisePool.execute(sql0, prepare0)
+            console.log(result)
+            uImg = result[0].uImg
+        }
+        console.log(uImg)
+        const sql = `UPDATE user SET uImg=?, userpw=?, nickname=?, address=?, mobile=?, phone=?, email=?, bio=? WHERE userid=?`
+        const prepare = [uImg, userpw, nickname, address, mobile, phone, email, bio, userid]
         const [result] = await promisePool.execute(sql, prepare)
         res.send(alertmove('http://localhost:3001/user/profile', '수정이 완료되었습니다.'))
     } catch (err) {
