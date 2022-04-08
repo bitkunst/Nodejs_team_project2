@@ -63,7 +63,7 @@ manageUser.addEventListener('submit', async (e) => {
             userArr.forEach(v => {
                 if (userValue == v.userid) {
                     str += userInfoTemp.innerHTML.replace(/{userid}/g, v.userid)
-                        .replace('{userpw}', v.userpw)
+                        .replace('{userpw}', '*****')
                         .replace('{name}', v.name)
                         .replace('{nickname}', v.nickname)
                         .replace('{address}', v.address)
