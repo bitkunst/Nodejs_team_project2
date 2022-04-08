@@ -42,7 +42,7 @@ CREATE TABLE board (
 
 CREATE TABLE hashtag (
     idx INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    hstg VARCHAR(50) NOT NULL,
+    hstg TEXT NOT NULL,
     bid INT NOT NULL
 );
 
