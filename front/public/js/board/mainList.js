@@ -8,7 +8,33 @@ const cgArr = currentCg.split('/')
 // }
 console.log(cgArr)
 
-// 0.
+
+
+const getBoardName = async () => {
+    const boardCg = document.querySelector('#boardCg')
+
+    let cgLink = ''
+    let cgStr = ''
+    if (cgArr.length == 1) {
+        cgLink = '/board/main/list'
+        cgStr = 'BOARD'
+    }
+    else if (cgArr.length == 2) {
+        cgLink = `/board/main/list/${cgArr[1]}`
+        cgStr = `${cgArr[1]}`
+    }
+    else {
+        cgLink = `/board/main/list/${cgArr[1]}/${cgArr[2]}`
+        cgStr = `${cgArr[1]}/${cgArr[2]}`
+    }
+    console.log(cgLink)
+    console.log(boardCg.innerHTML.replace('{link}', cgLink).replace('{cgName}', cgStr))
+    boardCg.innerHTML = boardCg.innerHTML.replace('{link}', cgLink).replace('{cgName}', cgStr)
+}
+
+getBoardName()
+
+
 
 // 1. 리스트 데이터 가져오기
 const getData = async (router) => {

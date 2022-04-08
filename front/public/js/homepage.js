@@ -36,7 +36,7 @@ const createList = (data, userid) => {
     const latestContent = document.querySelector('#latestContent').innerHTML
     let str = ''
     data.forEach((v, i) => {
-        if (v.img == undefined) { v.img = 'js1648455420407.png' }
+        if (v.img == undefined) { v.img = 'no_image.jpg' }
         const hstgArr = ['', '', '', '', '']
         if (v.hashtag != undefined) { v.hashtag.split('-').slice(0, 5).forEach((v, i) => hstgArr[i] = v) }
 
@@ -128,7 +128,7 @@ const createList2 = (data, userid) => {
     const popularContent = document.querySelector('#popularContent').innerHTML
     let str = ''
     data.forEach((v, i) => {
-        if (v.img == undefined) { v.img = 'js1648455420407.png' }
+        if (v.img == undefined) { v.img = 'no_image.jpg' }
         const hstgArr = ['', '', '', '', '']
         if (v.hashtag != undefined) { v.hashtag.split('-').slice(0, 5).forEach((v, i) => hstgArr[i] = v) }
 
@@ -294,12 +294,12 @@ const absoluteTop3 = 6 * window.innerHeight
 //각각의 네비버튼에 클릭이벤트 주기
 nav1Btn.addEventListener('click', (e) => {
     e.preventDefault();
-    window.scrollTo({ top: absoluteTop1, behavior: "smooth" })
+    window.scrollTo({ top: absoluteTop2, behavior: "smooth" })
 })
 
 nav2Btn.addEventListener('click', (e) => {
     e.preventDefault();
-    window.scrollTo({ top: absoluteTop2, behavior: "smooth" })
+    window.scrollTo({ top: absoluteTop1, behavior: "smooth" })
 })
 
 nav3Btn.addEventListener('click', (e) => {

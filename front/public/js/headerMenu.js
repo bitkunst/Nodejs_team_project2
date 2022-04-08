@@ -9,8 +9,9 @@ const getCgMenu = async () => {
         const response = await axios.post(router, boardData, option)
         const errNo = response.data.errno
         const data = response.data.result
+        const userInfo = response.data.userInfo.userid
         if (errNo === 0) {
-            return data
+            return { data, userInfo }
         } else {
             console.log('백엔드에서 에러발생')
             return
@@ -25,7 +26,17 @@ const getCgMenu = async () => {
 const createCgMenu = async () => {
     const navimenu = document.querySelector('#navimenu')
 
-    const data = await getCgMenu()
+    const dataObj = await getCgMenu()
+    const data = dataObj.data
+    const userInfo = dataObj.userInfo
+    const isLogin = document.querySelector('#isLogin')
+    if (userInfo != undefined) {
+        //로그아웃
+        isLogin.innerHTML = isLogin.innerHTML.replace('{login}', 'logout').replace('{loginStr}', '로그아웃')
+    } else {
+        // 로그인
+        isLogin.innerHTML = isLogin.innerHTML.replace('{login}', 'login').replace('{loginStr}', '로그인')
+    }
 
     let str = ''
     let sub = ''
