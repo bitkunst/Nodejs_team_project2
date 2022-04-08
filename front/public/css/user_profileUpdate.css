@@ -157,3 +157,20 @@
 #profile_img {
     color: white;
 }
+
+#user_id1 {
+    font-size: 25px;
+}
+
+#user_gender1 {
+    font-size: 25px;
+}
+
+#user_point1 {
+    font-size: 25px;
+}
+
+#user_bio {
+    width: 450px;
+    height: 100px;
+}

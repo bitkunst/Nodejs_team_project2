@@ -5,7 +5,7 @@
         enctype="multipart/form-data">
         <ul id="update_list">
             <li>
-                <label for="user_id"> 아이디 : {{user.userid}}
+                <label for="user_id" id="user_id1"> 아이디 : {{user.userid}}
                     <input type="hidden" name="userid" id="user_id" value="{{user.userid}}">
             </li>
             <li>
@@ -30,7 +30,7 @@
                 <input type="text" name="address" value="{{user.address}}" id="user_address">
             </li>
             <li>
-                <label> 성별 : {{user.gender}}</label>
+                <label id="user_gender1"> 성별 : {{user.gender}}</label>
             </li>
             <li>
                 <label> 핸드폰</label>
@@ -71,14 +71,16 @@
             </li>
             <li>
                 <label> 자기소개</label>
-                <input type="text" name="bio" value="{{user.bio}}" id="user_bio">
+                <!-- <textarea id="user_bio" name="bio" class="textarea"></textarea> -->
+
+                <textarea type="text" name="bio" id="user_bio" class="textarea">{{user.bio}}</textarea>
             </li>
             <li>
                 <label> 프로필 이미지(선택)</label>
                 <input id="profile_img" type="file" name="upload" id="user_image">
             </li>
             <li>
-                <label> 포인트 : {{user.point}}</label>
+                <label id="user_point1"> 포인트 : {{user.point}}</label>
             </li>
 
             <div id="btn">
