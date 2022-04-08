@@ -15,7 +15,9 @@
 <div id="contentView">{{item.content}}</div>
 <div id="btnDiv">
     <a class="btn" href="/board/qna/list">목록가기</a>
+    {% if isAnswer %}
     <a class="btn" href="/board/qna/writeA?q={{item.idx}}">답변하기</a>
+    {% endif %}
     {% if userCheck %}
     <a class="btn" href="/board/qna/update/{{item.idx}}">수정</a>
     <form action="http://localhost:4001/api/board/delete" method="post">

@@ -324,7 +324,6 @@ async function replyHandler(e) {
                 withCredentials: true
             }
             const data = { bid, cid, c_userid, replyContent }
-            console.log(data)
 
             const response = await axios.post(router, data, option)
 

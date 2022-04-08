@@ -175,47 +175,6 @@ const showList2 = async () => {
 
 showList2()
 
-/*
-async function likeHandeler(currentPage, viewArticle) {
-
-    
-    const likeFrm = document.querySelectorAll('.likeFrm')
-    likeFrm.forEach(v => {
-        v.addEventListener('submit', async (e) => {
-            e.preventDefault()
-            const idx = parseInt(e.target.querySelector('.idx').value)
-            const likeFlag = parseInt(e.target.querySelector('.likeFlag').value)
-            try {
-                const option = {
-                    'Content-type': 'application/json',
-                    withCredentials: true
-                }
-                const dataObj = {
-                    idx, likeFlag
-                }
-                const response = await axios.post('http://localhost:4001/api/home/like', dataObj, option)
-                const errNo = response.data.errno
-
-                if (errNo === 0) {
-                    showList()
-                    showList2()
-                } else {
-                    if (errNo === 2) {
-                        alert('로그인된 사용자만 ❤️ 가능')
-                    }
-                    return
-                }
-            }
-            catch (e) {
-                console.log(`axios 통신 중 에러발생 : ${e.message}`)
-                alert('문제가 발생했습니다')
-            }
-        })
-    })
-    
-
-}
-*/
 
 
 
@@ -282,11 +241,6 @@ const nav3go = document.querySelector('#userMainInfo')
 // //이동할 div의 절대좌표구하기
 const absoluteTop1 = window.pageYOffset + nav1go.getBoundingClientRect().top;
 const absoluteTop2 = window.pageYOffset + nav2go.getBoundingClientRect().top;
-// const absoluteTop3 = window.pageYOffset + nav3go.getBoundingClientRect().top + parseInt(window.innerHeight / 2);
-
-//이동할 div의 절대좌표구하기
-// const absoluteTop1 = 1.2 * window.innerHeight
-// const absoluteTop2 = 3.3 * window.innerHeight
 const absoluteTop3 = 6 * window.innerHeight
 
 
@@ -310,7 +264,6 @@ nav3Btn.addEventListener('click', (e) => {
 
 // 유저정보 가져오기 ajax
 const getUserData = async () => {
-    console.log('실행')
     try {
         const router = 'http://localhost:4001/api/user/profile'
         const option = {
@@ -341,7 +294,6 @@ const createUser = (data) => {
 
 const showUser = async () => {
     const data = await getUserData()
-    console.log(data)
     createUser(data)
 }
 

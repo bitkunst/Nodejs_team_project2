@@ -25,7 +25,6 @@ const createList = (data, currentPage, viewArticle) => {
     const boardElement2 = document.querySelector('#boardList2').innerHTML
     let str = ''
     data.slice((currentPage - 1) * viewArticle, currentPage * viewArticle).forEach((v, i) => {
-        console.log(v.parent)
         if (v.parent == undefined) {
             str += boardElement
                 .replace('{num}', data.length - (currentPage - 1) * viewArticle - i)

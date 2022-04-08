@@ -24,7 +24,13 @@ router.get('/view/:idx', auth, async (req, res) => {
         // 글 작성자 본인 확인
         let userCheck = 0
         if (req.userInfo.nickname === item.nickname) { userCheck = 1 }
-        res.render('board/qna/view', { item, userCheck })
+
+        // 질문/답변 확인
+        let isAnswer = 1
+        if (item.parent != undefined) {
+            isAnswer = 0
+        }
+        res.render('board/qna/view', { item, userCheck, isAnswer })
     } catch (error) {
         console.log(error)
         res.send('axios 오류')
@@ -34,10 +40,8 @@ router.get('/view/:idx', auth, async (req, res) => {
 // ajax로 게시판/카테고리 구성하기 or  그냥 html 분리하기
 router.get('/writeA', auth, (req, res) => {
     const idx = req.query.q
-    console.log(idx)
     let adminFlag = 0
     if (req.userInfo.userid === 'admin') { adminFlag = 1 }
-    console.log(adminFlag)
     res.render('board/qna/writeA', { adminFlag, idx })
 })
 

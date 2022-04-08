@@ -24,7 +24,6 @@ const viewApi = async (req, res) => {
 
 // 메인카테고리 추가
 const writeApi = async (req, res) => {
-    console.log('라우터실행')
     const { main, m_url } = req.body
     let response = {
         errno: 1
@@ -60,7 +59,6 @@ const writeApi = async (req, res) => {
 // 2. 메인/서브 구분해서 처리하는 로직 필요
 const updateApi = async (req, res) => {
     const { idx, cngCom, cngCom2 } = req.body
-    console.log(idx, cngCom, cngCom2)
     const token = req.cookies.AccessToken
     const userinfo = decodePayload(token)
     let response = {
@@ -149,7 +147,6 @@ const replyApi = async (req, res) => {
         })
         let newKey = '' + (Math.max(...sKeyArr) + 1)
         newKey = newKey.length >= 3 ? newKey : new Array(3 - newKey.length + 1).join('0') + newKey;
-        console.log(newKey)
 
         let sql2 = `INSERT INTO category(idx, board_name, main, m_url, m_key, sub, s_url, s_key) 
                     values('${m_key}${newKey}','main', '${main}', '${m_url}', ${m_key}, '${sub}', '${s_url}', '${newKey}') ;`

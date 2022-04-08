@@ -6,7 +6,6 @@ const cgArr = currentCg.split('/')
 // if (currentCg !== undefined) {
 //     currentCg.split('/').forEach((v, i) => cgArr[i] = v.split('=')[1])
 // }
-console.log(cgArr)
 
 
 
@@ -27,8 +26,6 @@ const getBoardName = async () => {
         cgLink = `/board/main/list/${cgArr[1]}/${cgArr[2]}`
         cgStr = `${cgArr[1]}/${cgArr[2]}`
     }
-    console.log(cgLink)
-    console.log(boardCg.innerHTML.replace('{link}', cgLink).replace('{cgName}', cgStr))
     boardCg.innerHTML = boardCg.innerHTML.replace('{link}', cgLink).replace('{cgName}', cgStr)
 }
 
@@ -163,7 +160,6 @@ const showList = async (viewArticle, blockArticle) => {
     const data = dataObj.data
     const userid = dataObj.userid
 
-    console.log(data)
 
     let currentBlock = 1
     let currentPage = 1
@@ -183,7 +179,6 @@ async function likeHandeler(currentPage, viewArticle) {
             e.preventDefault()
             const idx = parseInt(e.target.querySelector('.idx').value)
             const likeFlag = parseInt(e.target.querySelector('.likeFlag').value)
-            console.log(likeFlag)
             try {
                 const option = {
                     'Content-type': 'application/json',

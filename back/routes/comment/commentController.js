@@ -64,7 +64,6 @@ const updateApi = async (req, res) => {
         errno: 1
     }
     try {
-        console.log('업데이트실행')
         let sql1 = `UPDATE comment SET comment='${cngCom}' where cid=${cid};`
         const [result] = await promisePool.execute(sql1)
         response = {
