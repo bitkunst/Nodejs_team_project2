@@ -15,15 +15,16 @@
     </tbody>
 </table>
 <div id="paging">
-    <a id="prevBlock"> << </a>
-    <ul>
-    </ul>
-    <a id="nextBlock"> >> </a>
+    <a id="prevBlock">
+        << </a>
+            <ul>
+            </ul>
+            <a id="nextBlock"> >> </a>
 </div>
 <template id="board_row">
     <tr>
         <td>{num}</td>
-        <td><a href="/board/main/view/{idx}">{comment}</a></td>
+        <td><a href="/board/main/view/{idx}" id="comment">{comment}</a></td>
         <td>{nickname}</td>
         <td>{date}</td>
     </tr>

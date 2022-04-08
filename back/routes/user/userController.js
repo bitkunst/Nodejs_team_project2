@@ -21,7 +21,7 @@ exports.login = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'localhost',
-                maxAge: 60*60*1000
+                maxAge: 60 * 60 * 1000
             })
 
             res.redirect('http://localhost:3001')
@@ -57,7 +57,7 @@ exports.kakaoLogin = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'localhost',
-                maxAge: 60*60*1000
+                maxAge: 60 * 60 * 1000
             })
             res.redirect('http://localhost:3001')
         } else {
@@ -75,17 +75,17 @@ exports.kakaoLogin = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'localhost',
-                maxAge: 60*60*1000
+                maxAge: 60 * 60 * 1000
             })
             res.redirect('http://localhost:3001')
         }
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 };
 
 exports.googleLogin = async (req, res) => {
-    const {name, picture, email} = req.user._json
+    const { name, picture, email } = req.user._json
     const userInfo = {
         name,
         email,
@@ -106,7 +106,7 @@ exports.googleLogin = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'localhost',
-                maxAge: 60*60*1000
+                maxAge: 60 * 60 * 1000
             })
             res.redirect('http://localhost:3001')
         } else {
@@ -124,17 +124,17 @@ exports.googleLogin = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'localhost',
-                maxAge: 60*60*1000
+                maxAge: 60 * 60 * 1000
             })
             res.redirect('http://localhost:3001')
         }
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
 
 exports.naverLogin = async (req, res) => {
-    const {nickname, email, profile_img} = req.user._json
+    const { nickname, email, profile_img } = req.user._json
     const userInfo = {
         nickname,
         email,
@@ -155,7 +155,7 @@ exports.naverLogin = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'localhost',
-                maxAge: 60*60*1000
+                maxAge: 60 * 60 * 1000
             })
             res.redirect('http://localhost:3001')
         } else {
@@ -173,11 +173,11 @@ exports.naverLogin = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'localhost',
-                maxAge: 60*60*1000
+                maxAge: 60 * 60 * 1000
             })
             res.redirect('http://localhost:3001')
         }
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }
@@ -314,7 +314,6 @@ exports.myscrap = async (req, res) => {
 
 
         const [result] = await promisePool.execute(sql0);
-        console.log(result)
         response = {
             ...response,
             errno: 0,
@@ -389,12 +388,11 @@ exports.profileUpdate = async (req, res) => {
 
 exports.quit = async (req, res) => {
     const { userid } = req.body
-    console.log(userid)
     const sql = `DELETE FROM user WHERE userid=?`
     const prepare = [userid]
     let [result] = await promisePool.execute(sql, prepare)
     res.clearCookie('AccessToken');
 
-    res.json(result) // result값을 브라우저 profile로
+    res.json(result)
 
 }

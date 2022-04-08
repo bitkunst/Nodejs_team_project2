@@ -10,10 +10,13 @@
                     <img src="{{user.uImg}}" class="img">
                 </div>
                 {% else %}
-                <span id="user_img"><img src="http://localhost:4001/profile_img/default_profileImg.jpg"></span>
+                <span id="user_img" class="img_box"><img src="http://localhost:4001/profile_img/default_profileImg.jpg"
+                        class="img"></span>
                 {% endif %}
             </li>
             <li id="u_bio">
+                <span>자기소개<br></span>
+                <br>
                 <span>{{user.bio}}</span>
             </li>
         </ul>
@@ -68,21 +71,26 @@
     </div>
 
     <div class="profile_down">
+
         <div id="link">
             <button type="button" id="mylink_btn" onclick="location.href='/user/profile/myboard' ">작성 글 보기</button>
             <!-- <a href="/user/profile/myboard">작성한 글 보기</a> -->
         </div>
         <div id="link">
-            <button type="button" id="mylink_btn" onclick="location.href='/user/profile/mycomment' ">작성 댓글 보기</button>
+            <button type="button" id="mylink_btn" onclick="location.href='/user/profile/mycomment' ">작성 댓글
+                보기</button>
             <!-- <a href="/user/profile/mycomment">작성 댓글 보기</a> -->
         </div>
         <div id="link">
             <button type="button" id="mylink_btn" onclick="location.href='/user/profile/myscrap' ">스크랩 보기</button>
             <!-- <a href="/user/profile/myscrap">스크랩 보기</a> -->
         </div>
+        <div id="quit">
+            <button href="/" id="quit_btn">회원탈퇴</button>
+        </div>
+
     </div>
 </div>
-<!-- <button href="/" id="quit_btn">회원 탈퇴하기</button> -->
 
 <script>
     const quit = document.querySelector('#quit_btn')
