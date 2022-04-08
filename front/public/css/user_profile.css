@@ -63,7 +63,8 @@
 #profile>.profile_up>#profile_left>#u_bio {
     width: 300px;
     height: 200px;
-    margin-left: 50px;
+    margin-left: 100px;
+    margin-top: 50px;
     color: white;
 }
 
@@ -72,7 +73,8 @@
     object-fit: cover;
     object-position: center center;
     width: 15vw;
-    height: 35vh;
+    height: 15vw;
+    border-radius: 7.5vw;
 }
 
 
@@ -101,16 +103,18 @@
 
 
 .img_box {
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
+    width: 100%;
+    height: 100%;
+    margin-left: 100px;
     overflow: hidden;
+
 }
 
 #user_img {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center center;
 }
 
 
@@ -179,4 +183,36 @@ button {
     color: white;
     background-color: #831814;
     border-color: #831814;
+}
+
+#quit_btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    background-color: #831814;
+
+}
+
+#quit_btn.non_btn {
+    background-color: white;
+    color: white;
+    line-height: 40px;
+    text-align: center;
+}
+
+#quit_btn:hover {
+    color: white;
+    background-color: gray;
+    border-color: #831814;
+}
+
+#quit {
+    margin-top: 20px;
 }

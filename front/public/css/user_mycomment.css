@@ -6,7 +6,7 @@
 #board {
     width: 90%;
     margin-top: 30px;
-    background-color: #DDC6B6;
+    background-color: transparent;
     color: #262223;
 }
 
@@ -14,7 +14,13 @@
     padding: 7px 14px;
     border-bottom: 1px solid #eee;
     text-align: center;
+    color: white;
 }
+
+#comment {
+    color: white;
+}
+
 
 #board>thead th {
     padding: 7px 14px;

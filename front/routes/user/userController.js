@@ -20,7 +20,6 @@ exports.join = (req, res) => {
 
 exports.welcome = (req, res) => {
     const nickname = req.userInfo.nickname
-    console.log(req.userInfo.nickname)
     if (req.userInfo.nickname == undefined) {
         res.send(alertmove('/', '회원가입 환영페이지 입니다.'));
     } else {
