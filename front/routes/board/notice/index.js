@@ -51,7 +51,11 @@ router.get('/update/:idx', auth, adminCheck, async (req, res) => {
         const data = { idx }
         const response = await axios.post(router, data, option)
         const item = response.data.result[0]
-        res.render('board/update', { item })
+
+        let adminFlag = 0
+        if (req.userInfo.userid === 'admin') { adminFlag = 1 }
+
+        res.render('board/update', { item, adminFlag })
     } catch (error) {
         console.log(error)
         res.send('axios 오류')
