@@ -1,5 +1,7 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=300&section=header&text=team%20BNW&fontSize=90)
 
+<img src='./BNW_logo.png' width="100px" height="100px">
+
 ## 🛠 Front-end tech stacks 🛠
 
 ![](https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white)
