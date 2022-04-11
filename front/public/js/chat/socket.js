@@ -6,12 +6,12 @@ socket.on('connect', ()=>{
     console.log('browser webSocket connected')
 })
 
-const roomName = location.href.split('?')[1].split('=')[1]
+const roomName = decodeURI(location.href.split('?')[1].split('=')[1])
 const roomCount = document.querySelector('#roomCount')
 const msgForm = document.querySelector('#msgForm')
 const innerElement = document.querySelector('#chatBox')
 const nickname = document.querySelector('#nickname').value
-
+console.log(roomName)
 function addMessage(msg, user, date) {
     const item_div = document.createElement('div')
     const box_div = document.createElement('div')
